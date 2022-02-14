@@ -1,1 +1,0 @@
-Later, we improve the layouts and save them as separated images

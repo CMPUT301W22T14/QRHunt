@@ -1,0 +1,21 @@
+  1. On the first page, we have three buttons for the user to choose from. The local user doesn't need the scan function to log in(note this case only happens when the user has already logged in once on this device). Otherwise, the user will click the foreign player and scan his or her QR code. When the owner button is clicked, he or she will be directed to the scanning page and log in via the special username and password.
+
+  2. The second page is there only for the owner to log into the game with owner access using the special username and password.  
+
+  3. For the Third page, we will list the users’ username, contact information, status QR code, another QR code for login, as well as some detailed stats like highest, lowest score, etc.
+
+  4. For the fourth page, we will have a button at the right up corner, the user will be directed to the scanning page once this button is clicked. Following that, we have the list of game QR codes that the user has scanned. At the button left of the page, the button named “detail” will redirect the user to the 5th page, where detail stats of a QR code are displayed. The deleting button allows the user to delete whatever game QR codes they scanned. The profile button allows the user to go to the second page.
+
+  5. For the 5th page, the user will see the current image from the camera in the giant square in the middle of the screen. Right below that, we have a window asking for the user permission. 
+
+  6. For the 6th page, the details of a specific QR code. The first Listview is the list of all the players that scanned this QR code, the second Listview is showing the player’s comment (N/A if the user doesn’t comment) and other players’ comments shown as well. The button is connected to the fragment for adding comments. And the graph at the left end corner is the picture of QR code.
+
+  7. For the 7th page, the Leader board is shown three buttons on the top. After clicking the different buttons, it would show the ranking for the highest scoring unique QR code of each player, the ranking for the total number of QR codes scanned and the ranking for a total sum of scores of QR codes scanned.
+
+  8. For the 8th page, the owner platform will show two scrolled Listview. One of them is the list of all the players in the game, and another one is for all the QR codes in the database that have been scanned by any players.
+
+  9. For the 9th page, there will be a widget to access the map, which shows all the QR code around the user in a certain distance.
+
+  10. For the 10th page, we displayed the detailed stats as well as user name and contact information of a specific user. This page is invoked only when one user scans the profile QR code of the user whose stats are to be shown.
+
+  11. For the 11th page, we will implement a textview and search the user by username function. 
