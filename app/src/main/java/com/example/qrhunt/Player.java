@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Player {
     private String userName;
     private String deviceID;
-    PlayerQRCode playerQRCode;
+    PlayerQRCode loginQRCode;
+    PlayerQRCode profileQRCode;
     ArrayList<GameQRCode> QRCodeList= new ArrayList<GameQRCode>();
 
     Player(String deviceID){
@@ -14,6 +15,7 @@ public class Player {
 
     String getUserName(){ return this.userName; }
     String getDeviceID(){ return this.deviceID; }
-    PlayerQRCode getPlayerQRCode(){ return this.playerQRCode; }
+    PlayerQRCode getLoginQRCode(){ return this.loginQRCode; }
+    PlayerQRCode getProfileQRCode(){ return this.profileQRCode; }
     ArrayList<GameQRCode> getQRCodeList() { return this.QRCodeList; }
 }
