@@ -4,18 +4,26 @@ import java.util.ArrayList;
 
 public class Player {
     private String userName;
-    private String deviceID;
+    private String uuid;
     PlayerQRCode loginQRCode;
     PlayerQRCode profileQRCode;
-    ArrayList<GameQRCode> QRCodeList= new ArrayList<GameQRCode>();
+    ArrayList<GameQRCode> QRCodeList= new ArrayList<>();
 
-    Player(String deviceID){
-        this.deviceID = deviceID;
+    Player(String uuid) {
+        this.uuid = uuid;
     }
 
-    String getUserName(){ return this.userName; }
-    String getDeviceID(){ return this.deviceID; }
-    PlayerQRCode getLoginQRCode(){ return this.loginQRCode; }
-    PlayerQRCode getProfileQRCode(){ return this.profileQRCode; }
-    ArrayList<GameQRCode> getQRCodeList() { return this.QRCodeList; }
+    String getUserName() {
+        return this.userName;
+    }
+    String getUUID() {
+        return this.uuid;
+    }
+    PlayerQRCode getLoginQRCode() {
+        return this.loginQRCode;
+    }
+    PlayerQRCode getProfileQRCode() {
+        return this.profileQRCode;
+    }
+    ArrayList<GameQRCode> getQRCodeList() {return this.QRCodeList;}
 }
