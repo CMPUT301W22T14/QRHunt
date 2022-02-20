@@ -1,8 +1,10 @@
 package com.example.qrhunt;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
@@ -130,6 +135,18 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
                     switch (optionIdx) {
                         case 0:
                             // Scan New Code
+                            //Initialize intent integrator
+                            IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+                            //Set prompt text
+                            intentIntegrator.setPrompt("For flash use volume up key");
+                            //Set beep
+                            intentIntegrator.setBeepEnabled(true);
+                            //Locked orientation
+                            intentIntegrator.setOrientationLocked(true);
+                            //Set capture activity
+                            intentIntegrator.setCaptureActivity(Capture.class);
+                            //Initiate scan
+                            intentIntegrator.initiateScan();
                             break;
                         case 1:
                             // Searching by Location
@@ -212,6 +229,22 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
         mDatabase.child("Players").child(player.getUUID()).setValue(player);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //Initialize intent result
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        //check condition
+        if (intentResult.getContents() != null) {
+            //when result content is not null
+            GameQRCode gameQRCode = new GameQRCode(intentResult.getContents());
+        }
+        else {
+            //When result content is null
+            //Display toast
+            Toast.makeText(getApplicationContext(), "OOPS.. You did not scan anything",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 }
 
