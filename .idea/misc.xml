@@ -4,10 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31921132656729245" />
+<<<<<<< HEAD
+        <entry key="app/src/main/res/layout/detail_display_fragment_layout.xml" value="0.10064924154429115" />
+        <entry key="app/src/main/res/layout/leader_board_layout.xml" value="0.2677767263901692" />
+        <entry key="app/src/main/res/layout/profile_display_fragment_layout.xml" value="0.165" />
+=======
         <entry key="app/src/main/res/layout/add_edit_session_fragment_layout.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/browse_session_fragment_layout.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/content.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/leader_board_fragment_layout.xml" value="0.3880208333333333" />
+>>>>>>> 43c741e858d673cd8914f183cfa1e4114a4dd77f
       </map>
     </option>
   </component>
