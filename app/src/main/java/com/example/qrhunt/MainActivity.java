@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 
@@ -31,9 +32,9 @@ import java.util.UUID;
 //
 public class MainActivity extends AppCompatActivity implements FragmentName.OnFragmentInteractionListener {
     /* Global Variables */
-    ListView sessionList;
-    ArrayList<GameCode> sessionDataList;
-    ArrayAdapter<GameCode> sessionAdapter;
+    ListView mainListView;
+    ArrayList<String> mainDataList;
+    ArrayAdapter<String> mainDataAdapter;
 
 
     // <<Creating Function>>
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
         setContentView(R.layout.activity_main);
 
         // Locations Marked：
-        sessionList = findViewById(R.id.session_list);
+        mainListView = findViewById(R.id.session_list);
         final TextView text_rollNum = findViewById(R.id.textview_total_score);
         final Button button_more = findViewById(R.id.button_more);
         final Button button_detail = findViewById(R.id.button_detail);
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
                         String[] localPlayerOptions = {"Nope, I am new here", "Yep, I already have an account"};
                         AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
                         builder2.setTitle("Are you an existed user?");
-                        builder2.setItems(localPlayerOptions, new DialogInterface.OnClickListener() {
+                        Arrays.stream(new AlertDialog.Builder[]{builder2.setItems(localPlayerOptions, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int optionIdx) {
                                 switch (optionIdx) {
@@ -80,17 +81,25 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
                                         break;
                                     case 1:
                                         // Old Player
-                                        boolean isValid = dataReload(uuid);
+                                        // --> Temporary DataSet
+                                        // --> Connect to DataBase
+                                        String[] gameQRCode = {"vfr567ujh6gbv9fr2ty", "bvg6frt1y3ui3jh0gty", "nb5fre67u8i4k2jhb3j", "9876t5rfd3vh3ji1hgf"};
+                                        mainDataAdapter.addAll(Arrays.asList(gameQRCode));
+
+                                        mainListView.setAdapter(mainDataAdapter);
+                                        boolean isValid = true; //dataReload(uuid);
                                         if (isValid) {
-
-                                        }
-                                        else {
-
+                                            // ...
+                                            Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Sorry, you have no history record on this device...", Toast.LENGTH_LONG).show();
+                                            // ...
                                         }
                                         break;
                                 }
                             }
-                        }).create().show();
+                        })}).create().show();
+
                         break;
                     case 1:
                         // Scan Player Code
@@ -102,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
                         // Owner
                         // --> Checking username and password;
                         // --> To Owner Page;
-                        Toast.makeText(getApplicationContext(), "Owner Rights Activated", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
                         break;
                 }
             }
@@ -139,11 +148,11 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
 
 
         // Monitoring ListView Clicking:
-        sessionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Catching the item clicked:
-                GameCode sessionAtPos = sessionAdapter.getItem(position);
+                GameQRCode sessionAtPos = mainDataAdapter.getItem(position);
 
                 // Visible Operation:
                 button_detail.setVisibility(View.VISIBLE);
@@ -164,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
                 button_delete.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         // Removing from ListView:
-                        sessionAdapter.remove(sessionAtPos);
+                        mainDataAdapter.remove(sessionAtPos);
 
                         // Removing from DataBase:
                         // ...
@@ -200,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
 
     public void addToDatabase(Player player) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Players").child(player.UUID).setValue(player);
+        mDatabase.child("Players").child(player.getUUID()).setValue(player);
     }
 
 
