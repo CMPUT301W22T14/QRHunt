@@ -1,4 +1,4 @@
 package com.example.qrhunt;
 
-public class PlayerCode {
+public class GameQRCode {
 }
