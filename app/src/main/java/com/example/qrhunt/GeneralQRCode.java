@@ -10,4 +10,6 @@ public abstract class GeneralQRCode {
     public String getContent() {
         return content;
     }
+
+    public abstract void generateQRCode();
 }
