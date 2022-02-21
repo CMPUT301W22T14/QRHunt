@@ -6,13 +6,24 @@ import java.util.ArrayList;
 public class Player {
     private String userName;
     private String uuid;
-    PlayerQRCode loginQRCode;
-    PlayerQRCode profileQRCode;
-    ArrayList<GameQRCode> QRCodeList= new ArrayList<GameQRCode>();
+    private boolean isStoredRemotely = false;
+    private PlayerQRCode loginQRCode;
+    private PlayerQRCode profileQRCode;
+    private ArrayList<GameQRCode> QRCodeList= new ArrayList<GameQRCode>();
 
     Player(String uuid) {
         this.uuid = uuid;
     }
+
+    public ArrayList<GameQRCode> getQRCodeList() {
+        return QRCodeList;
+    }
+
+    public int getQRCodeListSum() {
+        return QRCodeList.size();
+    }
+
+
 
 
     String getUserName() {
@@ -27,9 +38,7 @@ public class Player {
     PlayerQRCode getProfileQRCode() {
         return this.profileQRCode;
     }
-    ArrayList<GameQRCode> getQRCodeList() {
-        return this.QRCodeList;
-    }
+
 
 
 }
