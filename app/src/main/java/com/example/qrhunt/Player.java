@@ -2,7 +2,6 @@ package com.example.qrhunt;
 
 import java.util.ArrayList;
 
-
 public class Player {
     private String userName;
     private String uuid;
@@ -15,6 +14,7 @@ public class Player {
         this.uuid = uuid;
     }
 
+
     public ArrayList<GameQRCode> getQRCodeList() {
         return QRCodeList;
     }
@@ -22,8 +22,6 @@ public class Player {
     public int getQRCodeListSum() {
         return QRCodeList.size();
     }
-
-
 
 
     String getUserName() {
@@ -38,7 +36,5 @@ public class Player {
     PlayerQRCode getProfileQRCode() {
         return this.profileQRCode;
     }
-
-
 
 }
