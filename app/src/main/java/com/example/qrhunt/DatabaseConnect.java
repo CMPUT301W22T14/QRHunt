@@ -40,4 +40,21 @@ public class DatabaseConnect {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Players").child(player.getUUID()).setValue(player);
     }
+
+    /*
+        private boolean dataReload(String uuid) {
+        // success/fail --> return true/false
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Player player;
+        mDatabase.child("players").child(uuid).getKey();
+        //...
+        return false;
+
+    }
+
+    public void addToDatabase(Player player) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Players").child(player.getUUID()).setValue(player);
+    }
+    * */
 }

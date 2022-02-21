@@ -226,20 +226,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private boolean dataReload(String uuid) {
-        // success/fail --> return true/false
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Player player;
-        mDatabase.child("players").child(uuid).getKey();
-        //...
-        return false;
-
-    }
-
-    public void addToDatabase(Player player) {
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Players").child(player.getUUID()).setValue(player);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
