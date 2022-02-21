@@ -4,4 +4,7 @@
     <string name="delete">Delete</string>
     <string name="profile">Profile</string>
     <string name="sum_of_scores">[Sum of Scores]</string>
+    <string name="gameqrcodeid">Game QR Code ID</string>
+    <string name="score">Score</string>
+    <string name="add_comments">Add Comments</string>
 </resources>
