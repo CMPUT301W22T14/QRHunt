@@ -13,33 +13,29 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 
 
-// For Meeting:
-// Todo - Confirmation 01: Dataset Storage format
-//
-// For Bugs:
-//
-//
-
-
-
-
-//
-public class MainActivity extends AppCompatActivity implements FragmentName.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
     /* Global Variables */
-    ListView mainListView;
-    ArrayList<String> mainDataList;
-    ArrayAdapter<String> mainDataAdapter;
+    ListView mainListView = null;
+    ArrayList<GameQRCode> mainDataList = null;
+    ArrayAdapter<GameQRCode> mainDataAdapter = null;
+
+    // Acquiring Identification:
+    boolean isUUIDExisted = false;
+    String uuid = UUID.randomUUID().toString();
+    DatabaseConnect dbc = new DatabaseConnect(uuid);
+    Player player = null;
 
 
     // <<Creating Function>>
@@ -51,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
         // Locations Marked：
         mainListView = findViewById(R.id.session_list);
         final TextView text_rollNum = findViewById(R.id.textview_total_score);
-        final Button button_more = findViewById(R.id.button_more);
+        final FloatingActionButton button_more = findViewById(R.id.button_more);
         final Button button_detail = findViewById(R.id.button_detail);
         final Button button_delete = findViewById(R.id.button_delete);
         final Button button_profile = findViewById(R.id.button_profile);
@@ -61,66 +57,82 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
         button_delete.setVisibility(View.INVISIBLE);
         button_profile.setVisibility(View.INVISIBLE);
 
-        // Acquiring Device UUID:
-        String uuid = UUID.randomUUID().toString();
 
         // Identity Asking:
-        String[] roleOptions = {"Local Player", "Foreign Player", "Owner Channel"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Please select your role: ");
-        builder.setItems(roleOptions, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int optionIdx) {
-                switch (optionIdx) {
-                    case 0:
-                        String[] localPlayerOptions = {"Nope, I am new here", "Yep, I already have an account"};
-                        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
-                        builder2.setTitle("Are you an existed user?");
-                        Arrays.stream(new AlertDialog.Builder[]{builder2.setItems(localPlayerOptions, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int optionIdx) {
-                                switch (optionIdx) {
-                                    case 0:
-                                        // New Player
-                                        // --> To ActivityMain;
-                                        break;
-                                    case 1:
-                                        // Old Player
-                                        // --> Temporary DataSet
-                                        // --> Connect to DataBase
-                                        String[] gameQRCode = {"vfr567ujh6gbv9fr2ty", "bvg6frt1y3ui3jh0gty", "nb5fre67u8i4k2jhb3j", "9876t5rfd3vh3ji1hgf"};
-                                        mainDataAdapter.addAll(Arrays.asList(gameQRCode));
-
-                                        mainListView.setAdapter(mainDataAdapter);
-                                        boolean isValid = true; //dataReload(uuid);
-                                        if (isValid) {
-                                            // ...
-                                            Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
-                                        } else {
-                                            Toast.makeText(getApplicationContext(), "Sorry, you have no history record on this device...", Toast.LENGTH_LONG).show();
-                                            // ...
-                                        }
-                                        break;
+        if (player == null) {
+            String[] roleOptions = {"Local Player", "Foreign Player", "Owner Channel"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Please select your role: ");
+            builder.setItems(roleOptions, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface arg0, int optionIdx) {
+                    switch (optionIdx) {
+                        case 0:
+                            String[] localPlayerOptions = {"Yep, I already have an account", "Nope, I am new here"};
+                            AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
+                            builder2.setTitle("Are you an existed user?");
+                            builder2.setItems(localPlayerOptions, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int optionIdx) {
+                                    switch (optionIdx) {
+                                        case 0:
+                                            // Old Player
+                                            // Checking whether data existed or not:
+                                            // Existed --> Connect to DataBase
+                                            // NotExisted -->
+                                            if (dbc.isDatabaseExisted()) {
+                                                isUUIDExisted = true;
+                                                Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
+                                            }
+                                            else {
+                                                isUUIDExisted = false;
+                                                Toast.makeText(getApplicationContext(), "Sorry, you have no history record on this device...", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getApplicationContext(), "We are creating a new account for this device.", Toast.LENGTH_LONG).show();
+                                                return;
+                                            }
+                                            break;
+                                        case 1:
+                                            isUUIDExisted = false;
+                                            // New Player
+                                            // --> To ActivityMain;
+                                            Toast.makeText(getApplicationContext(), "Welcome!! We are creating a new account for your device!", Toast.LENGTH_LONG).show();
+                                            break;
+                                    }
                                 }
-                            }
-                        })}).create().show();
-
-                        break;
-                    case 1:
-                        // Scan Player Code
-                        // --> QRCode Scanner Page;
-                        dataReload(uuid);
-                        Toast.makeText(getApplicationContext(), "Welcome back!!", Toast.LENGTH_LONG).show();
-                        break;
-                    case 2:
-                        // Owner
-                        // --> Checking username and password;
-                        // --> To Owner Page;
-                        Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
-                        break;
+                            }).create().show();
+                            break;
+                        case 1:
+                            // Scan Player Code
+                            // --> QRCode Scanner Page;
+                            uuid = "0000"; // --> from QR scanner
+                            isUUIDExisted = true;
+                            Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
+                            break;
+                        case 2:
+                            // Owner
+                            // --> Checking username and password;
+                            // --> To Owner Page;
+                            isUUIDExisted = false;
+                            Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
+                            break;
+                    }
                 }
-            }
-        }).create().show();
+            }).create().show();
+        }
+
+
+        // Filling the main activity based on roles:
+        if (isUUIDExisted) {
+            player = dbc.getPlayerReload();
+
+            ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
+            mainDataList.addAll(gameQRCodes);
+            mainDataAdapter = new CustomList(this, mainDataList);
+        }
+        else {
+            mainDataList = null;
+            mainDataAdapter = new CustomList(this, mainDataList);
+        }
 
 
         // MORE:
@@ -246,5 +258,6 @@ public class MainActivity extends AppCompatActivity implements FragmentName.OnFr
                     Toast.LENGTH_SHORT).show();
         }
     }
+
 }
 

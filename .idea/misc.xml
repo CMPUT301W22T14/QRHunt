@@ -7,8 +7,10 @@
         <entry key="app/src/main/res/layout/add_edit_session_fragment_layout.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/browse_session_fragment_layout.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/content.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/detail_display_fragment_layout.xml" value="0.21979166666666666" />
+        <entry key="app/src/main/res/layout/detail_display_fragment_layout.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/leader_board_fragment_layout.xml" value="0.3880208333333333" />
+        <entry key="app/src/main/res/layout/profile_display_fragment_layout.xml" value="0.3880208333333333" />
+
       </map>
     </option>
   </component>

@@ -15,18 +15,18 @@
         android:layout_height="670dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="-1dp"
         android:layout_marginTop="0dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_more"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="650dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
         android:clickable="true"
         android:focusable="true"
         app:srcCompat="@android:drawable/ic_input_add" />
@@ -71,16 +71,15 @@
 
     <TextView
         android:id="@+id/textview_total_score"
-        android:layout_width="130dp"
-        android:layout_height="30dp"
+        android:layout_width="106dp"
+        android:layout_height="32dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="250dp"
-        android:layout_marginTop="-40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="65dp"
         android:text="@string/sum_of_scores"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
 
 </RelativeLayout>

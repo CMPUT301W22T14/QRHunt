@@ -14,6 +14,9 @@ public class GameQRCode extends GeneralQRCode {
         this.score = score;
     }
 
+    public int getScore() {
+        return score;
+    }
 
     @Override
     public void generateQRCode() {

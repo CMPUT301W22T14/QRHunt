@@ -25,5 +25,5 @@
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"/>
     </application>
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 </manifest>
