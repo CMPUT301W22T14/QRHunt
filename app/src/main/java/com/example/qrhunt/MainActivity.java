@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 3:
                             // Searching by Username
+                            new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
                             // --> Unfolding ProfileDisplayFragment;
                             break;
                     }
