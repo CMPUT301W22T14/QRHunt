@@ -25,7 +25,7 @@ import java.util.UUID;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener{
     /* Global Variables */
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = null;
@@ -247,5 +247,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onSearchPressed(String uuid) {
+        // search if uuid exist in the database
+        // if exist -> show the profile of uuid
+        // if not exit ->
+        Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_SHORT).show();
+    }
 }
 
