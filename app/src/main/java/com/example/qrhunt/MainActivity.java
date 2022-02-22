@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface arg0, int optionIdx) {
                                     switch (optionIdx) {
+                                        // Old Player:
+                                        // --> Checking whether data existed or not;
                                         case 0:
-                                            // Old Player
-                                            // Checking whether data existed or not:
                                             // Existed --> Connect to DataBase
-                                            // NotExisted -->
+                                            // NotExisted --> Create New Account
                                             if (dbc.isDatabaseExisted()) {
                                                 isUUIDExisted = true;
                                                 Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
@@ -91,10 +91,10 @@ public class MainActivity extends AppCompatActivity {
                                                 return;
                                             }
                                             break;
+                                        // New Player
+                                        // --> To ActivityMain;
                                         case 1:
                                             isUUIDExisted = false;
-                                            // New Player
-                                            // --> To ActivityMain;
                                             Toast.makeText(getApplicationContext(), "Welcome!! We are creating a new account for your device!", Toast.LENGTH_LONG).show();
                                             break;
                                     }
@@ -102,14 +102,14 @@ public class MainActivity extends AppCompatActivity {
                             }).create().show();
                             break;
                         case 1:
-                            // Scan Player Code
+                            // Scan Player Code:
                             // --> QRCode Scanner Page;
                             uuid = "0000"; // --> from QR scanner
                             isUUIDExisted = true;
                             Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
                             break;
                         case 2:
-                            // Owner
+                            // Owner:
                             // --> Checking username and password;
                             // --> To Owner Page;
                             isUUIDExisted = false;
@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
                         case 0:
+                            // --> Unfolding ProfileDisplayFragment in protected edition;
                             // Scan New Code
                             //Initialize intent integrator
                             IntentIntegrator intentIntegrator = new IntentIntegrator (MainActivity.this);
@@ -168,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 3:
                             // Searching by Username
+                            // --> Unfolding ProfileDisplayFragment;
                             break;
                     }
                 }
@@ -212,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
                 // PROFILE:
                 button_profile.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        // --> profile_display_fragment
-                        // new ProfileFragment(sessionAtPos).show(getSupportFragmentManager(), "Profile_Session");
+                        // --> unfolding ProfileDisplayFragment;
+                        new ProfileDisplayFragment(player, false).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
                     }
                 });
 

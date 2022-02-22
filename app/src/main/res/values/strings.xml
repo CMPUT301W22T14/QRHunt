@@ -7,4 +7,13 @@
     <string name="gameqrcodeid">Game QR Code ID</string>
     <string name="score">Score</string>
     <string name="add_comments">Add Comments</string>
+    <string name="total_qr_code">Total QR Code</string>
+    <string name="my_status_qr_code">My status QR code</string>
+    <string name="my_logging_in_qr_code">My logging in QR code</string>
+    <string name="average">Average</string>
+    <string name="sum">Sum</string>
+    <string name="max">Max</string>
+    <string name="min">Min</string>
+    <string name="user_name">User Name</string>
+    <string name="contact_information">Contact Information</string>
 </resources>
