@@ -25,7 +25,7 @@ import java.util.UUID;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener{
     /* Global Variables */
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = new ArrayList<GameQRCode>();
@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 3:
                             // Searching by Username
+                            new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
                             // --> Unfolding ProfileDisplayFragment;
                             break;
                     }
@@ -279,5 +280,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onSearchPressed(String uuid) {
+        // search if uuid exist in the database
+        // if exist -> show the profile of uuid
+        // if not exit ->
+        Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_SHORT).show();
+    }
 }
 
