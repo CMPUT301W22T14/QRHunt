@@ -109,6 +109,10 @@ public class ProfileDisplayFragment extends DialogFragment {
     }
 
     public void generateStatusQRCode(ImageView statusQRCodeImage) {
+        //from: youtube.com
+        //URL: https://www.youtube.com/watch?v=yJh22Wk74V8
+        //Author: https://www.youtube.com/channel/UCklYpZX_-QqHOeSUH4GVQpA
+
         // Get the information of the player
         String username = "User Name: " + player.getUserName();
         String contactInfo = "Contact Information: " + player.getContactInfo();

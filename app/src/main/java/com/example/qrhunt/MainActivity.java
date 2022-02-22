@@ -178,6 +178,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
                         case 0:
+                            //from: youtube.com
+                            //URL: https://www.youtube.com/watch?v=kwOZEU0UBVg
+                            //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
+                            
                             // --> Unfolding ProfileDisplayFragment in protected edition;
                             // Scan New Code
                             //Initialize intent integrator
@@ -270,6 +274,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //from: youtube.com
+        //URL: https://www.youtube.com/watch?v=kwOZEU0UBVg
+        //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
         super.onActivityResult(requestCode, resultCode, data);
         //Initialize intent result
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
