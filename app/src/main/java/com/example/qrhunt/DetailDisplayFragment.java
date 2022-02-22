@@ -45,7 +45,7 @@ public class DetailDisplayFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // Locations Marked：
         @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.profile_display_fragment_layout, null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.detail_display_fragment_layout, null);
 
         TextView playerScannedTheSameTextView = view.findViewById(R.id.player_scanned_the_same_QRCode_textView);
         TextView commentsTextView = view.findViewById(R.id.comments_textView);
@@ -61,18 +61,11 @@ public class DetailDisplayFragment extends DialogFragment {
         ArrayList<String> allScannersList = gameQRCode.showAllScanners();
         ArrayList<String> allCommentsList = gameQRCode.showAllComments();
 
-        ArrayAdapter<String> allScannersAdapter = new CustomList2(this, allScannersList);
-        ArrayAdapter<String> allCommentsAdapter = new CustomList2(this, allCommentsList);
+        ArrayAdapter<String> allScannersAdapter = new CustomList2(getActivity().getBaseContext(), allScannersList);
+        ArrayAdapter<String> allCommentsAdapter = new CustomList2(getActivity().getBaseContext(), allCommentsList);
 
-        playerSameQRCodeList.setAdapter();
-        commentSameQRCodeList.setAdapter();
-
-
-
-
-
-
-
+        playerSameQRCodeList.setAdapter(allScannersAdapter);
+        commentSameQRCodeList.setAdapter(allCommentsAdapter);
 
 
         // Adding Comment (when button clicked):

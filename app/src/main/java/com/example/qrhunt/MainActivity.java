@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     public void onClick(View v) {
                         // button_detail functions:
                         // --> detail_display_fragment;
-                        // new DetailFragment(sessionAtPos).show(getSupportFragmentManager(), "Detail_Session");
+                        new DetailDisplayFragment(sessionAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
 
                         // Invisible Operation:
                         button_detail.setVisibility(View.INVISIBLE);

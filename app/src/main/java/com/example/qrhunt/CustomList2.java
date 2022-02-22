@@ -18,17 +18,13 @@ public class CustomList2 extends ArrayAdapter<String> {
     private Context context;
     private int functionSelection;
 
-    public CustomList2(DetailDisplayFragment detailDisplayFragment, Context context, ArrayList<String> data){
+    public CustomList2(Context context, ArrayList<String> data){
         super(context,0, data);
         this.data = data;
         this.context = context;
         this.functionSelection = functionSelection;
     }
 
-
-
-    @NonNull
-    @Override`
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
         if (view == null) {
