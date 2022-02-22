@@ -63,14 +63,14 @@ public class ProfileDisplayFragment extends DialogFragment {
         /* Protection Operations */
         // Invisible Operations:
         // --> For Searching Result;
-        //statusQRCodeButton.setVisibility(View.INVISIBLE);
+        statusQRCodeButton.setVisibility(View.INVISIBLE);
         loggingInQRCodeButton.setVisibility(View.INVISIBLE);
         statusQRCodeImage.setVisibility(View.INVISIBLE);
         loggingInQRCodeImage.setVisibility(View.INVISIBLE);
 
         // Checking Clicks:
         // --> Show Codes & Images (when clicked);
-        if (isPrivacyProtected = false) {
+        if (isPrivacyProtected == false) {
             statusQRCodeButton.setVisibility(View.VISIBLE);
             loggingInQRCodeButton.setVisibility(View.VISIBLE);
 
