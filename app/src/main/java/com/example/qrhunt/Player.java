@@ -1,5 +1,7 @@
 package com.example.qrhunt;
 
+import com.google.zxing.qrcode.encoder.QRCode;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -18,6 +20,8 @@ public class Player {
         this.uuid = uuid;
     }
 
+
+    // Expand Methods:
     public int getMaxCodeScore() {
         return 0;
     }
@@ -33,9 +37,16 @@ public class Player {
     public int getSumCodeScore() {
         return 0;
     }
+
     public int getTotalCodeNum() {
         return 0;
     }
+
+    public void addQRCode(GameQRCode newQRCode) {
+        QRCodeList.add(newQRCode);
+    }
+
+
 
 
     // Getters

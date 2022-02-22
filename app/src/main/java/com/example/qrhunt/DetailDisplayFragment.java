@@ -3,14 +3,27 @@ package com.example.qrhunt;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.zxing.qrcode.encoder.QRCode;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class DetailDisplayFragment extends DialogFragment {
@@ -32,32 +45,54 @@ public class DetailDisplayFragment extends DialogFragment {
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.profile_display_fragment_layout, null);
 
-        TextView username = view.findViewById(R.id.user_name_textView);
-        TextView contactInfo = view.findViewById(R.id.contact_information_textView);
+        TextView playerScannedTheSameTextView = view.findViewById(R.id.player_scanned_the_same_QRCode_textView);
+        TextView commentsTextView = view.findViewById(R.id.comments_textView);
+        ListView playerSameQRCodeList = view.findViewById(R.id.players_sameQRCode_list);
+        ListView commentSameQRCodeList = view.findViewById(R.id.comment_sameQRCode_list);
 
-        TextView minScore = view.findViewById(R.id.min_score_textView);
-        TextView maxScore = view.findViewById(R.id.max_score_textView);
-        TextView avgScore = view.findViewById(R.id.average_score_textView);
-        TextView sumScore = view.findViewById(R.id.sum_score_textView);
-        TextView totalNum = view.findViewById(R.id.total_QRCode_textView);
+        EditText inputCommentEditText = view.findViewById(R.id.input_comment_editText);
+        Button addCommentButton = view.findViewById(R.id.add_comment_button);
+        ImageView QRCodeImageView = view.findViewById(R.id.QRCode_view);
 
 
-        // Filling Data to Components:
-        username.setText("User Name: " + player.getUserName());
-        contactInfo.setText("Contact Information: " + player.getContactInfo());
-        minScore.setText("Minimal Score: " + player.getMinCodeScore());
-        maxScore.setText("Maximal Score: " + player.getMaxCodeScore());
-        avgScore.setText("Average Score: " + player.getAvgCodeScore());
-        sumScore.setText("Sum Score: " + player.getSumCodeScore());
-        totalNum.setText("SessionDate: " + player.getTotalCodeNum());
+        // Filling Data to ListViews:
+        ArrayList<String> allScanners = gameQRCode.showAllScanners();
+        ArrayList<String> allComments = gameQRCode.showAllComments();
+
+
+
+
+
+
+
+
+
+
+        // Adding Comment (when button clicked):
+        // --> Fixing Text Size (limit < 80);
+        addCommentButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String inputComment = inputCommentEditText.getText().toString();
+                if (inputComment.length() > 80) {
+                    inputComment = inputComment.substring(0, 79);
+                }
+                gameQRCode.addComment(inputComment);
+            }
+        });
+
 
         // Page Structure:
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
                 .setView(view)
-                .setTitle("Profile Page")
-                .setNegativeButton("Got it", null).create();
+                .setTitle("Detail Page")
+                .setNegativeButton("Looks Good", null).create();
+
+
+
+
 
     }
+
 }
 
