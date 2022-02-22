@@ -71,14 +71,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/players_sameQRCode_list" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_comment_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="10pt"
-        android:text="Put in Comment"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:hint="Type Comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment_sameQRCode_list" />
 
