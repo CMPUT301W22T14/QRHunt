@@ -17,7 +17,7 @@ public class UsernameSearchFragment extends DialogFragment {
     private OnFragmentInteractionListener listener;
 
     public interface OnFragmentInteractionListener{
-        void onOkPressed(Player player);
+        void onSearchPressed(String uuid);
     }
 
     @Override
@@ -42,11 +42,11 @@ public class UsernameSearchFragment extends DialogFragment {
                 .setView(view)
                 .setTitle("Search player by username")
                 .setNegativeButton("Cancel", null)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Search", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String uuid = username.getText().toString();
-                        listener.onOkPressed(new Player(uuid));
+                        listener.onSearchPressed(uuid);
                     }
                 }).create();
     }
