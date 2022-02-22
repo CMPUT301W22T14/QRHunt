@@ -150,8 +150,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 mainDataAdapter = new CustomList(this, mainDataList);
             }
             else {
-                mainDataList = null;
-                mainDataAdapter = new CustomList(this, mainDataList);
+                mainDataAdapter = new CustomList(this, null);
             }
         }
 

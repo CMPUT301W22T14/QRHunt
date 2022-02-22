@@ -3,11 +3,13 @@ package com.example.qrhunt;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -56,9 +58,14 @@ public class DetailDisplayFragment extends DialogFragment {
 
 
         // Filling Data to ListViews:
-        ArrayList<String> allScanners = gameQRCode.showAllScanners();
-        ArrayList<String> allComments = gameQRCode.showAllComments();
+        ArrayList<String> allScannersList = gameQRCode.showAllScanners();
+        ArrayList<String> allCommentsList = gameQRCode.showAllComments();
 
+        ArrayAdapter<String> allScannersAdapter = new CustomList2(this, allScannersList);
+        ArrayAdapter<String> allCommentsAdapter = new CustomList2(this, allCommentsList);
+
+        playerSameQRCodeList.setAdapter();
+        commentSameQRCodeList.setAdapter();
 
 
 
