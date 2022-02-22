@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 3:
                             // Searching by Username
-                            break;
+                            new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
                     }
                 }
             }).create().show();
