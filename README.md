@@ -1,7 +1,8 @@
 # Groupwork UPDATE
 ## *LATEST UPDATE VERSION*:
 *Beta 1.0.2
-nBeta 1.0.3 TEST Ver.
+
+*Beta 1.0.3 TEST Ver.
 
 ## 2022-02-20
 Please check all group branches to find the repo with the latest update, then you may build something new based on that.
