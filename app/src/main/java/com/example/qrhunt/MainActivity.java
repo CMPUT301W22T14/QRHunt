@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     DatabaseConnect dbc = new DatabaseConnect(uuid);
     Player player = null;
 
-    boolean TESTING = true;
+    boolean TESTING = true;     //** FOR TEST
 
 
 
@@ -127,9 +127,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             isUUIDExisted = false;
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
                             break;
-                        case 3:
-                            // TEST:
-                            Toast.makeText(getApplicationContext(), "Welcome to the TEST channel", Toast.LENGTH_LONG).show();
 
 
 
@@ -138,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }).create().show();
         }
 
-        if (TESTING) {
+        if (TESTING) {      //** FOR TEST
             ArrayList<GameQRCode> gameQRCodes = player.getQRCodeList();
             mainDataList.addAll(gameQRCodes);
             mainDataAdapter = new CustomList(this, mainDataList);
@@ -244,19 +241,18 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         button_delete.setVisibility(View.INVISIBLE);
                     }
                 });
+            }
+        });
 
-                // PROFILE:
-                button_profile.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        // --> unfolding ProfileDisplayFragment;
-                        new ProfileDisplayFragment(player, false).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+        // PROFILE:
+        button_profile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // --> unfolding ProfileDisplayFragment;
+                new ProfileDisplayFragment(player, false).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
 
-                        // Invisible Operation:
-                        button_detail.setVisibility(View.INVISIBLE);
-                        button_delete.setVisibility(View.INVISIBLE);
-                    }
-                });
-
+                // Invisible Operation:
+                button_detail.setVisibility(View.INVISIBLE);
+                button_delete.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -283,10 +279,19 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
     @Override
     public void onSearchPressed(String uuid) {
-        // search if uuid exist in the database
-        // if exist -> show the profile of uuid
-        // if not exit ->
-        Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_SHORT).show();
+        // Searching if uuid exist in the database:
+        // If Exist
+        // -> show the profile of uuid;
+        /*
+        DatabaseConnect dbc = new DatabaseConnect(uuid);
+        Player playerSearchingResult = dbc.getPlayerReload();
+        */
+        Player playerSearchingResult = player;  //** FOR TEST
+        new ProfileDisplayFragment(playerSearchingResult, true).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+        // Not Exist:
+        // --> Show Error;
+        Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
+
     }
 }
 
