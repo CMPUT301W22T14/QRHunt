@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                         case 0:
                             // Scan New Code
                             //Initialize intent integrator
-                            IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+                            IntentIntegrator intentIntegrator = new IntentIntegrator (MainActivity.this);
                             //Set prompt text
                             intentIntegrator.setPrompt("For flash use volume up key");
                             //Set beep
@@ -240,8 +240,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             //When result content is null
             //Display toast
-            Toast.makeText(getApplicationContext(), "OOPS.. You did not scan anything",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "OOPS.. You did not scan anything", Toast.LENGTH_SHORT).show();
         }
     }
 
