@@ -28,8 +28,8 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener{
     /* Global Variables */
     ListView mainListView = null;
-    ArrayList<GameQRCode> mainDataList = null;
-    ArrayAdapter<GameQRCode> mainDataAdapter = null;
+    ArrayList<GameQRCode> mainDataList = new ArrayList<GameQRCode>();
+    ArrayAdapter<GameQRCode> mainDataAdapter= null;
 
     // Acquiring Identification:
     boolean isUUIDExisted = false;
@@ -37,12 +37,25 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     DatabaseConnect dbc = new DatabaseConnect(uuid);
     Player player = null;
 
+    boolean TESTING = true;
 
-    // <<Creating Function>>
+
+
+    /* Creating Function */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // TESTING
+        player = new Player("000000");
+        GameQRCode gameQRCode1 = new GameQRCode("abc");
+        GameQRCode gameQRCode2 = new GameQRCode("edf");
+        GameQRCode gameQRCode3 = new GameQRCode("xyz");
+        player.addQRCode(gameQRCode1);
+        player.addQRCode(gameQRCode2);
+        player.addQRCode(gameQRCode3);
+
 
         // Locations Marked：
         mainListView = findViewById(R.id.session_list);
@@ -55,12 +68,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         // Invisible Operation:
         button_detail.setVisibility(View.INVISIBLE);
         button_delete.setVisibility(View.INVISIBLE);
-        button_profile.setVisibility(View.INVISIBLE);
 
 
         // Identity Asking:
         if (player == null) {
-            String[] roleOptions = {"Local Player", "Foreign Player", "Owner Channel"};
+            String[] roleOptions = {"Local Player", "Foreign Player", "Owner Channel", "TEST Channel"};
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Please select your role: ");
             builder.setItems(roleOptions, new DialogInterface.OnClickListener() {
@@ -104,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         case 1:
                             // Scan Player Code:
                             // --> QRCode Scanner Page;
-                            uuid = "0000"; // --> from QR scanner
+                            uuid = "000000"; // --> from QR scanner
                             isUUIDExisted = true;
                             Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
                             break;
@@ -115,24 +127,38 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             isUUIDExisted = false;
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
                             break;
+                        case 3:
+                            // TEST:
+                            Toast.makeText(getApplicationContext(), "Welcome to the TEST channel", Toast.LENGTH_LONG).show();
+
+
+
                     }
                 }
             }).create().show();
         }
 
-
-        // Filling the main activity based on roles:
-        if (isUUIDExisted) {
-            player = dbc.getPlayerReload();
-
-            ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
+        if (TESTING) {
+            ArrayList<GameQRCode> gameQRCodes = player.getQRCodeList();
             mainDataList.addAll(gameQRCodes);
             mainDataAdapter = new CustomList(this, mainDataList);
+            mainListView.setAdapter(mainDataAdapter);
         }
         else {
-            mainDataList = null;
-            mainDataAdapter = new CustomList(this, mainDataList);
+            // Filling the main activity based on roles:
+            if (isUUIDExisted) {
+                player = dbc.getPlayerReload();
+                ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
+                mainDataList.addAll(gameQRCodes);
+                mainDataAdapter = new CustomList(this, mainDataList);
+            }
+            else {
+                mainDataList = null;
+                mainDataAdapter = new CustomList(this, mainDataList);
+            }
         }
+
+
 
 
         // MORE:
@@ -189,7 +215,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 // Visible Operation:
                 button_detail.setVisibility(View.VISIBLE);
                 button_delete.setVisibility(View.VISIBLE);
-                button_profile.setVisibility(View.VISIBLE);
 
 
                 // DETAIL:
@@ -198,6 +223,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         // button_detail functions:
                         // --> detail_display_fragment;
                         // new DetailFragment(sessionAtPos).show(getSupportFragmentManager(), "Detail_Session");
+
+                        // Invisible Operation:
+                        button_detail.setVisibility(View.INVISIBLE);
+                        button_delete.setVisibility(View.INVISIBLE);
                     }
                 });
 
@@ -209,6 +238,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
                         // Removing from DataBase:
                         // ...
+
+                        // Invisible Operation:
+                        button_detail.setVisibility(View.INVISIBLE);
+                        button_delete.setVisibility(View.INVISIBLE);
                     }
                 });
 
@@ -217,13 +250,13 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     public void onClick(View v) {
                         // --> unfolding ProfileDisplayFragment;
                         new ProfileDisplayFragment(player, false).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+
+                        // Invisible Operation:
+                        button_detail.setVisibility(View.INVISIBLE);
+                        button_delete.setVisibility(View.INVISIBLE);
                     }
                 });
 
-                // Invisible Operation:
-                button_detail.setVisibility(View.INVISIBLE);
-                button_delete.setVisibility(View.INVISIBLE);
-                button_profile.setVisibility(View.INVISIBLE);
             }
         });
     }

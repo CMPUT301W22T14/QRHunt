@@ -16,4 +16,7 @@
     <string name="min">Min</string>
     <string name="user_name">User Name</string>
     <string name="contact_information">Contact Information</string>
+    <string name="player_scanned_the_same_qr_code">Players Who Scanned The Same QR Code: </string>
+    <string name="comments">Comments: </string>
+    <string name="put_in_comment">Put in Comment</string>
 </resources>
