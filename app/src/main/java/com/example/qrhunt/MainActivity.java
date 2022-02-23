@@ -283,9 +283,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //check condition
         if (intentResult.getContents() != null) {
             //when result content is not null
-            GameQRCode gameQRCode = new GameQRCode(intentResult.getContents());
+            String content = intentResult.getContents();
+            GameQRCode gameQRCode = new GameQRCode(content);
             mainDataAdapter.add(gameQRCode);
         }
+
         else {
             //When result content is null
             //Display toast
