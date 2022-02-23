@@ -1,16 +1,16 @@
 package com.example.qrhunt;
 
 public abstract class GeneralQRCode {
-    protected String content = "123";
+
+    protected String content;
 
     public GeneralQRCode(String content) {
         this.content = content;
     }
 
     public String getContent() {
-        return "123";
+        return content;
     }
-
 
     public abstract void generateQRCode();
 }

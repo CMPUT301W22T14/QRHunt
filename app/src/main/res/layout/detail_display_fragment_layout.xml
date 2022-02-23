@@ -32,18 +32,18 @@
         android:id="@+id/add_comment_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/add_comments"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_comment_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/input_comment_editText" />
 
     <ImageView
         android:id="@+id/QRCode_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment_sameQRCode_list"
@@ -53,10 +53,10 @@
         android:id="@+id/player_scanned_the_same_QRCode_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Player scanned the same QR Code"
         android:layout_marginStart="16dp"
-        android:textSize="10pt"
+        android:layout_marginTop="16dp"
+        android:text="@string/player_scanned_the_same_qr_code"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,19 +66,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Comments"
-        android:textSize="10pt"
+        android:text="@string/comments"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/players_sameQRCode_list" />
 
-    <TextView
-        android:id="@+id/input_comment_textView"
+    <EditText
+        android:id="@+id/input_comment_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="10pt"
-        android:text="Put in Comment"
+        android:ems="10"
+        android:hint="Type Comment"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment_sameQRCode_list" />
 
