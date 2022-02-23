@@ -3,9 +3,12 @@ package com.example.qrhunt;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,12 +16,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 
 public class ProfileDisplayFragment extends DialogFragment {
     /* Global Variables */
     private Player player = null;
     private Boolean isPrivacyProtected = false;
+    private Boolean isVisibleStatus = false;
+    private Boolean isVisibleLogin = false;
 
 
     // Constructor
@@ -50,6 +60,8 @@ public class ProfileDisplayFragment extends DialogFragment {
         ImageView statusQRCodeImage = view.findViewById(R.id.my_status_QRCode_image);
         ImageView loggingInQRCodeImage = view.findViewById(R.id.my_logging_in_QRCode_image);
 
+        generateStatusQRCode(statusQRCodeImage);
+        generateLoggingInQRCode(loggingInQRCodeImage);
 
         /* Protection Operations */
         // Invisible Operations:
@@ -61,20 +73,36 @@ public class ProfileDisplayFragment extends DialogFragment {
 
         // Checking Clicks:
         // --> Show Codes & Images (when clicked);
-        if (isPrivacyProtected = false) {
+        if (isPrivacyProtected == false) {
             statusQRCodeButton.setVisibility(View.VISIBLE);
             loggingInQRCodeButton.setVisibility(View.VISIBLE);
 
             statusQRCodeButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // Show Image (statusQRCode):
-                    statusQRCodeImage.setVisibility(View.VISIBLE);
+                    if (isVisibleStatus == false) {
+                        // Show Image (statusQRCode):
+                        statusQRCodeImage.setVisibility(View.VISIBLE);
+                        isVisibleStatus = true;
+                    }
+                    else {
+                        // Hide Image (statusQRCode)
+                        statusQRCodeImage.setVisibility(View.INVISIBLE);
+                        isVisibleStatus = false;
+                    }
                 }
             });
             loggingInQRCodeButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // Show Image (loggingInQRCode):
-                    loggingInQRCodeImage.setVisibility(View.VISIBLE);
+                    if (isVisibleLogin == false) {
+                        // Show Image (loggingInQRCode):
+                        loggingInQRCodeImage.setVisibility(View.VISIBLE);
+                        isVisibleLogin = true;
+                    }
+                    else {
+                        // Hide Image (loggingInQRCode)
+                        loggingInQRCodeImage.setVisibility(View.INVISIBLE);
+                        isVisibleLogin = false;
+                    }
                 }
             });
         }
@@ -98,5 +126,52 @@ public class ProfileDisplayFragment extends DialogFragment {
                 .setNegativeButton("Got it", null).create();
 
     }
+
+    public void generateStatusQRCode(ImageView statusQRCodeImage) {
+        //from: youtube.com
+        //URL: https://www.youtube.com/watch?v=yJh22Wk74V8
+        //Author: https://www.youtube.com/channel/UCklYpZX_-QqHOeSUH4GVQpA
+
+        // Get the information of the player
+        String username = "User Name: " + player.getUserName();
+        String contactInfo = "Contact Information: " + player.getContactInfo();
+        String minScore = "Minimal Score: " + player.getMinCodeScore();
+        String maxScore = "Maximal Score: " + player.getMaxCodeScore();
+        String avgScore = "Average Score: " + player.getAvgCodeScore();
+        String sumScore = "Sum Score: " + player.getSumCodeScore();
+        String totalSum = "SessionDate: " + player.getTotalCodeNum();
+        // Integrate the information
+        String content = username + "\n" + contactInfo + "\n" + minScore + "\n" + maxScore + "\n" +
+                avgScore + "\n" + sumScore + "\n" + totalSum;
+        // Initialize multi format writer
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 250, 250);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            statusQRCodeImage.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void generateLoggingInQRCode(ImageView loggingInQRCodeImage) {
+        //from: youtube.com
+        //URL: https://www.youtube.com/watch?v=yJh22Wk74V8
+        //Author: https://www.youtube.com/channel/UCklYpZX_-QqHOeSUH4GVQpA
+
+        String content = player.getUUID();
+        // Initialize multi format writer
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 250, 250);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            loggingInQRCodeImage.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 

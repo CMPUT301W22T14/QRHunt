@@ -11,40 +11,38 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 
-public class CustomList extends ArrayAdapter<GameQRCode> {
 
-    private ArrayList<GameQRCode> codes;
+public class CustomList2 extends ArrayAdapter<String> {
+
+    private ArrayList<String> data;
     private Context context;
     private int functionSelection;
 
-    public CustomList(Context context, ArrayList<GameQRCode> codes){
-        super(context,0, codes);
-        this.codes = codes;
+    public CustomList2(Context context, ArrayList<String> data){
+        super(context,0, data);
+        this.data = data;
         this.context = context;
+        this.functionSelection = functionSelection;
     }
 
-
-    @NonNull
-    @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.content, parent, false);
         }
-        GameQRCode code = null;
-        if (codes.size() != 0){
-            code = codes.get(position);
-
+        String dataItem = null;
+        if (data.size() != 0){
+            dataItem = data.get(position);
         }
-        if (code == null) {
+        if (dataItem == null) {
             return view;
         }
+
         TextView gameQRCodeText = view.findViewById(R.id.game_code_text);
         TextView gameQRCodeScoreText = view.findViewById(R.id.game_code_other_text);
 
-        gameQRCodeText.setText(code.getContent());
-        //gameQRCodeScoreText.setText(code.getScore());   //** FOR TEST
+        String scanner = dataItem;
+        gameQRCodeText.setText(scanner);
         return view;
-
     }
 }

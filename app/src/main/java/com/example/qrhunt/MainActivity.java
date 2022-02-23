@@ -3,13 +3,18 @@ package com.example.qrhunt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,8 +22,13 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -37,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     DatabaseConnect dbc = new DatabaseConnect(uuid);
     Player player = null;
 
-    boolean TESTING = true;
+    boolean TESTING = true;     //** FOR TEST
 
 
 
@@ -127,9 +137,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             isUUIDExisted = false;
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
                             break;
-                        case 3:
-                            // TEST:
-                            Toast.makeText(getApplicationContext(), "Welcome to the TEST channel", Toast.LENGTH_LONG).show();
 
 
 
@@ -138,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }).create().show();
         }
 
-        if (TESTING) {
+        if (TESTING) {      //** FOR TEST
             ArrayList<GameQRCode> gameQRCodes = player.getQRCodeList();
             mainDataList.addAll(gameQRCodes);
             mainDataAdapter = new CustomList(this, mainDataList);
@@ -153,8 +160,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 mainDataAdapter = new CustomList(this, mainDataList);
             }
             else {
-                mainDataList = null;
-                mainDataAdapter = new CustomList(this, mainDataList);
+                mainDataAdapter = new CustomList(this, null);
             }
         }
 
@@ -172,6 +178,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
                         case 0:
+                            //from: youtube.com
+                            //URL: https://www.youtube.com/watch?v=kwOZEU0UBVg
+                            //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
+                            
                             // --> Unfolding ProfileDisplayFragment in protected edition;
                             // Scan New Code
                             //Initialize intent integrator
@@ -222,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     public void onClick(View v) {
                         // button_detail functions:
                         // --> detail_display_fragment;
-                        // new DetailFragment(sessionAtPos).show(getSupportFragmentManager(), "Detail_Session");
+                        new DetailDisplayFragment(sessionAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
 
                         // Invisible Operation:
                         button_detail.setVisibility(View.INVISIBLE);
@@ -244,19 +254,18 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         button_delete.setVisibility(View.INVISIBLE);
                     }
                 });
+            }
+        });
 
-                // PROFILE:
-                button_profile.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        // --> unfolding ProfileDisplayFragment;
-                        new ProfileDisplayFragment(player, false).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+        // PROFILE:
+        button_profile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // --> unfolding ProfileDisplayFragment;
+                new ProfileDisplayFragment(player, false).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
 
-                        // Invisible Operation:
-                        button_detail.setVisibility(View.INVISIBLE);
-                        button_delete.setVisibility(View.INVISIBLE);
-                    }
-                });
-
+                // Invisible Operation:
+                button_detail.setVisibility(View.INVISIBLE);
+                button_delete.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -265,6 +274,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //from: youtube.com
+        //URL: https://www.youtube.com/watch?v=kwOZEU0UBVg
+        //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
         super.onActivityResult(requestCode, resultCode, data);
         //Initialize intent result
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -283,10 +295,22 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
     @Override
     public void onSearchPressed(String uuid) {
-        // search if uuid exist in the database
-        // if exist -> show the profile of uuid
-        // if not exit ->
-        Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_SHORT).show();
+        // Searching if uuid exist in the database:
+        // If Exist
+        // -> show the profile of uuid;
+        /*
+        DatabaseConnect dbc = new DatabaseConnect(uuid);
+        Player playerSearchingResult = dbc.getPlayerReload();
+        */
+        Player playerSearchingResult = player;  //** FOR TEST
+        new ProfileDisplayFragment(playerSearchingResult, true).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+        // Not Exist:
+        // --> Show Error;
+        Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
+
     }
+
+
+
 }
 

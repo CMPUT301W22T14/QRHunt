@@ -3,11 +3,13 @@ package com.example.qrhunt;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -43,7 +45,7 @@ public class DetailDisplayFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // Locations Marked：
         @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.profile_display_fragment_layout, null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.detail_display_fragment_layout, null);
 
         TextView playerScannedTheSameTextView = view.findViewById(R.id.player_scanned_the_same_QRCode_textView);
         TextView commentsTextView = view.findViewById(R.id.comments_textView);
@@ -56,16 +58,14 @@ public class DetailDisplayFragment extends DialogFragment {
 
 
         // Filling Data to ListViews:
-        ArrayList<String> allScanners = gameQRCode.showAllScanners();
-        ArrayList<String> allComments = gameQRCode.showAllComments();
+        ArrayList<String> allScannersList = gameQRCode.showAllScanners();
+        ArrayList<String> allCommentsList = gameQRCode.showAllComments();
 
+        ArrayAdapter<String> allScannersAdapter = new CustomList2(getActivity().getBaseContext(), allScannersList);
+        ArrayAdapter<String> allCommentsAdapter = new CustomList2(getActivity().getBaseContext(), allCommentsList);
 
-
-
-
-
-
-
+        playerSameQRCodeList.setAdapter(allScannersAdapter);
+        commentSameQRCodeList.setAdapter(allCommentsAdapter);
 
 
         // Adding Comment (when button clicked):
@@ -93,6 +93,7 @@ public class DetailDisplayFragment extends DialogFragment {
 
 
     }
+
 
 }
 
