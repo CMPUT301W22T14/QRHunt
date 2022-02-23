@@ -34,12 +34,59 @@ public class GameQRCode extends GeneralQRCode {
                 hexString.append(hex);
             }
             String SHA256Hash = hexString.toString();
+            score = hashToScore(SHA256Hash);
             // Then calculate the score
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         int score = 10;
         this.score = score;
+    }
+
+    private int hashToScore(String content) {
+        StringBuilder sb = new StringBuilder();
+        int sum = 0;
+        for (char c : content.toCharArray()) {
+            if (sb.length() == 0)
+                sb.append(c);
+            else {
+                if (sb.charAt(sb.length() - 1) == c)
+                    sb.append(c);
+                else {
+                    if (sb.length() == 1) {
+                        sb.setLength(0);
+                        sb.append(c);
+                    }
+                    else {
+                        int length = sb.length();
+                        char prev = sb.charAt(length - 1);
+                        //update sb
+                        sb.setLength(0);
+                        sb.append(c);
+                        //calculate score
+                        if (prev == '0')
+                            sum += Math.round(Math.pow(20, length - 1));
+                        else if (prev == 'a')
+                            sum += Math.round(Math.pow(10, length - 1));
+                        else if (prev == 'b')
+                            sum += Math.round(Math.pow(11, length - 1));
+                        else if (prev == 'c')
+                            sum += Math.round(Math.pow(12, length - 1));
+                        else if (prev == 'd')
+                            sum += Math.round(Math.pow(13, length - 1));
+                        else if (prev == 'e')
+                            sum += Math.round(Math.pow(14, length - 1));
+                        else if (prev == 'f')
+                            sum += Math.round(Math.pow(15, length - 1));
+                        else {
+                            int number = prev - '0';
+                            sum += Math.round(Math.pow(number, length - 1));
+                        }
+                    }
+                }
+            }
+        }
+        return sum;
     }
 
     public int getScore() {
