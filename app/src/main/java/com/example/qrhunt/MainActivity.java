@@ -284,8 +284,20 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         if (intentResult.getContents() != null) {
             //when result content is not null
             String content = intentResult.getContents();
-            GameQRCode gameQRCode = new GameQRCode(content);
-            mainDataAdapter.add(gameQRCode);
+            //from: stackoverflow.com
+            //URL: https://stackoverflow.com/questions/454908/split-java-string-by-new-line
+            //Author: https://stackoverflow.com/users/18393/cletus
+            String lines[] = content.split("\\r?\\n");
+            if (lines[0].equals("STATUS")) {
+                // check other player's status
+            }
+            else if (lines[0].equals("LOGIN")) {
+                // login my account in another device
+            }
+            else {
+                GameQRCode gameQRCode = new GameQRCode(content);
+                mainDataAdapter.add(gameQRCode);
+            }
         }
 
         else {
