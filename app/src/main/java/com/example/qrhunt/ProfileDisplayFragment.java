@@ -146,7 +146,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         // Initialize multi format writer
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 250, 250);
+            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             statusQRCodeImage.setImageBitmap(bitmap);
@@ -164,10 +164,14 @@ public class ProfileDisplayFragment extends DialogFragment {
         // Initialize multi format writer
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 250, 250);
+            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             loggingInQRCodeImage.setImageBitmap(bitmap);
+
+            loggingInQRCodeImage.setVisibility(View.VISIBLE);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

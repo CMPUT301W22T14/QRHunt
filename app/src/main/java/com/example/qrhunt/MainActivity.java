@@ -313,16 +313,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         // Searching if uuid exist in the database:
         // If Exist
         // -> show the profile of uuid;
-        /*
-        DatabaseConnect dbc = new DatabaseConnect(uuid);
-        Player playerSearchingResult = dbc.getPlayerReload();
-        */
-        Player playerSearchingResult = player;  //** FOR TEST
-        new ProfileDisplayFragment(playerSearchingResult, true).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
-        // Not Exist:
-        // --> Show Error;
-        Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
 
+        DatabaseConnect dbc = new DatabaseConnect(uuid);
+        Player playerSearchingResult;
+        if (dbc.isDatabaseExisted()){
+            playerSearchingResult = dbc.getPlayerReload();
+            playerSearchingResult = player;     //** FOR TEST
+            new ProfileDisplayFragment(playerSearchingResult, true).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
+        }
     }
 
 

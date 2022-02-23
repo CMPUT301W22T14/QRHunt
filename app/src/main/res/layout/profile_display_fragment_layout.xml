@@ -111,7 +111,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.865"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/my_logging_in_QRCode_image"
+        app:layout_constraintTop_toBottomOf="@+id/my_logging_in_QRCode_button"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -124,6 +125,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_logging_in_QRCode_button"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@tools:sample/avatars" />
 
