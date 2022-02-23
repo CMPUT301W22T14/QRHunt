@@ -27,6 +27,8 @@ public class ProfileDisplayFragment extends DialogFragment {
     /* Global Variables */
     private Player player = null;
     private Boolean isPrivacyProtected = false;
+    private Boolean isVisibleStatus = false;
+    private Boolean isVisibleLogin = false;
 
 
     // Constructor
@@ -59,6 +61,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         ImageView loggingInQRCodeImage = view.findViewById(R.id.my_logging_in_QRCode_image);
 
         generateStatusQRCode(statusQRCodeImage);
+        generateLoggingInQRCode(loggingInQRCodeImage);
 
         /* Protection Operations */
         // Invisible Operations:
@@ -76,14 +79,30 @@ public class ProfileDisplayFragment extends DialogFragment {
 
             statusQRCodeButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // Show Image (statusQRCode):
-                    statusQRCodeImage.setVisibility(View.VISIBLE);
+                    if (isVisibleStatus == false) {
+                        // Show Image (statusQRCode):
+                        statusQRCodeImage.setVisibility(View.VISIBLE);
+                        isVisibleStatus = true;
+                    }
+                    else {
+                        // Hide Image (statusQRCode)
+                        statusQRCodeImage.setVisibility(View.INVISIBLE);
+                        isVisibleStatus = false;
+                    }
                 }
             });
             loggingInQRCodeButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // Show Image (loggingInQRCode):
-                    loggingInQRCodeImage.setVisibility(View.VISIBLE);
+                    if (isVisibleLogin == false) {
+                        // Show Image (loggingInQRCode):
+                        loggingInQRCodeImage.setVisibility(View.VISIBLE);
+                        isVisibleLogin = true;
+                    }
+                    else {
+                        // Hide Image (loggingInQRCode)
+                        loggingInQRCodeImage.setVisibility(View.INVISIBLE);
+                        isVisibleLogin = false;
+                    }
                 }
             });
         }
@@ -131,6 +150,24 @@ public class ProfileDisplayFragment extends DialogFragment {
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             statusQRCodeImage.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void generateLoggingInQRCode(ImageView loggingInQRCodeImage) {
+        //from: youtube.com
+        //URL: https://www.youtube.com/watch?v=yJh22Wk74V8
+        //Author: https://www.youtube.com/channel/UCklYpZX_-QqHOeSUH4GVQpA
+
+        String content = player.getUUID();
+        // Initialize multi format writer
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 250, 250);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            loggingInQRCodeImage.setImageBitmap(bitmap);
         } catch (Exception e) {
             e.printStackTrace();
         }
