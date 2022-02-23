@@ -1,12 +1,12 @@
 # Groupwork UPDATE
 ## *LATEST UPDATE VERSION*:
-Beta 1.1.1 STABLE Ver: 
+Beta 1.1.1 - STABLE Ver: 
 https://github.com/CMPUT301W22T14/QRHunt/commit/d939fa448325a0a5137f0885ea55e3e0287dd0d9
 
-Beta 1.1 STABLE Ver: 
+Beta 1.1 - STABLE Ver: 
 https://github.com/CMPUT301W22T14/QRHunt/commit/56e44dfcd5994cde796c4ecf3e39d36917c0e172
 
-Beta 1.0.3 TEST Ver:
+Beta 1.0.3 - TEST Ver:
 https://github.com/CMPUT301W22T14/QRHunt/tree/af6c5251fd32c4a0ec2e85bacacb522b664759b2
 
 Beta 1.0.2: 
