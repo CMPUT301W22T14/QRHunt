@@ -85,8 +85,8 @@ public class DetailDisplayFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
                 .setView(view)
-                .setTitle("Detail Page")
-                .setNegativeButton("Looks Good", null).create();
+                .setTitle("Detail Page").create();
+                //.setNegativeButton("Looks Good", null).create();
 
 
 
