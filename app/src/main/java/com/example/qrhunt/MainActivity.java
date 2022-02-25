@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }
             else {
                 // !!! get geolocation
-                
+
                 GameQRCode gameQRCode = new GameQRCode(content);
                 mainDataAdapter.add(gameQRCode);
 
