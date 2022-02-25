@@ -1,5 +1,6 @@
 package com.example.qrhunt;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +13,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -24,6 +29,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,7 +43,11 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 
@@ -54,6 +66,15 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
     boolean TESTING = false;     //** FOR TEST
     Bitmap captureImage = null;
+
+    //Initialize attributes needed for geolocation
+    FusedLocationProviderClient fusedLocationProviderClient;
+    double latittude;
+    double longtitude;
+    String countryName;
+    String locality;
+    String address;
+
 
 
     /* Creating Function */
@@ -288,6 +309,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 button_delete.setVisibility(View.INVISIBLE);
             }
         });
+
+        //Check permission
+        if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            //when permission granted
+            getLocation();
+        } else {
+            //when permission denied
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
     }
 
 
@@ -365,7 +397,50 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
         }
     }
+    private void getLocation() {
+        //From: youtube.com
+        // URL:https://www.youtube.com/watch?v=Ak1O9Gip-pg
+        // Author: android coding
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                // Initialize Location
+                Location location = task.getResult();
+                if (location != null) {
+                    try {
+                        //Initialize geoCoder
+                        Geocoder geocoder = new Geocoder(MainActivity.this,
+                                Locale.getDefault());
+                        //Initialize address list
 
+                        List<Address> addresses = geocoder.getFromLocation(
+                                location.getLatitude(), location.getLongitude(), 1
+                        );
+                        longtitude = addresses.get(0).getLongitude();
+                        latittude = addresses.get(0).getLatitude();
+                        countryName = addresses.get(0).getCountryName();
+                        locality = addresses.get(0).getLocality();
+                        address = addresses.get(0).getAddressLine(0);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
+    }
 
 
 }
