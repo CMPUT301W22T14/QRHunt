@@ -1,5 +1,7 @@
 package com.example.qrhunt;
 
+import android.graphics.Bitmap;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,6 +12,7 @@ public class GameQRCode extends GeneralQRCode {
     private int score;
     private final ArrayList<String> comments = new ArrayList<String>();
     private final ArrayList<String> uuidOfScanners = new ArrayList<String>();
+    private Bitmap captureImage;
 
 
 
@@ -115,6 +118,14 @@ public class GameQRCode extends GeneralQRCode {
 
     public ArrayList<String> showAllScanners() {
         return uuidOfScanners;
+    }
+
+    public void setCaptureImage(Bitmap captureImage) {
+        this.captureImage = captureImage;
+    }
+
+    public Bitmap getCaptureImage() {
+        return captureImage;
     }
 
     @Override

@@ -3,12 +3,17 @@ package com.example.qrhunt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -48,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     Player player = null;
 
     boolean TESTING = false;     //** FOR TEST
-
+    Bitmap captureImage = null;
 
 
     /* Creating Function */
@@ -292,6 +297,12 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //from: youtube.com
         //URL: https://www.youtube.com/watch?v=kwOZEU0UBVg
         //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
+        if (requestCode == 100) {
+            // Get capture image
+            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            this.captureImage = captureImage;
+            return;
+        }
         super.onActivityResult(requestCode, resultCode, data);
         //Initialize intent result
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -311,10 +322,22 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }
             else {
                 // !!! get geolocation
-
+                // Get image
+                // Request for camera Permission
+                //from: youtube.com
+                //URL: https://www.youtube.com/watch?v=RaOyw84625w&t=250s
+                //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[] {
+                            Manifest.permission.CAMERA
+                    }, 100);
+                }
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 100);
                 GameQRCode gameQRCode = new GameQRCode(content);
+                gameQRCode.setCaptureImage(this.captureImage);
                 mainDataAdapter.add(gameQRCode);
-
+                this.captureImage = null;
             }
         }
 

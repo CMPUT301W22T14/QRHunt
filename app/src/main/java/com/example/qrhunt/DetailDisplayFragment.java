@@ -56,6 +56,10 @@ public class DetailDisplayFragment extends DialogFragment {
         Button addCommentButton = view.findViewById(R.id.add_comment_button);
         ImageView QRCodeImageView = view.findViewById(R.id.QRCode_view);
 
+        // Set QRCodeImageView
+        if (gameQRCode.getCaptureImage() != null)
+            QRCodeImageView.setImageBitmap(gameQRCode.getCaptureImage());
+
 
         // Filling Data to ListViews:
         ArrayList<String> allScannersList = gameQRCode.showAllScanners();
