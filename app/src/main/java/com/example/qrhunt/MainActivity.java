@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     DatabaseConnect dbc = new DatabaseConnect(uuid);
     Player player = null;
 
-    boolean TESTING = true;     //** FOR TEST
+    boolean TESTING = false;     //** FOR TEST
 
 
 
@@ -56,16 +56,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // TESTING
-        player = new Player("000000");
-        GameQRCode gameQRCode1 = new GameQRCode("abc");
-        GameQRCode gameQRCode2 = new GameQRCode("edf");
-        GameQRCode gameQRCode3 = new GameQRCode("xyz");
-        player.addQRCode(gameQRCode1);
-        player.addQRCode(gameQRCode2);
-        player.addQRCode(gameQRCode3);
-
 
         // Locations Marked：
         mainListView = findViewById(R.id.session_list);
@@ -78,6 +68,21 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         // Invisible Operation:
         button_detail.setVisibility(View.INVISIBLE);
         button_delete.setVisibility(View.INVISIBLE);
+
+
+        // TEST DATASET
+        Player testPlayer1 = new Player("000000");
+        Player testPlayer2 = new Player("111111");
+        GameQRCode gameQRCode1 = new GameQRCode("111");
+        GameQRCode gameQRCode2 = new GameQRCode("222");
+        GameQRCode gameQRCode3 = new GameQRCode("333");
+        GameQRCode gameQRCode4 = new GameQRCode("abc");
+        GameQRCode gameQRCode5 = new GameQRCode("zxy");
+        testPlayer1.addQRCode(gameQRCode1);
+        testPlayer1.addQRCode(gameQRCode2);
+        testPlayer1.addQRCode(gameQRCode3);
+        testPlayer2.addQRCode(gameQRCode4);
+        testPlayer2.addQRCode(gameQRCode5);
 
 
         // Identity Asking:
@@ -103,20 +108,27 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                                             // Existed --> Connect to DataBase
                                             // NotExisted --> Create New Account
                                             if (dbc.isDatabaseExisted()) {
-                                                isUUIDExisted = true;
+                                                //player = dbc.getPlayerReload();
+                                                //ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
+                                                //mainDataList.addAll(gameQRCodes);
+                                                player = testPlayer2;                        //** FOR TEST
+                                                mainDataList = player.getQRCodeList();      //** FOR TEST
+                                                mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
+                                                mainListView.setAdapter(mainDataAdapter);
                                                 Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
                                             }
                                             else {
-                                                isUUIDExisted = false;
+                                                mainDataAdapter = new CustomList(getBaseContext(), null);
+                                                mainListView.setAdapter(mainDataAdapter);
                                                 Toast.makeText(getApplicationContext(), "Sorry, you have no history record on this device...", Toast.LENGTH_LONG).show();
                                                 Toast.makeText(getApplicationContext(), "We are creating a new account for this device.", Toast.LENGTH_LONG).show();
-                                                return;
                                             }
                                             break;
                                         // New Player
                                         // --> To ActivityMain;
                                         case 1:
-                                            isUUIDExisted = false;
+                                            mainDataAdapter = new CustomList(getBaseContext(), null);
+                                            mainListView.setAdapter(mainDataAdapter);
                                             Toast.makeText(getApplicationContext(), "Welcome!! We are creating a new account for your device!", Toast.LENGTH_LONG).show();
                                             break;
                                     }
@@ -126,44 +138,38 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         case 1:
                             // Scan Player Code:
                             // --> QRCode Scanner Page;
-                            uuid = "000000"; // --> from QR scanner
-                            isUUIDExisted = true;
+
+                            //player = dbc.getPlayerReload();
+                            //ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
+                            //mainDataList.addAll(gameQRCodes);
+                            player = testPlayer2;                        //** FOR TEST
+                            mainDataList = player.getQRCodeList();      //** FOR TEST
+                            mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
+                            mainListView.setAdapter(mainDataAdapter);
                             Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
+
                             break;
                         case 2:
                             // Owner:
                             // --> Checking username and password;
                             // --> To Owner Page;
-                            isUUIDExisted = false;
+                            mainDataAdapter = new CustomList(getBaseContext(), null);
+                            mainListView.setAdapter(mainDataAdapter);
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
                             break;
+                        case 3:
+                            // TEST:
+                            // --> Fake DataSet Activated;
+                            Toast.makeText(getApplicationContext(), "TEST channel with Fake Data Set Activated", Toast.LENGTH_LONG).show();     //** FOR TEST
 
-
-
+                            player = testPlayer1;                        //** FOR TEST
+                            mainDataList = player.getQRCodeList();      //** FOR TEST
+                            mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
+                            mainListView.setAdapter(mainDataAdapter);                           //** FOR TEST
                     }
                 }
             }).create().show();
         }
-
-        if (TESTING) {      //** FOR TEST
-            ArrayList<GameQRCode> gameQRCodes = player.getQRCodeList();
-            mainDataList.addAll(gameQRCodes);
-            mainDataAdapter = new CustomList(this, mainDataList);
-            mainListView.setAdapter(mainDataAdapter);
-        }
-        else {
-            // Filling the main activity based on roles:
-            if (isUUIDExisted) {
-                player = dbc.getPlayerReload();
-                ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
-                mainDataList.addAll(gameQRCodes);
-                mainDataAdapter = new CustomList(this, mainDataList);
-            }
-            else {
-                mainDataAdapter = new CustomList(this, null);
-            }
-        }
-
 
 
 
@@ -220,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Catching the item clicked:
-                GameQRCode sessionAtPos = mainDataAdapter.getItem(position);
+                GameQRCode codeAtPos = mainDataAdapter.getItem(position);
 
                 // Visible Operation:
                 button_detail.setVisibility(View.VISIBLE);
@@ -232,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     public void onClick(View v) {
                         // button_detail functions:
                         // --> detail_display_fragment;
-                        new DetailDisplayFragment(sessionAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
+                        new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
 
                         // Invisible Operation:
                         button_detail.setVisibility(View.INVISIBLE);
@@ -244,10 +250,19 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 button_delete.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         // Removing from ListView:
-                        mainDataAdapter.remove(sessionAtPos);
+                        mainDataAdapter.remove(codeAtPos);
 
                         // Removing from DataBase:
-                        // ...
+                        //DatabaseConnect dbc =  new DatabaseConnect(uuid);
+                        //boolean result = dbc.removeCode(position);
+                        boolean result = true;   //** FOR TEST
+                        if (result) {
+                            Toast.makeText(getApplicationContext(), "Removed Successfully", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Cannot Remove Invalid Code", Toast.LENGTH_LONG).show();
+                        }
+
 
                         // Invisible Operation:
                         button_detail.setVisibility(View.INVISIBLE);
@@ -315,16 +330,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         // Searching if uuid exist in the database:
         // If Exist
         // -> show the profile of uuid;
-        /*
-        DatabaseConnect dbc = new DatabaseConnect(uuid);
-        Player playerSearchingResult = dbc.getPlayerReload();
-        */
-        Player playerSearchingResult = player;  //** FOR TEST
-        new ProfileDisplayFragment(playerSearchingResult, true).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
-        // Not Exist:
-        // --> Show Error;
-        Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
 
+        DatabaseConnect dbc = new DatabaseConnect(uuid);
+        Player playerSearchingResult;
+        if (dbc.isDatabaseExisted()){
+            playerSearchingResult = dbc.getPlayerReload();
+            playerSearchingResult = player;     //** FOR TEST
+            new ProfileDisplayFragment(playerSearchingResult, true).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
+        }
     }
 
 

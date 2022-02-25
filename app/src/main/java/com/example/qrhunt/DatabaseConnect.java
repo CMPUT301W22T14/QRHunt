@@ -41,6 +41,11 @@ public class DatabaseConnect {
         mDatabase.child("Players").child(player.getUUID()).setValue(player);
     }
 
+    public boolean removeCode(int codeIndex) {
+        //..
+        return false;
+    }
+
     /*
         private boolean dataReload(String uuid) {
         // success/fail --> return true/false
