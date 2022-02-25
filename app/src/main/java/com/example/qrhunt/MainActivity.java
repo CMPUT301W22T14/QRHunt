@@ -295,8 +295,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 // login my account in another device
             }
             else {
+                // !!! get geolocation
+                
                 GameQRCode gameQRCode = new GameQRCode(content);
                 mainDataAdapter.add(gameQRCode);
+
             }
         }
 
