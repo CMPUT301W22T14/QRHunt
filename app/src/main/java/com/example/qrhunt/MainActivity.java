@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.content.Context;
@@ -241,7 +242,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             // --> Unfolding ProfileDisplayFragment;
                             break;
                         case 4:
-
+                            //Initialize fragment
+                            Fragment fragment = new MapFragment();
+                            //Open fragment
+                            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
                             break;
                     }
                 }
