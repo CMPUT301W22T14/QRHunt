@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         // MORE:
         button_more.setOnClickListener((view) -> {
             // Asking for function needed:
-            String[] functionOptions = {"Scan New Code", "Searching by Location", "Leader Board", "Searching by Username"};
+            String[] functionOptions = {"Scan New Code", "Searching by Location", "Leader Board", "Searching by Username", "Map"};
             AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
             builder2.setTitle("How can I help you? my friend?");
             builder2.setItems(functionOptions, new DialogInterface.OnClickListener() {
@@ -239,6 +239,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             // Searching by Username
                             new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
                             // --> Unfolding ProfileDisplayFragment;
+                            break;
+                        case 4:
+
                             break;
                     }
                 }

@@ -19,4 +19,6 @@
     <string name="player_scanned_the_same_qr_code">Players Who Scanned The Same QR Code: </string>
     <string name="comments">Comments: </string>
     <string name="put_in_comment">Put in Comment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
