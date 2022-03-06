@@ -15,7 +15,6 @@ public class GameQRCode extends GeneralQRCode {
     private Bitmap captureImage;
 
 
-
     public GameQRCode(String content) {
         super(content);
         calculateScore();

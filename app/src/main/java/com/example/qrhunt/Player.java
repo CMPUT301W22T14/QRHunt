@@ -6,18 +6,22 @@ import java.util.ArrayList;
 
 public class Player {
     /* Global Variables */
-    private String userName;
     private String uuid;
-    private boolean isStoredRemotely = false;
-    private PlayerQRCode loginQRCode;
-    private PlayerQRCode profileQRCode;
-    private ArrayList<GameQRCode> QRCodeList= new ArrayList<GameQRCode>();
+    private String userName = null;
+    private ArrayList<GameQRCode> QRCodeList = null;
     private String contactInfo = null;
 
 
     // Constructor
-    Player(String uuid) {
+    Player (String uuid) {
         this.uuid = uuid;
+    }
+
+    Player (String uuid, String userName, ArrayList<GameQRCode> QRCodeList, String contactInfo) {
+        this.uuid = uuid;
+        this.userName = userName;
+        this.QRCodeList = QRCodeList;
+        this.contactInfo = contactInfo;
     }
 
 
@@ -48,7 +52,6 @@ public class Player {
 
 
 
-
     // Getters
     public String getUserName() {
         return userName;
@@ -56,18 +59,6 @@ public class Player {
 
     public String getUUID() {
         return uuid;
-    }
-
-    public boolean isStoredRemotely() {
-        return isStoredRemotely;
-    }
-
-    public PlayerQRCode getLoginQRCode() {
-        return loginQRCode;
-    }
-
-    public PlayerQRCode getProfileQRCode() {
-        return profileQRCode;
     }
 
     public ArrayList<GameQRCode> getQRCodeList() {
@@ -86,18 +77,6 @@ public class Player {
 
     public void setUUID(String uuid) {
         this.uuid = uuid;
-    }
-
-    public void setStoredRemotely(boolean storedRemotely) {
-        isStoredRemotely = storedRemotely;
-    }
-
-    public void setLoginQRCode(PlayerQRCode loginQRCode) {
-        this.loginQRCode = loginQRCode;
-    }
-
-    public void setProfileQRCode(PlayerQRCode profileQRCode) {
-        this.profileQRCode = profileQRCode;
     }
 
     public void setQRCodeList(ArrayList<GameQRCode> QRCodeList) {

@@ -392,7 +392,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         DatabaseConnect dbc = new DatabaseConnect(uuid);
         Player playerSearchingResult;
         if (dbc.isDatabaseExisted()){
-            playerSearchingResult = dbc.getPlayerReload();
+           // playerSearchingResult = dbc.getPlayerReload();
             playerSearchingResult = player;     //** FOR TEST
             new ProfileDisplayFragment(playerSearchingResult, true).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
         }
