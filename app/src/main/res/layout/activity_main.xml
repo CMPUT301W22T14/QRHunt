@@ -81,6 +81,10 @@
         android:text="@string/sum_of_scores"
         android:textSize="15sp" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_layout" />
 
 </RelativeLayout>
 

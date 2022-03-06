@@ -141,7 +141,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         String sumScore = "Sum Score: " + player.getSumCodeScore();
         String totalSum = "SessionDate: " + player.getTotalCodeNum();
         // Integrate the information
-        String content = username + "\n" + contactInfo + "\n" + minScore + "\n" + maxScore + "\n" +
+        String content = "STATUS\n" + username + "\n" + contactInfo + "\n" + minScore + "\n" + maxScore + "\n" +
                 avgScore + "\n" + sumScore + "\n" + totalSum;
         // Initialize multi format writer
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -160,7 +160,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         //URL: https://www.youtube.com/watch?v=yJh22Wk74V8
         //Author: https://www.youtube.com/channel/UCklYpZX_-QqHOeSUH4GVQpA
 
-        String content = player.getUUID();
+        String content = "LOGIN\n" + player.getUUID();
         // Initialize multi format writer
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
