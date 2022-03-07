@@ -6,16 +6,27 @@ import java.util.ArrayList;
 
 public class Player {
     /* Global Variables */
-    private String userName;
     private String uuid;
+
     private boolean isStoredRemotely = false;
-    private ArrayList<GameQRCode> QRCodeList= new ArrayList<GameQRCode>();
+
+
+    private String userName = null;
+    private ArrayList<GameQRCode> QRCodeList = null;
+
     private String contactInfo = null;
 
 
     // Constructor
-    Player(String uuid) {
+    Player (String uuid) {
         this.uuid = uuid;
+    }
+
+    Player (String uuid, String userName, ArrayList<GameQRCode> QRCodeList, String contactInfo) {
+        this.uuid = uuid;
+        this.userName = userName;
+        this.QRCodeList = QRCodeList;
+        this.contactInfo = contactInfo;
     }
 
 
@@ -46,7 +57,6 @@ public class Player {
 
 
 
-
     // Getters
     public String getUserName() {
         return userName;
@@ -56,9 +66,11 @@ public class Player {
         return uuid;
     }
 
+
     public boolean isStoredRemotely() {
         return isStoredRemotely;
     }
+
 
 
     public ArrayList<GameQRCode> getQRCodeList() {
@@ -79,9 +91,11 @@ public class Player {
         this.uuid = uuid;
     }
 
+
     public void setStoredRemotely(boolean storedRemotely) {
         isStoredRemotely = storedRemotely;
     }
+
 
 
     public void setQRCodeList(ArrayList<GameQRCode> QRCodeList) {

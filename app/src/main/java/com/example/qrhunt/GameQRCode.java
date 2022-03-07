@@ -16,7 +16,6 @@ public class GameQRCode {
     private Bitmap captureImage;
 
 
-
     public GameQRCode(String content) {
        this.content = content;
         calculateScore();
