@@ -153,7 +153,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             break;
                         case 1:
                             // --> Foreign Player, goto QRCode Scanner Page;
-                            // Todo: Scan,
+                            // Todo: Scan needed
+                            uuid = ...
+                            dbc = new DatabaseConnect(uuid);
                             player = dbc.getPlayerReload();
                             ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
                             mainDataList.addAll(gameQRCodes);
