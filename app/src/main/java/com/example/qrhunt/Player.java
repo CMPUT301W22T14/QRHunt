@@ -9,8 +9,6 @@ public class Player {
     private String userName;
     private String uuid;
     private boolean isStoredRemotely = false;
-    private PlayerQRCode loginQRCode;
-    private PlayerQRCode profileQRCode;
     private ArrayList<GameQRCode> QRCodeList= new ArrayList<GameQRCode>();
     private String contactInfo = null;
 
@@ -62,13 +60,6 @@ public class Player {
         return isStoredRemotely;
     }
 
-    public PlayerQRCode getLoginQRCode() {
-        return loginQRCode;
-    }
-
-    public PlayerQRCode getProfileQRCode() {
-        return profileQRCode;
-    }
 
     public ArrayList<GameQRCode> getQRCodeList() {
         return QRCodeList;
@@ -92,13 +83,6 @@ public class Player {
         isStoredRemotely = storedRemotely;
     }
 
-    public void setLoginQRCode(PlayerQRCode loginQRCode) {
-        this.loginQRCode = loginQRCode;
-    }
-
-    public void setProfileQRCode(PlayerQRCode profileQRCode) {
-        this.profileQRCode = profileQRCode;
-    }
 
     public void setQRCodeList(ArrayList<GameQRCode> QRCodeList) {
         this.QRCodeList = QRCodeList;

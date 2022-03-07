@@ -8,7 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
-public class GameQRCode extends GeneralQRCode {
+public class GameQRCode {
+    private String content;
     private int score;
     private final ArrayList<String> comments = new ArrayList<String>();
     private final ArrayList<String> uuidOfScanners = new ArrayList<String>();
@@ -17,7 +18,7 @@ public class GameQRCode extends GeneralQRCode {
 
 
     public GameQRCode(String content) {
-        super(content);
+       this.content = content;
         calculateScore();
     }
 
@@ -128,7 +129,10 @@ public class GameQRCode extends GeneralQRCode {
         return captureImage;
     }
 
-    @Override
+    public String getContent() {
+        return content;
+    }
+
     public void generateQRCode() {
 
     }

@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             break;
                         case 1:
                             // Scan Player Code:
+                            
                             // --> QRCode Scanner Page;
 
                             //player = dbc.getPlayerReload();
@@ -242,10 +243,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             // --> Unfolding ProfileDisplayFragment;
                             break;
                         case 4:
-                            //Initialize fragment
-                            Fragment fragment = new MapFragment();
-                            //Open fragment
-                            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
+                            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                            startActivity(intent);
                             break;
                     }
                 }
@@ -317,6 +316,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }
         });
 
+        /*
         //Check permission
         if (ActivityCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -327,6 +327,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
+
+         */
     }
 
 
