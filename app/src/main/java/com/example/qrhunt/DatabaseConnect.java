@@ -81,7 +81,7 @@ public class DatabaseConnect {
         referencePlayer.child(uuid).setValue(player);
     }
 
-    public boolean removeCode(int codeIndex) {
+    public boolean removeCode(GameQRCode codeAtPos) {
         //..
         return false;
     }
