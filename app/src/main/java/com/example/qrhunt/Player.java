@@ -1,19 +1,15 @@
 package com.example.qrhunt;
 
 import com.google.zxing.qrcode.encoder.QRCode;
-
 import java.util.ArrayList;
+
 
 public class Player {
     /* Global Variables */
     private String uuid;
-
     private boolean isStoredRemotely = false;
-
-
     private String userName = null;
-    private ArrayList<GameQRCode> QRCodeList = null;
-
+    private ArrayList<GameQRCode> QRCodeList = new ArrayList<GameQRCode>();
     private String contactInfo = null;
 
 
