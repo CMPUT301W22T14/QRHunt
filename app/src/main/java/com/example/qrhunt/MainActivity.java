@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             // Todo: Scan needed
                             dbc = new DatabaseConnect(uuid);
                             player = dbc.getPlayerReload();
+                            //We need to have a uuid to
                             ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
                             mainDataList.addAll(gameQRCodes);
                             /*

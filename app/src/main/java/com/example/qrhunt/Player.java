@@ -2,19 +2,17 @@ package com.example.qrhunt;
 
 import com.google.zxing.qrcode.encoder.QRCode;
 
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
 
 public class Player {
     /* Global Variables */
     private String uuid;
-
     private boolean isStoredRemotely = false;
-
-
     private String userName = null;
-    private ArrayList<GameQRCode> QRCodeList = new ArrayList<>();
-
+    private ArrayList<GameQRCode> QRCodeList = new ArrayList<GameQRCode>();
     private String contactInfo = null;
 
 
@@ -23,10 +21,14 @@ public class Player {
         this.uuid = uuid;
     }
 
+
+
     Player (String uuid, String userName, ArrayList<GameQRCode> QRCodeList, String contactInfo) {
         this.uuid = uuid;
         this.userName = userName;
         this.QRCodeList = QRCodeList;
+
+
         this.contactInfo = contactInfo;
     }
 
