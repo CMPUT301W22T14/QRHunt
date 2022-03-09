@@ -42,9 +42,8 @@ public class GameQRCode {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        int score = 10;
-        this.score = score;
     }
+
 
     private int hashToScore(String content) {
         StringBuilder sb = new StringBuilder();

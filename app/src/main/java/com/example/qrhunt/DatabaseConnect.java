@@ -57,16 +57,17 @@ public class DatabaseConnect {
         return new ArrayList<GameQRCode>();
     }
 
+
     public Player getPlayerReload() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Player");
         Query checkPlayer = reference.orderByChild("username").equalTo(uuid);
         checkPlayer.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String userName = snapshot.child(uuid).child("userName").getValue(String.class);
-                ArrayList<GameQRCode> QRCodeList = snapshot.child(uuid).child("QRCodeList").getValue(ArrayList<?>.class);
-                String contactInfo = snapshot.child(uuid).child("contactInfo").getValue(String.class);
-                player = new Player(uuid, userName, QRCodeList, contactInfo);
+                //String userName = snapshot.child(uuid).child("userName").getValue(String.class);
+                //ArrayList<GameQRCode> QRCodeList = snapshot.child(uuid).child("QRCodeList").getValue(ArrayList<?>.class);
+                //String contactInfo = snapshot.child(uuid).child("contactInfo").getValue(String.class);
+                //player = new Player(uuid, userName, QRCodeList, contactInfo);
             }
 
             @Override
@@ -74,6 +75,8 @@ public class DatabaseConnect {
         });
         return player;
     }
+
+
 
     public void addNew(Player player) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();  //This is a call to the top level, which is the root node

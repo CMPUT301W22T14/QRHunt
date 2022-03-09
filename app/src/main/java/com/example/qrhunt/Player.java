@@ -2,6 +2,7 @@ package com.example.qrhunt;
 
 import com.google.zxing.qrcode.encoder.QRCode;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Player {
@@ -12,7 +13,7 @@ public class Player {
 
 
     private String userName = null;
-    private ArrayList<GameQRCode> QRCodeList = null;
+    private ArrayList<GameQRCode> QRCodeList = new ArrayList<>();
 
     private String contactInfo = null;
 
@@ -32,29 +33,56 @@ public class Player {
 
     // Expand Methods:
     public int getMaxCodeScore() {
-        return 0;
+        if (QRCodeList.size() == 0)
+            return 0;
+
+        int max = Integer.MIN_VALUE;
+        for (GameQRCode code : QRCodeList) {
+            max = Math.max(max, code.getScore());
+        }
+        return max;
     }
 
     public int getMinCodeScore() {
-        return 0;
+        if (QRCodeList.size() == 0)
+            return 0;
+
+        int min = Integer.MAX_VALUE;
+        for (GameQRCode code : QRCodeList) {
+            min = Math.min(min, code.getScore());
+        }
+        return min;
     }
 
-    public int getAvgCodeScore() {
-        return 0;
+    public double getAvgCodeScore() {
+        if (QRCodeList.size() == 0)
+            return 0;
+
+        double sum = 0;
+        for (GameQRCode code : QRCodeList) {
+            sum += code.getScore();
+        }
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        double avg = Double.parseDouble(df.format(sum / QRCodeList.size()));
+        return avg;
     }
 
     public int getSumCodeScore() {
-        return 0;
+        int sum = 0;
+        for (GameQRCode code : QRCodeList) {
+            sum += code.getScore();
+        }
+        return sum;
     }
 
     public int getTotalCodeNum() {
-        return 0;
+        return QRCodeList.size();
     }
 
     public void addQRCode(GameQRCode newQRCode) {
         QRCodeList.add(newQRCode);
     }
-
 
 
     // Getters
@@ -70,7 +98,6 @@ public class Player {
     public boolean isStoredRemotely() {
         return isStoredRemotely;
     }
-
 
 
     public ArrayList<GameQRCode> getQRCodeList() {
@@ -96,11 +123,6 @@ public class Player {
         isStoredRemotely = storedRemotely;
     }
 
-
-
-    public void setQRCodeList(ArrayList<GameQRCode> QRCodeList) {
-        this.QRCodeList = QRCodeList;
-    }
 
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;

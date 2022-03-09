@@ -319,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }
         });
 
-        /*
+
         //Check permission
         if (ActivityCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -331,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
 
-         */
+
     }
 
 
