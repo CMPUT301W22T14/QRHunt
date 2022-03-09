@@ -22,10 +22,14 @@ public class Player {
         this.uuid = uuid;
     }
 
+
+
     Player (String uuid, String userName, ArrayList<GameQRCode> QRCodeList, String contactInfo) {
         this.uuid = uuid;
         this.userName = userName;
         this.QRCodeList = QRCodeList;
+
+
         this.contactInfo = contactInfo;
     }
 
