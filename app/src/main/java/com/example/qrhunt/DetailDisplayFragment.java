@@ -65,6 +65,7 @@ public class DetailDisplayFragment extends DialogFragment {
         ArrayList<String> allScannersList = gameQRCode.showAllScanners();
         ArrayList<String> allCommentsList = gameQRCode.showAllComments();
 
+
         ArrayAdapter<String> allScannersAdapter = new CustomList2(getActivity().getBaseContext(), allScannersList);
         ArrayAdapter<String> allCommentsAdapter = new CustomList2(getActivity().getBaseContext(), allCommentsList);
 
@@ -77,10 +78,18 @@ public class DetailDisplayFragment extends DialogFragment {
         addCommentButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String inputComment = inputCommentEditText.getText().toString();
+                if (inputComment.equals(""))
+                    return;
+
+                inputCommentEditText.setText("");
+                inputComment = "                     " + inputComment;
                 if (inputComment.length() > 80) {
                     inputComment = inputComment.substring(0, 79);
                 }
                 gameQRCode.addComment(inputComment);
+                String redundant = " ";
+                allCommentsAdapter.add(redundant);
+                allCommentsAdapter.remove(redundant);
             }
         });
 

@@ -39,7 +39,7 @@ public class CustomList2 extends ArrayAdapter<String> {
         }
 
         TextView gameQRCodeText = view.findViewById(R.id.game_code_text);
-        TextView gameQRCodeScoreText = view.findViewById(R.id.game_code_other_text);
+        //TextView gameQRCodeScoreText = view.findViewById(R.id.game_code_other_text);
 
         String scanner = dataItem;
         gameQRCodeText.setText(scanner);

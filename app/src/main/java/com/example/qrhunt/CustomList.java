@@ -40,7 +40,7 @@ public class CustomList extends ArrayAdapter<GameQRCode> {
             return view;
         }
         TextView gameQRCodeText = view.findViewById(R.id.game_code_text);
-        TextView gameQRCodeScoreText = view.findViewById(R.id.game_code_other_text);
+        //TextView gameQRCodeScoreText = view.findViewById(R.id.game_code_other_text);
 
         gameQRCodeText.setText(code.getContent());
         //gameQRCodeScoreText.setText(code.getScore());   //** FOR TEST

@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         if (ActivityCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             //when permission granted
-            getLocation();
+            //getLocation();
         } else {
             //when permission denied
             ActivityCompat.requestPermissions(MainActivity.this,
@@ -382,7 +382,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 startActivityForResult(intent, 100);
                 GameQRCode gameQRCode = new GameQRCode(content);
                 gameQRCode.setCaptureImage(this.captureImage);
-                mainDataAdapter.add(gameQRCode);
+                player.addQRCode(gameQRCode);
+                //GameQRCode redundant = new GameQRCode("");
+                //mainDataAdapter.add(redundant);
                 this.captureImage = null;
             }
         }

@@ -8,87 +8,80 @@
 
     <TextView
         android:id="@+id/user_name_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="99dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/user_name"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/contact_information_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="178dp"
+        android:layout_height="34dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/contact_information"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_name_textView" />
 
     <TextView
         android:id="@+id/min_score_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="@string/min"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contact_information_textView" />
 
     <TextView
         android:id="@+id/max_score_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/max"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/min_score_textView" />
 
     <TextView
         android:id="@+id/average_score_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="27dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/average"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/max_score_textView" />
 
     <TextView
         android:id="@+id/sum_score_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/sum"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/average_score_textView" />
 
     <TextView
         android:id="@+id/total_QRCode_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="127dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/total_qr_code"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sum_score_textView" />
 
     <Button
         android:id="@+id/my_status_QRCode_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="166dp"
+        android:layout_height="39dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
 
         android:text="@string/my_status_qr_code"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,8 +89,8 @@
 
     <Button
         android:id="@+id/my_logging_in_QRCode_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="196dp"
+        android:layout_height="37dp"
         android:layout_marginStart="16dp"
         android:text="@string/my_logging_in_qr_code"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,12 +98,11 @@
 
     <ImageView
         android:id="@+id/my_status_QRCode_image"
-        android:layout_width="158dp"
-        android:layout_height="153dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="139dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toEndOf="@+id/my_logging_in_QRCode_image"
         app:layout_constraintTop_toBottomOf="@+id/my_logging_in_QRCode_button"
         tools:ignore="MissingConstraints"
@@ -118,15 +110,57 @@
 
     <ImageView
         android:id="@+id/my_logging_in_QRCode_image"
-        android:layout_width="158dp"
-        android:layout_height="153dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="143dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_logging_in_QRCode_button"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="76dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="212dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="80dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="212dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="71dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="212dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="72dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="212dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
