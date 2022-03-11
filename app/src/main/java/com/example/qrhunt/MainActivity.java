@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,12 +40,19 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+/* DEBUG LOGS */
+// Todo - 01 - [FIXED] -  Local Player cannot work correctly
+// Todo - 02 - [FIXED] - DetailPage Comment Fragment Display Error (LinearLayout-->RelativeLayout)
+// Todo - 03 - [FIXED] - Comments Adding Auto-refreshing
+// Todo - 04 - [] -
+// Todo - 05 - [] -
+
 
 public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener{
     /* Global Variables */
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = new ArrayList<GameQRCode>();
-    ArrayAdapter<GameQRCode> mainDataAdapter= null;
+    ArrayAdapter<GameQRCode> mainDataAdapter;
 
     // Acquiring Identification:
     boolean isUUIDExisted = false;
@@ -135,8 +143,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                                             // --> Local Player --> Old Player --> NotExisted, Create New Account
                                             else {
                                                 player = new Player(uuid);
-                                                mainDataAdapter = new CustomList(getBaseContext(), null);
-                                                mainListView.setAdapter(mainDataAdapter);
+                                                dbc = new DatabaseConnect(uuid);
+                                                //mainDataAdapter = new CustomList(getBaseContext(), null);
+                                                //mainListView.setAdapter(mainDataAdapter);
                                                 Toast.makeText(getApplicationContext(), "Sorry, you have no history record on this device...", Toast.LENGTH_LONG).show();
                                                 Toast.makeText(getApplicationContext(), "We are creating a new account for this device.", Toast.LENGTH_LONG).show();
                                             }
@@ -144,8 +153,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                                         // --> Local Player --> New Player, To ActivityMain;
                                         case 1:
                                             player = new Player(uuid);
-                                            mainDataAdapter = new CustomList(getBaseContext(), null);
-                                            mainListView.setAdapter(mainDataAdapter);
+                                            dbc = new DatabaseConnect(uuid);
+                                            //mainDataAdapter = new CustomList(getBaseContext(), null);
+                                            //mainListView.setAdapter(mainDataAdapter);
                                             Toast.makeText(getApplicationContext(), "Welcome!! We are creating a new account for your device!", Toast.LENGTH_LONG).show();
                                             break;
                                     }
