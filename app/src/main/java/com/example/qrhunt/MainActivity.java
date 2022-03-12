@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             if (lines[0].equals("STATUS")) {
                 // check other player's status
             }
-            else if (lines[0].equals("LOGIN")) {
+            else if (lines[0].equals("LOGIN") && lines.length > 1) {
                 // login my account in another device
 
                 uuidLocal = lines[1];
