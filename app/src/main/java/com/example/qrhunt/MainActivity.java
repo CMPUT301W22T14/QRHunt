@@ -393,8 +393,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 GameQRCode gameQRCode = new GameQRCode(content);
                 gameQRCode.setCaptureImage(this.captureImage);
                 player.addQRCode(gameQRCode);
-                //GameQRCode redundant = new GameQRCode("");
-                //mainDataAdapter.add(redundant);
+                GameQRCode redundant = new GameQRCode("");
+                mainDataAdapter.add(redundant);
+                mainDataAdapter.remove(redundant);
                 this.captureImage = null;
             }
         }

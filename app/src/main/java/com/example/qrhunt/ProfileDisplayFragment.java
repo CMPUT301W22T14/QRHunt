@@ -60,6 +60,9 @@ public class ProfileDisplayFragment extends DialogFragment {
         ImageView statusQRCodeImage = view.findViewById(R.id.my_status_QRCode_image);
         ImageView loggingInQRCodeImage = view.findViewById(R.id.my_logging_in_QRCode_image);
 
+        TextView changeNameTextView = view.findViewById(R.id.change_name_editText);
+        Button changeNameButton = view.findViewById(R.id.change_name_button);
+
         generateStatusQRCode(statusQRCodeImage);
         generateLoggingInQRCode(loggingInQRCodeImage);
 
@@ -107,6 +110,18 @@ public class ProfileDisplayFragment extends DialogFragment {
             });
         }
 
+        changeNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newName = changeNameTextView.getText().toString();
+                if (!newName.equals("")) {
+                    player.setUserName(newName);
+                    changeNameTextView.setText("");
+                    username.setText("User Name: " + newName);
+                }
+            }
+        });
+
 
         // Filling Data to Components:
         username.setText("User Name: " + player.getUserName());
@@ -115,7 +130,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         maxScore.setText("Maximal Score: " + player.getMaxCodeScore());
         avgScore.setText("Average Score: " + player.getAvgCodeScore());
         sumScore.setText("Sum Score: " + player.getSumCodeScore());
-        totalNum.setText("SessionDate: " + player.getTotalCodeNum());
+        totalNum.setText("Num Of QR Code: " + player.getTotalCodeNum());
 
 
         // Page Structure:
@@ -139,7 +154,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         String maxScore = "Maximal Score: " + player.getMaxCodeScore();
         String avgScore = "Average Score: " + player.getAvgCodeScore();
         String sumScore = "Sum Score: " + player.getSumCodeScore();
-        String totalSum = "SessionDate: " + player.getTotalCodeNum();
+        String totalSum = "Num Of QR Code: " + player.getTotalCodeNum();
         // Integrate the information
         String content = "STATUS\n" + username + "\n" + contactInfo + "\n" + minScore + "\n" + maxScore + "\n" +
                 avgScore + "\n" + sumScore + "\n" + totalSum;

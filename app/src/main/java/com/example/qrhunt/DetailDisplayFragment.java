@@ -62,7 +62,7 @@ public class DetailDisplayFragment extends DialogFragment {
 
 
         // Filling Data to ListViews:
-        
+
         ArrayAdapter<String> allScannersAdapter = new CustomList2(getActivity().getBaseContext(), gameQRCode.showAllScanners());
         ArrayAdapter<String> allCommentsAdapter = new CustomList2(getActivity().getBaseContext(), gameQRCode.showAllComments());
 
