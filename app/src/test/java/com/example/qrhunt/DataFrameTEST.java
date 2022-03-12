@@ -55,7 +55,7 @@ public class DataFrameTEST {
         code1.removeComment(8);
         code1.removeComment(3);
         assertSame(100, code1.getScore());
-        assertSame(9, code1.showAllComments().size());
+        assertSame(7, code1.showAllComments().size());
         GameQRCode code2 = new GameQRCode("content for code2");
         code1.addComment("comment for localMachinePlayer_code2");
         code2.score = -101;
