@@ -97,7 +97,6 @@ public class DatabaseConnect {
                 String contactInfo = snapshot.child(uuid).child("contactInfo").getValue(String.class);
                 player = new Player(uuid, userName, QRCodeList, contactInfo);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
@@ -109,7 +108,7 @@ public class DatabaseConnect {
     public void addNew(Player player) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();  //This is a call to the top level, which is the root node
         DatabaseReference referencePlayer = rootNode.getReference("Players");
-        //Instead of setting new players directly, we have to set its values seperately because
+        //Instead of setting new players directly, we have to set its values separately because
         // QRCode class is hard to maintain and have to be stored using only its content
         referencePlayer.child(uuid).child("uuid").setValue(player.getUUID());
         referencePlayer.child(uuid).child("username").setValue(player.getUserName());

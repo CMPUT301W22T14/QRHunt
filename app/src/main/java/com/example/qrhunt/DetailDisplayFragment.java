@@ -80,7 +80,6 @@ public class DetailDisplayFragment extends DialogFragment {
                     return;
 
                 inputCommentEditText.setText("");
-                inputComment = "                     " + inputComment;
                 if (inputComment.length() > 80) {
                     inputComment = inputComment.substring(0, 79);
                 }

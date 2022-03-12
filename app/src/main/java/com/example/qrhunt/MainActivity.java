@@ -6,10 +6,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     ArrayAdapter<GameQRCode> mainDataAdapter;
 
     // Acquiring Identification:
-    boolean isUUIDExisted = false;
+    boolean usingLocalUUID = true;
     String uuid = UUID.randomUUID().toString();
     DatabaseConnect dbc = new DatabaseConnect(uuid);
     Player player = null;
@@ -181,27 +179,27 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             intentIntegrator.setCaptureActivity(Capture.class);
                             //Initiate scan
                             intentIntegrator.initiateScan();
-
+                            // Todo - Error: return uuid for db;
                             // --> Foreign Player, goto QRCode Scanner Page;
-                            // Todo: Scan needed
+                            usingLocalUUID = false;
+                            uuid = ...;
                             dbc = new DatabaseConnect(uuid);
                             player = dbc.getPlayerReload();
                             //We need to have a uuid to
-                            ArrayList<GameQRCode> gameQRCodes = dbc.getGameCodesReload();
-                            mainDataList.addAll(gameQRCodes);
                             /*
->>>>>>> 436a0e35e0463dba733e0257306a5f78bf42e865
+                            >>>>>>> 436a0e35e0463dba733e0257306a5f78bf42e865
                             player = testPlayer2;                        //** FOR TEST
                             ainDataList = player.getQRCodeList();      //** FOR TEST
                             */
+                            mainDataList = dbc.getGameCodesReload();
                             mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
                             mainListView.setAdapter(mainDataAdapter);
                             Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
                             break;
                         case 2:
                             // --> Owner Channel, Checking username and password, goto Owner Page;
-                            mainDataAdapter = new CustomList(getBaseContext(), null);
-                            mainListView.setAdapter(mainDataAdapter);
+                            // mainDataAdapter = new CustomList(getBaseContext(), null);
+                            // mainListView.setAdapter(mainDataAdapter);
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
                             break;
                         case 3:
