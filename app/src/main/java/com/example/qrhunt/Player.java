@@ -21,14 +21,10 @@ public class Player {
         this.uuid = uuid;
     }
 
-
-
     Player (String uuid, String userName, ArrayList<GameQRCode> QRCodeList, String contactInfo) {
         this.uuid = uuid;
         this.userName = userName;
         this.QRCodeList = QRCodeList;
-
-
         this.contactInfo = contactInfo;
     }
 
@@ -96,12 +92,6 @@ public class Player {
         return uuid;
     }
 
-
-    public boolean isStoredRemotely() {
-        return isStoredRemotely;
-    }
-
-
     public ArrayList<GameQRCode> getQRCodeList() {
         return QRCodeList;
     }
@@ -119,12 +109,6 @@ public class Player {
     public void setUUID(String uuid) {
         this.uuid = uuid;
     }
-
-
-    public void setStoredRemotely(boolean storedRemotely) {
-        isStoredRemotely = storedRemotely;
-    }
-
 
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;

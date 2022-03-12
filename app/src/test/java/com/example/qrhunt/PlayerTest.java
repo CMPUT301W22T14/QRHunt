@@ -2,9 +2,9 @@ package com.example.qrhunt;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+
 
 public class PlayerTest {
     private Player mockPlayer() {

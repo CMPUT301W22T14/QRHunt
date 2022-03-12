@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class GameQRCode {
     private String content;
-    private int score;
+    public int score;
     private final ArrayList<String> comments = new ArrayList<String>();
     private final ArrayList<String> uuidOfScanners = new ArrayList<String>();
     private Bitmap captureImage;

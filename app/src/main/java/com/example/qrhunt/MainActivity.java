@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             // Todo - Error: return uuid for db;
                             // --> Foreign Player, goto QRCode Scanner Page;
                             usingLocalUUID = false;
-                            uuid = ...;
+                            //uuid = ...;
                             dbc = new DatabaseConnect(uuid);
                             player = dbc.getPlayerReload();
                             //We need to have a uuid to
