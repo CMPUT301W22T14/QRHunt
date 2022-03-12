@@ -62,6 +62,8 @@ public class ProfileDisplayFragment extends DialogFragment {
 
         TextView changeNameTextView = view.findViewById(R.id.change_name_editText);
         Button changeNameButton = view.findViewById(R.id.change_name_button);
+        TextView changeContactInfoTextView = view.findViewById(R.id.change_contactInfo_textView);
+        Button changeContactInfoButton = view.findViewById(R.id.change_contactInfo_button);
 
         generateStatusQRCode(statusQRCodeImage);
         generateLoggingInQRCode(loggingInQRCodeImage);
@@ -118,6 +120,18 @@ public class ProfileDisplayFragment extends DialogFragment {
                     player.setUserName(newName);
                     changeNameTextView.setText("");
                     username.setText("User Name: " + newName);
+                }
+            }
+        });
+
+        changeContactInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newContactInfo = changeContactInfoTextView.getText().toString();
+                if (!newContactInfo.equals("")) {
+                    player.setContactInfo(newContactInfo);
+                    changeContactInfoTextView.setText("");
+                    contactInfo.setText("Contact Information: " + newContactInfo);
                 }
             }
         });

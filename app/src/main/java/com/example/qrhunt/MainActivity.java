@@ -47,6 +47,8 @@ import java.util.UUID;
 
 
 public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener{
+    static String uuid2;
+
     /* Global Variables */
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = new ArrayList<GameQRCode>();
@@ -182,9 +184,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             // Todo - Error: return uuid for db;
                             // --> Foreign Player, goto QRCode Scanner Page;
                             usingLocalUUID = false;
-                            //uuid = ...;
+                            uuid = uuid2;
                             dbc = new DatabaseConnect(uuid);
-                            player = dbc.getPlayerReload();
+                            //player = dbc.getPlayerReload();
+                            player = new Player("123");
                             //We need to have a uuid to
                             /*
                             >>>>>>> 436a0e35e0463dba733e0257306a5f78bf42e865
@@ -372,7 +375,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }
             else if (lines[0].equals("LOGIN")) {
                 // login my account in another device
-                uuid = lines[1];
+                uuid2 = lines[1];
             }
             else {
                 // !!! get geolocation
@@ -397,7 +400,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 this.captureImage = null;
             }
         }
-
         else {
             //When result content is null
             //Display toast
