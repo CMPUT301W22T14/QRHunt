@@ -114,7 +114,7 @@ public class DatabaseConnect {
         referencePlayer.child(uuid).child("username").setValue(player.getUserName());
         referencePlayer.child(uuid).child("contactInfo").setValue(player.getContactInfo());
         ArrayList<String> codes = new ArrayList<>();
-        int i =0;
+        int i = 0;
         //stored the contents of QRCode only. consequently, I added the reconstructing QRCodeList
         //feature when we are reading from the database
         while (i< player.getQRCodeList().size()){

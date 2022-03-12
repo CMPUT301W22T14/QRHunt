@@ -8,6 +8,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +19,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,12 +56,21 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     ArrayAdapter<GameQRCode> mainDataAdapter;
 
     // Acquiring Identification:
-    boolean usingLocalUUID = true;
-    String uuid = UUID.randomUUID().toString();
-    DatabaseConnect dbc = new DatabaseConnect(uuid);
-    Player player = null;
+    boolean isTesting = false;
 
-    boolean TESTING = false;     //** FOR TEST
+    String uuidLocal = null;
+    DatabaseConnect dbcLocal = null;
+    boolean usingLocalUUID = true;
+    boolean isDBForLocalExisted = false;
+    String uuidInput = null;
+    DatabaseConnect dbcInput = null;
+
+    String uuid = null;
+    DatabaseConnect dbc = null;
+    Player player = null;
+    Player testPlayer1 = null;
+    Player testPlayer2 = null;
+
     Bitmap captureImage = null;
 
     //Initialize attributes needed for geolocation
@@ -91,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
 
         // TEST DATASET
-        Player testPlayer1 = new Player("000000");
-        Player testPlayer2 = new Player("111111");
+        testPlayer1 = new Player("000000");
+        testPlayer2 = new Player("111111");
         GameQRCode gameQRCode1 = new GameQRCode("111");
         GameQRCode gameQRCode2 = new GameQRCode("222");
         GameQRCode gameQRCode3 = new GameQRCode("333");
@@ -105,6 +117,13 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         testPlayer2.addQRCode(gameQRCode5);
 
 
+        // Local Info Loading:
+        //uuidLocal = getLocalUUID();
+        uuidLocal = UUID.randomUUID().toString();
+        dbcLocal = new DatabaseConnect(uuidLocal);
+        isDBForLocalExisted = dbcLocal.isDatabaseExisted();
+
+
         // Identity Asking:
         if (player == null) {
             String[] roleOptions = {"Local Player", "Foreign Player", "Owner Channel", "TEST Channel"};
@@ -114,106 +133,42 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 @Override
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
-                        // Local Player --> Checking whether data existed or not;
+                        // Local Player
                         case 0:
-                            String[] localPlayerOptions = {"Yep, I already have an account", "Nope, I am new here"};
-                            AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
-                            builder2.setTitle("Are you an existed user?");
-                            builder2.setItems(localPlayerOptions, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface arg0, int optionIdx) {
-                                    switch (optionIdx) {
-                                        // --> Local Player --> Old Player, Checking whether data existed or not;
-                                        case 0:
-                                            // --> Local Player --> Old Player --> Existed, Connect to DataBase
-                                            if (dbc.isDatabaseExisted()) {
-                                                player = dbc.getPlayerReload();
-                                                ArrayList<GameQRCode> gameQRCodes = player.getQRCodeList();
-                                                mainDataList.addAll(gameQRCodes);
-                                                /*
-                                                player = testPlayer2;                        //** FOR TEST
-                                                mainDataList = player.getQRCodeList();      //** FOR TEST
-                                                */
-                                                mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
-                                                mainListView.setAdapter(mainDataAdapter);
-                                                Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
-                                            }
-                                            // --> Local Player --> Old Player --> NotExisted, Create New Account
-                                            else {
-                                                player = new Player(uuid);
-                                                dbc = new DatabaseConnect(uuid);
-                                                //mainDataAdapter = new CustomList(getBaseContext(), null);
-                                                //mainListView.setAdapter(mainDataAdapter);
-                                                Toast.makeText(getApplicationContext(), "Sorry, you have no history record on this device...", Toast.LENGTH_LONG).show();
-                                                Toast.makeText(getApplicationContext(), "We are creating a new account for this device.", Toast.LENGTH_LONG).show();
-                                            }
-                                            break;
-                                        // --> Local Player --> New Player, To ActivityMain;
-                                        case 1:
-                                            player = new Player(uuid);
-                                            dbc = new DatabaseConnect(uuid);
-                                            //mainDataAdapter = new CustomList(getBaseContext(), null);
-                                            //mainListView.setAdapter(mainDataAdapter);
-                                            Toast.makeText(getApplicationContext(), "Welcome!! We are creating a new account for your device!", Toast.LENGTH_LONG).show();
-                                            break;
-                                    }
-                                }
-                            }).create().show();
+                            usingLocalUUID = true;
+                            uuid = uuidLocal;
+                            dbc = dbcLocal;
                             break;
+                        // Foreign Player
                         case 1:
-                            //from: youtube.com
-                            //URL: https://www.youtube.com/watch?v=kwOZEU0UBVg
-                            //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
-
-                            // --> Unfolding ProfileDisplayFragment in protected edition;
-                            // Scan New Code
-                            //Initialize intent integrator
                             IntentIntegrator intentIntegrator = new IntentIntegrator (MainActivity.this);
-                            //Set prompt text
                             intentIntegrator.setPrompt("For flash use volume up key");
-                            //Set beep
                             intentIntegrator.setBeepEnabled(true);
-                            //Locked orientation
                             intentIntegrator.setOrientationLocked(true);
-                            //Set capture activity
                             intentIntegrator.setCaptureActivity(Capture.class);
-                            //Initiate scan
                             intentIntegrator.initiateScan();
-                            // Todo - Error: return uuid for db;
-                            // --> Foreign Player, goto QRCode Scanner Page;
+
                             usingLocalUUID = false;
-                            //uuid = ...;
-                            dbc = new DatabaseConnect(uuid);
-                            player = dbc.getPlayerReload();
-                            //We need to have a uuid to
-                            /*
-                            >>>>>>> 436a0e35e0463dba733e0257306a5f78bf42e865
-                            player = testPlayer2;                        //** FOR TEST
-                            ainDataList = player.getQRCodeList();      //** FOR TEST
-                            */
-                            mainDataList = dbc.getGameCodesReload();
-                            mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
-                            mainListView.setAdapter(mainDataAdapter);
-                            Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
+                            uuid = uuidInput;
+                            dbcInput = new DatabaseConnect(uuidInput);
+                            dbc = dbcInput;
                             break;
+                        // Owner Channel
                         case 2:
-                            // --> Owner Channel, Checking username and password, goto Owner Page;
-                            // mainDataAdapter = new CustomList(getBaseContext(), null);
-                            // mainListView.setAdapter(mainDataAdapter);
-                            Toast.makeText(getApplicationContext(), "Welcome to the owner channel", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Welcome to the owner channel!", Toast.LENGTH_LONG).show();
                             break;
+                        // TEST Channel
                         case 3:
-                            // --> TEST Channel, Fake DataSet Activated;
-                            Toast.makeText(getApplicationContext(), "TEST channel with Fake Data Set Activated", Toast.LENGTH_LONG).show();     //** FOR TEST
-                            player = testPlayer1;                        //** FOR TEST
-                            mainDataList = player.getQRCodeList();      //** FOR TEST
-                            mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
-                            mainListView.setAdapter(mainDataAdapter);                           //** FOR TEST
+                            isTesting = true;
+                            uuid = "TEST";
+                            dbc = new DatabaseConnect(uuid);
+                            break;
                     }
+                    dataLoading();
                 }
             }).create().show();
         }
-
+        dataLoading();
 
 
         // MORE:
@@ -227,23 +182,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
                         case 0:
-                            //from: youtube.com
-                            //URL: https://www.youtube.com/watch?v=kwOZEU0UBVg
-                            //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
-                            
-                            // --> Unfolding ProfileDisplayFragment in protected edition;
-                            // Scan New Code
-                            //Initialize intent integrator
                             IntentIntegrator intentIntegrator = new IntentIntegrator (MainActivity.this);
-                            //Set prompt text
                             intentIntegrator.setPrompt("For flash use volume up key");
-                            //Set beep
                             intentIntegrator.setBeepEnabled(true);
-                            //Locked orientation
                             intentIntegrator.setOrientationLocked(true);
-                            //Set capture activity
                             intentIntegrator.setCaptureActivity(Capture.class);
-                            //Initiate scan
                             intentIntegrator.initiateScan();
                             break;
                         case 1:
@@ -299,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         // Removing from ListView:
                         mainDataAdapter.remove(codeAtPos);
                         // Removing from DataBase:
-                        DatabaseConnect dbc =  new DatabaseConnect(uuid);
+                        DatabaseConnect dbc =  new DatabaseConnect(uuidLocal);
                         boolean result = dbc.removeCode(codeAtPos);
                         if (result) {
                             Toast.makeText(getApplicationContext(), "Removed Successfully", Toast.LENGTH_LONG).show();
@@ -372,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }
             else if (lines[0].equals("LOGIN")) {
                 // login my account in another device
-                uuid = lines[1];
+                uuidLocal = lines[1];
             }
             else {
                 // !!! get geolocation
@@ -391,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 GameQRCode gameQRCode = new GameQRCode(content);
                 gameQRCode.setCaptureImage(this.captureImage);
                 player.addQRCode(gameQRCode);
-                GameQRCode redundant = new GameQRCode("");
+                GameQRCode redundant = new GameQRCode(" ");
                 mainDataAdapter.add(redundant);
                 mainDataAdapter.remove(redundant);
                 this.captureImage = null;
@@ -419,6 +362,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
         }
     }
+
     private void getLocation() {
         //From: youtube.com
         // URL:https://www.youtube.com/watch?v=Ak1O9Gip-pg
@@ -459,10 +403,41 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 }
             }
         });
-
-
     }
 
+    @SuppressLint("HardwareIds")
+    private String getLocalUUID(){
+        final TelephonyManager telephonyManager = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+
+        String androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(),android.provider.Settings.Secure.ANDROID_ID);
+        String telephonyManagerDevice = "" + telephonyManager.getDeviceId();
+        String telephonyManagerSerial = "" + telephonyManager.getSimSerialNumber();
+
+        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)telephonyManagerDevice.hashCode() << 32) | telephonyManagerSerial.hashCode());
+        return deviceUuid.toString();
+    }
+
+    private void dataLoading() {
+        if (dbc != null) {
+            if (dbc.isDatabaseExisted()) {
+                player = dbcLocal.getPlayerReload();
+                Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
+            }
+            else {
+                player = new Player(uuid);
+                dbc.addNew(player);
+                Toast.makeText(getApplicationContext(), "Welcome to join us!", Toast.LENGTH_LONG).show();
+            }
+            if (isTesting) {
+                player = testPlayer1;
+                Toast.makeText(getApplicationContext(), "TEST channel activated", Toast.LENGTH_LONG).show();     //** FOR TEST
+            }
+
+            mainDataList = player.getQRCodeList();
+            mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
+            mainListView.setAdapter(mainDataAdapter);
+        }
+    }
 
 }
 
