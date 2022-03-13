@@ -124,11 +124,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
 
         // Local Info Loading:
-        //uuidLocal = getLocalUUID();
+        uuidLocal = getLocalUUID();
 
 
 
-        uuidLocal = UUID.randomUUID().toString();
+        //uuidLocal = UUID.randomUUID().toString();
         dbcLocal = new DatabaseConnect(uuidLocal);
         isDBForLocalExisted = dbcLocal.isDatabaseExisted();
 
@@ -417,16 +417,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         });
     }
 
-    @SuppressLint("HardwareIds")
+
     private String getLocalUUID(){
-        final TelephonyManager telephonyManager = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-
-        String androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(),android.provider.Settings.Secure.ANDROID_ID);
-        String telephonyManagerDevice = "" + telephonyManager.getDeviceId();
-        String telephonyManagerSerial = "" + telephonyManager.getSimSerialNumber();
-
-        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)telephonyManagerDevice.hashCode() << 32) | telephonyManagerSerial.hashCode());
-        return deviceUuid.toString();
+        String android_id = Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
+        return android_id;
     }
 
     private void dataLoading() {

@@ -1,7 +1,6 @@
 package com.example.qrhunt;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
@@ -27,6 +26,7 @@ public class DataFrameTEST {
 
     @Test
     public void databaseInputTest(){
+        
         // Players Setting (test PlayerConstructor/getUUID/UUID.randomUUID()/setContactInfo/setUserName)
         String localUUID = UUID.randomUUID().toString();
         localPlayer = new Player(localUUID);
