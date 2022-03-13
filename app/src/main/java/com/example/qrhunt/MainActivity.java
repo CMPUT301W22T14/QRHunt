@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             break;
                         case 2:
                             // Leader Board
+                            new ProfileDisplayFragment(player, false).show(getSupportFragmentManager(), "LeaderBoardFragment Activated");
                             break;
                         case 3:
                             // Searching by Username
