@@ -41,6 +41,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+import android.provider.Settings.Secure;
+
 /* DEBUG LOGS */
 // Todo - 01 - [FIXED] -  Local Player cannot work correctly
 // Todo - 02 - [FIXED] - DetailPage Comment Fragment Display Error (LinearLayout-->RelativeLayout)
@@ -85,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
 
 
+
+
     /* Creating Function */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
         // Local Info Loading:
         //uuidLocal = getLocalUUID();
+
+
+
         uuidLocal = UUID.randomUUID().toString();
         dbcLocal = new DatabaseConnect(uuidLocal);
         isDBForLocalExisted = dbcLocal.isDatabaseExisted();
@@ -429,7 +436,13 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
             }
             else {
+                //From:stackoverflow.com
+                //URL:https://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
+                //Author: https://stackoverflow.com/users/166712/anthony-forloney
+                String android_id = Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
+                uuid = android_id;
                 player = new Player(uuid);
+                player.setUserName(uuid);
                 dbc.addNew(player);
                 Toast.makeText(getApplicationContext(), "Welcome to join us!", Toast.LENGTH_LONG).show();
             }
