@@ -17,7 +17,9 @@ import com.google.zxing.qrcode.encoder.QRCode;
 
 import java.util.ArrayList;
 
-
+/**
+ * This is a class connects the realtime database with the app.
+ */
 public class DatabaseConnect {
     private String uuid;
     private Player player = null;
@@ -28,14 +30,29 @@ public class DatabaseConnect {
         this.uuid = uuid;
     }
 
+    /**
+     * This method gets the UUID of the current DatabaseConnect.
+     * @return
+     *      Returns the uuid of the DatabaseConnect
+     */
     public String getUUID() {
         return uuid;
     }
 
+    /**
+     * This method gets the Player of the current DatabaseConnect.
+     * @return
+     *      Returns the Player of the DatabaseConnect
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * This method checks if the DatabaseConnect exist.
+     * @return
+     *      Returns the boolean of whether database exists remotely.
+     */
     public boolean isDatabaseExisted() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Player");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -54,6 +71,11 @@ public class DatabaseConnect {
         return dataExistedRemotely;
     }
 
+    /**
+     * This method reloads all the GameQRCode of the current DatabaseConnect.
+     * @return
+     *      Returns the GameQRCode[].
+     */
     public ArrayList<GameQRCode> getGameCodesReload() {
         // success/fail --> return true/false
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Player");
@@ -84,7 +106,11 @@ public class DatabaseConnect {
         return gameQRCodes;
     }
 
-
+    /**
+     * This method reloads the Player of the current DatabaseConnect.
+     * @return
+     *      Returns the Player of the DatabaseConnect
+     */
     public Player getPlayerReload() {
         // Since we are returning player here, I would assume we are returning a single player?
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Player");
@@ -103,8 +129,10 @@ public class DatabaseConnect {
         return player;
     }
 
-
-
+    /**
+     * This method add a new Player to the remote database.
+     * @param player
+     */
     public void addNew(Player player) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();  //This is a call to the top level, which is the root node
         DatabaseReference referencePlayer = rootNode.getReference("Players");
@@ -124,6 +152,12 @@ public class DatabaseConnect {
         referencePlayer.child(uuid).child("QRCode").setValue(codes);
     }
 
+    /**
+     * This method removes the selected GameQRCode from current Database Connect.
+     * @param codeAtPos
+     * @return
+     *      Return the result of if remove success.
+     */
     public boolean removeCode(GameQRCode codeAtPos) {
         // Will remove the code at with the QR supplied. 
         String StringCode = codeAtPos.getContent();
