@@ -26,7 +26,7 @@ public class DataFrameTEST {
 
     @Test
     public void databaseInputTest(){
-        
+
         // Players Setting (test PlayerConstructor/getUUID/UUID.randomUUID()/setContactInfo/setUserName)
         String localUUID = UUID.randomUUID().toString();
         localPlayer = new Player(localUUID);

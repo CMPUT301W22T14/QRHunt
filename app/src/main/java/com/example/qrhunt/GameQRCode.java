@@ -8,6 +8,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
+/**
+ * This is a class represent the QR code
+ */
 public class GameQRCode {
     private String content;
     public int score;
@@ -21,6 +24,9 @@ public class GameQRCode {
         calculateScore();
     }
 
+    /**
+     * This is to calculate the score of the QR code
+     */
     private void calculateScore() {
         try {
             //from: stackoverflow.com
@@ -44,7 +50,12 @@ public class GameQRCode {
         }
     }
 
-
+    /**
+     * This is to calculate score according to the hash code
+     * @param content
+     * @return
+     *      return the score according to the hash code
+     */
     private int hashToScore(String content) {
         StringBuilder sb = new StringBuilder();
         int sum = 0;
@@ -91,18 +102,36 @@ public class GameQRCode {
         return sum;
     }
 
+    /**
+     * This gets the score of the QR code
+     * @return
+     *      Return the score of the QR code
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * This adds a new comment to the list of comments
+     * @param inputComment
+     */
     public void addComment(String inputComment) {
         comments.add(inputComment);
     }
 
+    /**
+     * This removes a comment from the list of comments
+     * @param index
+     */
     public void removeComment(int index) {
         comments.remove(index);
     }
 
+    /**
+     * This gets the list of all comments
+     * @return
+     *      Return the list of all comments
+     */
     public ArrayList<String> showAllComments() {
         return comments;
     }
@@ -119,14 +148,28 @@ public class GameQRCode {
         return uuidOfScanners;
     }
 
+    /**
+     * This set the object/location's image
+     * @param captureImage
+     */
     public void setCaptureImage(Bitmap captureImage) {
         this.captureImage = captureImage;
     }
 
+    /**
+     * This gets the image of the object/location
+     * @return
+     *      Return the image of the object/location
+     */
     public Bitmap getCaptureImage() {
         return captureImage;
     }
 
+    /**
+     * This gets the content of the QR code
+     * @return
+     *      Return the content of the QR code
+     */
     public String getContent() {
         return content;
     }
