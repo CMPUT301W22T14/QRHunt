@@ -22,7 +22,9 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-
+/**
+ * This Fragment shows the player's information.
+ */
 public class ProfileDisplayFragment extends DialogFragment {
     /* Global Variables */
     private Player player = null;

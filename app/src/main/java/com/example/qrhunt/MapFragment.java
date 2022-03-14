@@ -15,7 +15,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
+/**
+ * This Fragment shows the GameQRCode's location on map based on Google.
+ */
 public class MapFragment extends Fragment {
 
 

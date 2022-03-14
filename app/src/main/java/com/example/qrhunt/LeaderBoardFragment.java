@@ -24,7 +24,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
+/**
+ * This Fragment shows all kinds of rank.
+ */
 public class LeaderBoardFragment extends DialogFragment {
     private Player player = null;
     private List<Player> players = null;

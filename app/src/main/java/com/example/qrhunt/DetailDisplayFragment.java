@@ -27,7 +27,9 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * This Fragment shows GameQRCode's detail.
+ */
 public class DetailDisplayFragment extends DialogFragment {
     /* Global Variables */
     private GameQRCode gameQRCode = null;

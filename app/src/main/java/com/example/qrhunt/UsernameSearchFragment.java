@@ -12,6 +12,9 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * This Fragment is for player to search other players by their username.
+ */
 public class UsernameSearchFragment extends DialogFragment {
     private EditText username;
     private OnFragmentInteractionListener listener;
