@@ -54,7 +54,7 @@ public class GameQRCode {
     /**
      * This is to calculate score according to the hash code
      * @param content
-     *      ...
+     *      Parameter is the QRCode content
      * @return
      *      Return the score according to the hash code
      */
@@ -116,7 +116,7 @@ public class GameQRCode {
     /**
      * This adds a new comment to the list of comments
      * @param inputComment
-     *      ...
+     *      The comment String for the QRCode
      */
     public void addComment(String inputComment) {
         comments.add(inputComment);
@@ -125,7 +125,7 @@ public class GameQRCode {
     /**
      * This removes a comment from the list of comments
      * @param index
-     *      ...
+     *      The index of comment want to remove.
      */
     public void removeComment(int index) {
         comments.remove(index);
@@ -140,14 +140,29 @@ public class GameQRCode {
         return comments;
     }
 
+    /**
+     * waiting to be done
+     * @param uuidOfScanner
+     *      The uuid get from the Scanner
+     */
     public void addScanner(String uuidOfScanner) {
         uuidOfScanners.add(uuidOfScanner);
     }
 
+    /**
+     * waiting to be done
+     * @param index
+     *      The index of the Scanner waiting to be remove.
+     */
     public void removeScanner(int index) {
         uuidOfScanners.remove(index);
     }
 
+    /**
+     * This shows all scanner.
+     * @return
+     *      The Sting[] of all scanners.
+     */
     public ArrayList<String> showAllScanners() {
         return uuidOfScanners;
     }
@@ -155,7 +170,7 @@ public class GameQRCode {
     /**
      * This set the object/location's image;
      * @param captureImage
-     *      ...
+     *      The image captured.
      */
     public void setCaptureImage(Bitmap captureImage) {
         this.captureImage = captureImage;

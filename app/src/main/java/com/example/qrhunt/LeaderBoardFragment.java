@@ -91,10 +91,16 @@ public class LeaderBoardFragment extends DialogFragment {
 
     }
 
+    /**
+     * This gets all players
+     */
     public void getAllPlayers() {
         //Yujie's task !!!!!!!!!
     }
 
+    /**
+     * This sets the highest score rank.
+     */
     public void setHighestRank() {
         //Initialize the highest rank
         rankNameView.setText("Highest Score Rank");
@@ -120,6 +126,9 @@ public class LeaderBoardFragment extends DialogFragment {
     }
 
 
+    /**
+     * This sets the total number of QRCode rank for players.
+     */
     public void setTotalNumberRank() {
         rankNameView.setText("Total Number Rank");
         Collections.sort(players, new Comparator<Player>() {
@@ -143,6 +152,9 @@ public class LeaderBoardFragment extends DialogFragment {
         myRankView.setText(s);
     }
 
+    /**
+     * This sets the highest total Sum score rank.
+     */
     public void setSumRank() {
         rankNameView.setText("Total Sum Rank");
         Collections.sort(players, new Comparator<Player>() {
