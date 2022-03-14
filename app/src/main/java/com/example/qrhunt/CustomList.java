@@ -45,6 +45,8 @@ public class CustomList extends ArrayAdapter<GameQRCode> {
      *      The view access used for the CustomList;
      * @param parent
      *      The ViewGroup that is used to access the upper level context setting;
+     * @return
+     *      Return the view designed based on the CustomList setting;
      */
     @NonNull
     @Override

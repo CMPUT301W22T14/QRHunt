@@ -123,6 +123,12 @@ public class DatabaseConnect {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Player");
         Query checkPlayer = reference.orderByChild("username").equalTo(uuid);
         checkPlayer.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * This method reloads the Player of the current DatabaseConnect;
+             *
+             * @param snapshot
+             *      Input the snapshot of the remote database for editing and accessing;
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String userName = snapshot.child(uuid).child("userName").getValue(String.class);
@@ -130,6 +136,13 @@ public class DatabaseConnect {
                 String contactInfo = snapshot.child(uuid).child("contactInfo").getValue(String.class);
                 player = new Player(uuid, userName, QRCodeList, contactInfo);
             }
+            /**
+             * This alternative action function for the above one, used to cancel the accessing when
+             *  any DatabaseError occurred;
+             *
+             * @param error
+             *      Input the DatabaseError object occurred in accessing remote database snapshot;
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });

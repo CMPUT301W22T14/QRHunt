@@ -44,6 +44,8 @@ public class CustomList2 extends ArrayAdapter<String> {
      *      The view access used for the CustomList;
      * @param parent
      *      The ViewGroup that is used to access the upper level context setting;
+     * @return
+     *      Return the view designed based on the CustomList setting;
      */
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
