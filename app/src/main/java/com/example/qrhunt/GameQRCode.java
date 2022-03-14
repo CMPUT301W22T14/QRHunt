@@ -1,3 +1,4 @@
+
 package com.example.qrhunt;
 
 import android.graphics.Bitmap;
@@ -53,8 +54,9 @@ public class GameQRCode {
     /**
      * This is to calculate score according to the hash code
      * @param content
+     *      ...
      * @return
-     *      return the score according to the hash code
+     *      Return the score according to the hash code
      */
     private int hashToScore(String content) {
         StringBuilder sb = new StringBuilder();
@@ -114,6 +116,7 @@ public class GameQRCode {
     /**
      * This adds a new comment to the list of comments
      * @param inputComment
+     *      ...
      */
     public void addComment(String inputComment) {
         comments.add(inputComment);
@@ -122,6 +125,7 @@ public class GameQRCode {
     /**
      * This removes a comment from the list of comments
      * @param index
+     *      ...
      */
     public void removeComment(int index) {
         comments.remove(index);
@@ -149,15 +153,16 @@ public class GameQRCode {
     }
 
     /**
-     * This set the object/location's image
+     * This set the object/location's image;
      * @param captureImage
+     *      ...
      */
     public void setCaptureImage(Bitmap captureImage) {
         this.captureImage = captureImage;
     }
 
     /**
-     * This gets the image of the object/location
+     * This gets the image of the object/location;
      * @return
      *      Return the image of the object/location
      */
@@ -166,15 +171,12 @@ public class GameQRCode {
     }
 
     /**
-     * This gets the content of the QR code
+     * This gets the content of the QR code;
      * @return
-     *      Return the content of the QR code
+     *      Return the content of the QR code;
      */
     public String getContent() {
         return content;
     }
 
-    public void generateQRCode() {
-
-    }
 }

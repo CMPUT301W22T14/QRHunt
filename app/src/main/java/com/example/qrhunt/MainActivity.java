@@ -48,7 +48,9 @@ import android.provider.Settings.Secure;
 // Todo - 04 - [PROCESSING] -  Geolocation Searching Function
 // Todo - 05 - [] -
 
-
+/**
+ * This is a main class that controls the main activity and connect to all the sub-functions and sub-activities/fragments;
+ */
 public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener{
     /* Global Variables */
     ListView mainListView = null;
@@ -81,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     String countryName;
     String locality;
     String address;
-
-
 
 
     /* Creating Function */
@@ -496,7 +496,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
      *  the function will acquire them and rebuild the player info locally; if not existed, a new
      *  player object will be created and add to the remote database. Besides, we also prepare a
      *  test channel based on testPlayer1 for more local function tests;
-     *
      * */
     private void dataLoading() {
         if (dbc != null) {
