@@ -1,3 +1,4 @@
+
 package com.example.qrhunt;
 
 import androidx.annotation.NonNull;
@@ -6,7 +7,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,57 +27,54 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
-
 import android.provider.Settings.Secure;
+
 
 /* DEBUG LOGS */
 // Todo - 01 - [FIXED] -  Local Player cannot work correctly
 // Todo - 02 - [FIXED] - DetailPage Comment Fragment Display Error (LinearLayout-->RelativeLayout)
 // Todo - 03 - [FIXED] - Comments Adding Auto-refreshing
-// Todo - 04 - [] -
+// Todo - 04 - [PROCESSING] -  Geolocation Searching Function
 // Todo - 05 - [] -
 
 
 public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener{
-    static String uuid2;
-
     /* Global Variables */
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = new ArrayList<GameQRCode>();
     ArrayAdapter<GameQRCode> mainDataAdapter;
 
     // Acquiring Identification:
-    boolean isTesting = false;
-
-    String uuidLocal = null;
-    DatabaseConnect dbcLocal = null;
-    boolean usingLocalUUID = true;
-    boolean isDBForLocalExisted = false;
-    String uuidInput = null;
-    DatabaseConnect dbcInput = null;
-
     String uuid = null;
     DatabaseConnect dbc = null;
     Player player = null;
     Player testPlayer1 = null;
     Player testPlayer2 = null;
 
+    String uuidLocal = null;
+    DatabaseConnect dbcLocal = null;
+    String uuidInput = null;
+    DatabaseConnect dbcInput = null;
+
+    // Background Switchers:
+    boolean isTesting = false;
+    boolean usingLocalUUID = true;
+    boolean isDBForLocalExisted = false;
+
     Bitmap captureImage = null;
 
-    //Initialize attributes needed for geolocation
+    // Initialize attributes needed for geolocation
     FusedLocationProviderClient fusedLocationProviderClient;
     double latitude;
     double longitude;
@@ -88,8 +85,16 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
 
 
-
     /* Creating Function */
+    /**
+     * This is the main function of the project, all major tasks, functions and player data are
+     *  controlled by the codes below, it also manages the channel toward diverse windows, activities,
+     *  fragments and role channels;
+     *
+     * @param savedInstanceState
+     *      Calling by the Android Project to recall the state of application stored in a bundle;
+     *
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
 
 
-        //uuidLocal = UUID.randomUUID().toString();
+        uuidLocal = getLocalUUID();
         dbcLocal = new DatabaseConnect(uuidLocal);
         isDBForLocalExisted = dbcLocal.isDatabaseExisted();
 
@@ -209,8 +214,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             break;
                         case 3:
                             // Searching by Username
-                            new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
                             // --> Unfolding ProfileDisplayFragment;
+                            new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
                             break;
                         case 4:
                             Intent intent = new Intent(MainActivity.this, MapActivity.class);
@@ -225,6 +230,22 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
         // Monitoring ListView Clicking:
         mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * This is a click-checking function for listview items. If any item in the listview is
+             *  clicked, the function will record the information of the one selected and set two
+             *  buttons (Detail & Delete) on the main page to be visible. If the user taps any of
+             *  these two buttons, corresponding actions will be activated (show details of the
+             *  listview item selected / delete the listview item selected);
+             *
+             * @param parent
+             *      The adapterView where the action happened;
+             * @param view
+             *      The view clicked within the Adapter;
+             * @param position
+             *      The index of the listview item selected by the user;
+             * @param id
+             *      Presents the row id of the item clicked.;
+             * */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Catching the item clicked:
@@ -237,7 +258,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
                 // --> DETAIL:
                 button_detail.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
+                    /**
+                     * This is a click-checking function for the Detail button. If the user taps the
+                     *  button, the monitor will catch that and activate corresponding actions to
+                     *  show all the details (unfolding the DetailDisplayFragment) based on the
+                     *  listview item selected before. Feedback about the result is displayed with
+                     *  buttons to become invisible again;
+                     *
+                     * @param view
+                     *      The view clicked within the Adapter;
+                     * */
+                    public void onClick(View view) {
                         // button_detail functions:
                         // --> detail_display_fragment;
                         new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
@@ -250,7 +281,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
                 // --> DELETE:
                 button_delete.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
+                    /**
+                     * This is a click-checking function for the Delete button. If the user taps the
+                     *  button, the monitor will catch that and activate corresponding actions to
+                     *  remove the listview item selected before from both the listview presentation
+                     *  and the database remotely. Feedback about the result is displayed with
+                     *  buttons to become invisible again;
+                     *
+                     * @param view
+                     *      The view clicked within the Adapter;
+                     * */
+                    public void onClick(View view) {
                         // Removing from ListView:
                         mainDataAdapter.remove(codeAtPos);
                         // Removing from DataBase:
@@ -273,7 +314,16 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
         // PROFILE:
         button_profile.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            /**
+             * This is a click-checking function for the Profile button. If the user taps the button,
+             *  the monitor will catch that and activate corresponding actions to show the user's
+             *  profile (unfolding the ProfileDisplayFragment) based on the user's personal info.
+             *  Feedback about the result is displayed with buttons to become invisible again;
+             *
+             * @param view
+             *      The view clicked within the Adapter;
+             * */
+            public void onClick(View view) {
                 // --> unfolding ProfileDisplayFragment;
                 new ProfileDisplayFragment(player, false).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
 
@@ -283,21 +333,18 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             }
         });
 
-
-        //Check permission
+        // Check permission
         if (ActivityCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             //when permission granted
             //getLocation();
         } else {
-            //when permission denied
+            // when permission denied
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
 
-
     }
-
 
 
     @Override
@@ -361,14 +408,23 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         }
     }
 
+    /**
+     * This function receives an uuid from the user and searching it from the database to see if the
+     *  uuid history exists or not. If any previous records exists, showing the user's profile
+     *  (unfolding the ProfileDisplayFragment) based on the user's personal info stored remotely.
+     *  Feedback about the result is displayed
+     *
+     * @param uuid
+     *      An uuid inputted by a user to match and check are there any previously existed user info
+     *     recorded by the remote database;
+     * */
     @Override
     public void onSearchPressed(String uuid) {
-        // Searching if uuid exist in the database, if exists, show the profile of uuid;
+        //
         DatabaseConnect dbc = new DatabaseConnect(uuid);
         Player playerSearchingResult;
         if (dbc.isDatabaseExisted()){
             playerSearchingResult = dbc.getPlayerReload();
-            //playerSearchingResult = player;     //** FOR TEST
             new ProfileDisplayFragment(playerSearchingResult, true).show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
         }
         else {
@@ -376,6 +432,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         }
     }
 
+
+    // Todo: Geolocation Searching Part Is Still Processing...
+    /*
     private void getLocation() {
         //From: youtube.com
         // URL:https://www.youtube.com/watch?v=Ak1O9Gip-pg
@@ -416,14 +475,29 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 }
             }
         });
+    }*/
+
+
+    /**
+     * This function is used to acquire the device uuid from the local system;
+     *
+     * @return
+     *      The ANDROID_ID (aka uuid) acquired from the system;
+     * */
+    private String getLocalUUID() {
+        //From:stackoverflow.com
+        //URL:https://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
+        //Author: https://stackoverflow.com/users/166712/anthony-forloney
+        return Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
     }
 
-
-    private String getLocalUUID(){
-        String android_id = Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
-        return android_id;
-    }
-
+    /**
+     * This function is used to deal with the player data system, if remote user data record existed,
+     *  the function will acquire them and rebuild the player info locally; if not existed, a new
+     *  player object will be created and add to the remote database. Besides, we also prepare a
+     *  test channel based on testPlayer1 for more local function tests;
+     *
+     * */
     private void dataLoading() {
         if (dbc != null) {
             if (dbc.isDatabaseExisted()) {
@@ -431,13 +505,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
             }
             else {
-                //From:stackoverflow.com
-                //URL:https://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
-                //Author: https://stackoverflow.com/users/166712/anthony-forloney
-                String android_id = Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
-                uuid = android_id;
-                player = new Player(uuid);
-                player.setUserName(uuid);
+                player = new Player(uuidLocal);
                 dbc.addNew(player);
                 Toast.makeText(getApplicationContext(), "Welcome to join us!", Toast.LENGTH_LONG).show();
             }
