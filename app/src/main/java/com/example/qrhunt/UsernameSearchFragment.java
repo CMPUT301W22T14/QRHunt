@@ -20,6 +20,12 @@ public class UsernameSearchFragment extends DialogFragment {
         void onSearchPressed(String uuid);
     }
 
+    /**
+     * dealing with actions
+     *
+     * @param context
+     *      get the context
+     */
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
@@ -31,6 +37,12 @@ public class UsernameSearchFragment extends DialogFragment {
         }
     }
 
+    /**
+     * Called by the android system to build up the fragment;
+     *
+     * @param savedInstanceState
+     *      Last state record;
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {

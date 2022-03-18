@@ -32,12 +32,24 @@ public class ProfileDisplayFragment extends DialogFragment {
 
 
     // Constructor
+    /**
+     * This is a constructor function which is used to build up a fragment with info given;
+     *
+     * @param gameQRCode
+     *      This is the context record of the upper level activity, is used to access the view;
+     */
     public ProfileDisplayFragment(Player player, boolean isProtected) {
         this.player = player;
         this.isPrivacyProtected = isProtected;
     }
 
 
+    /**
+     * Called by the android system to build up the fragment;
+     *
+     * @param savedInstanceState
+     *      Last state record;
+     */
     @SuppressLint("SetTextI18n")
     @NonNull
     @Override
@@ -156,6 +168,12 @@ public class ProfileDisplayFragment extends DialogFragment {
 
     }
 
+    /**
+     * Get the code status;
+     *
+     * @param statusQRCodeImage
+     *      QR code image
+     */
     public void generateStatusQRCode(ImageView statusQRCodeImage) {
         //from: youtube.com
         //URL: https://www.youtube.com/watch?v=yJh22Wk74V8
@@ -184,6 +202,12 @@ public class ProfileDisplayFragment extends DialogFragment {
         }
     }
 
+    /**
+     * Get the code status;
+     *
+     * @param statusQRCodeImage
+     *      QR code image
+     */
     public void generateLoggingInQRCode(ImageView loggingInQRCodeImage) {
         //from: youtube.com
         //URL: https://www.youtube.com/watch?v=yJh22Wk74V8

@@ -34,11 +34,25 @@ public class LeaderBoardFragment extends DialogFragment {
     private TextView myRankView;
 
     // Constructor
+    /**
+     * This is a constructor function which is used to build up a fragment with info given;
+     *
+     * @param player
+     *      input player
+     * @param isProtected
+     *      input state of the case;
+     */
     public LeaderBoardFragment(Player player, boolean isProtected) {
         this.player = player;
         this.isPrivacyProtected = isProtected;
     }
 
+    /**
+     * Called by the android system to build up the fragment;
+     *
+     * @param savedInstanceState
+     *      This is the context record of the upper level activity, is used to access the view;
+     */
     @SuppressLint("SetTextI18n")
     @NonNull
     @Override

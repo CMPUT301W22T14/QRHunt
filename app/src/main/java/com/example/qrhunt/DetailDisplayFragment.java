@@ -34,11 +34,23 @@ public class DetailDisplayFragment extends DialogFragment {
 
 
     // Constructor
+    /**
+     * This is a constructor function which is used to build up a fragment with info given;
+     *
+     * @param gameQRCode
+     *      This is the context record of the upper level activity, is used to access the view;
+     */
     public DetailDisplayFragment(GameQRCode gameQRCode) {
         this.gameQRCode = gameQRCode;
     }
 
 
+    /**
+     * Called by the android system to build up the fragment;
+     *
+     * @param savedInstanceState
+     *      Last state record;
+     */
     @SuppressLint("SetTextI18n")
     @NonNull
     @Override

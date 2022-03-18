@@ -1,3 +1,4 @@
+
 package com.example.qrhunt;
 
 import android.util.Log;
@@ -17,8 +18,9 @@ import com.google.zxing.qrcode.encoder.QRCode;
 
 import java.util.ArrayList;
 
+
 /**
- * This is a class connects the realtime database with the app.
+ * This is a class connects the realtime database with the app;
  */
 public class DatabaseConnect {
     private String uuid;
@@ -31,27 +33,30 @@ public class DatabaseConnect {
     }
 
     /**
-     * This method gets the UUID of the current DatabaseConnect.
+     * This method gets the UUID of the current DatabaseConnect;
+     *
      * @return
-     *      Returns the uuid of the DatabaseConnect
+     *      Returns the uuid of the DatabaseConnect;
      */
     public String getUUID() {
         return uuid;
     }
 
     /**
-     * This method gets the Player of the current DatabaseConnect.
+     * This method gets the Player of the current DatabaseConnect;
+     *
      * @return
-     *      Returns the Player of the DatabaseConnect
+     *      Returns the Player of the DatabaseConnect;
      */
     public Player getPlayer() {
         return player;
     }
 
     /**
-     * This method checks if the DatabaseConnect exist.
+     * This method checks if the DatabaseConnect exist;
+     *
      * @return
-     *      Returns the boolean of whether database exists remotely.
+     *      Returns the boolean of whether database exists remotely;
      */
     public boolean isDatabaseExisted() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Player");
@@ -65,16 +70,17 @@ public class DatabaseConnect {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                //Temporailly skipped, will implement if error catched in testing
+                // Todo: Temporailly skipped, will implement if error catched in testing
             }
         });
         return dataExistedRemotely;
     }
 
     /**
-     * This method reloads all the GameQRCode of the current DatabaseConnect.
+     * This method reloads all the GameQRCode of the current DatabaseConnect;
+     *
      * @return
-     *      Returns the GameQRCode[].
+     *      Returns the GameQRCode[];
      */
     public ArrayList<GameQRCode> getGameCodesReload() {
         // success/fail --> return true/false
@@ -107,15 +113,22 @@ public class DatabaseConnect {
     }
 
     /**
-     * This method reloads the Player of the current DatabaseConnect.
+     * This method reloads the Player of the current DatabaseConnect;
+     *
      * @return
-     *      Returns the Player of the DatabaseConnect
+     *      Returns the Player of the DatabaseConnect;
      */
     public Player getPlayerReload() {
         // Since we are returning player here, I would assume we are returning a single player?
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Player");
         Query checkPlayer = reference.orderByChild("username").equalTo(uuid);
         checkPlayer.addListenerForSingleValueEvent(new ValueEventListener() {
+            /**
+             * This method reloads the Player of the current DatabaseConnect;
+             *
+             * @param snapshot
+             *      Input the snapshot of the remote database for editing and accessing;
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String userName = snapshot.child(uuid).child("userName").getValue(String.class);
@@ -123,6 +136,13 @@ public class DatabaseConnect {
                 String contactInfo = snapshot.child(uuid).child("contactInfo").getValue(String.class);
                 player = new Player(uuid, userName, QRCodeList, contactInfo);
             }
+            /**
+             * This alternative action function for the above one, used to cancel the accessing when
+             *  any DatabaseError occurred;
+             *
+             * @param error
+             *      Input the DatabaseError object occurred in accessing remote database snapshot;
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
@@ -130,8 +150,10 @@ public class DatabaseConnect {
     }
 
     /**
-     * This method add a new Player to the remote database.
+     * This method add a new Player to the remote database;
+     *
      * @param player
+     *      The player which will be uploaded to the remote database;
      */
     public void addNew(Player player) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();  //This is a call to the top level, which is the root node
@@ -154,9 +176,11 @@ public class DatabaseConnect {
 
     /**
      * This method removes the selected GameQRCode from current Database Connect.
+     *
      * @param codeAtPos
+     *      The specific code at a corresponding index which need to be removed;
      * @return
-     *      Return the result of if remove success.
+     *      Return the result of if remove success;
      */
     public boolean removeCode(GameQRCode codeAtPos) {
         // Will remove the code at with the QR supplied. 

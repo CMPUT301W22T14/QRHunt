@@ -21,6 +21,7 @@ public class Player {
     // Constructor
     Player (String uuid) {
         this.uuid = uuid;
+        this.userName = uuid;
     }
 
     Player (String uuid, String userName, ArrayList<GameQRCode> QRCodeList, String contactInfo) {
@@ -154,7 +155,7 @@ public class Player {
     }
 
 
-    //Setters
+    /* Setters */
 
     /**
      * Change the username of the player
