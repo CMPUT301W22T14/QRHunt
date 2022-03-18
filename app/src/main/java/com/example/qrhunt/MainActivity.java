@@ -31,6 +31,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import java.io.IOException;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = new ArrayList<GameQRCode>();
     ArrayAdapter<GameQRCode> mainDataAdapter;
+    FirebaseFirestore db;
 
     // Acquiring Identification:
     String uuid = null;
