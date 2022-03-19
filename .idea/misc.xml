@@ -3,26 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/jason/2nd year winter/Cmput 301/full_test/QRHunt/app/src/main/res/layout/activity_map.xml" value="0.17552083333333332" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3692725775801015" />
-        <entry key="app/src/main/res/layout/add_edit_session_fragment_layout.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/browse_session_fragment_layout.xml" value="0.3880208333333333" />
-<<<<<<< HEAD
-        <entry key="app/src/main/res/layout/comment_content.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/content.xml" value="0.3482466236515427" />
-=======
-        <entry key="app/src/main/res/layout/content.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/content2.xml" value="0.3880208333333333" />
->>>>>>> 411a5b528e2e5848430e0bc4f79ef718997c67dc
-        <entry key="app/src/main/res/layout/detail_display_fragment_layout.xml" value="0.3784323846320717" />
-        <entry key="app/src/main/res/layout/leader_board_fragment_layout.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/leader_board_layout.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/profile_display_fragment_layout.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/username_search_fragment_layout.xml" value="0.24364877372396943" />
+        <entry key="app/src/main/res/layout/activity_map.xml" value="0.34074074074074073" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

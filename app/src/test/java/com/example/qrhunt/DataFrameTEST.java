@@ -10,11 +10,8 @@ import java.util.UUID;
 // - [Player]
 // - [GameQRCode] (more tests needed)
 
-// - Todo: Adding More Tests for [GameQRCode], Fixing ActivityMain Foreign Channel (uuid returned from scanner) - for Yufei
-// - Todo: Passing All The Tests Listed Below, Fixing DB Parts AND Reporting Bugs in Other Parts - for Yujie
 
-
-
+/*
 public class DataFrameTEST {
     DatabaseConnect dbc_localUUID;
     DatabaseConnect dbc_fakeUUID_1;
@@ -144,4 +141,4 @@ public class DataFrameTEST {
         assertSame("comment_1 for code1", dbc_localUUID.getGameCodesReload().get(0).showAllComments().get(0));
     }
 
-}
+}*/

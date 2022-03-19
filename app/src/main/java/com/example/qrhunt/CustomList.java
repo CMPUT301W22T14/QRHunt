@@ -1,4 +1,3 @@
-
 package com.example.qrhunt;
 
 import android.content.Context;

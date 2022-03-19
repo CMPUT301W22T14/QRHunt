@@ -6,6 +6,7 @@ import com.google.zxing.qrcode.encoder.QRCode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+
 /**
  * This is a class that represents a player
  */

@@ -35,7 +35,7 @@ public class ProfileDisplayFragment extends DialogFragment {
     /**
      * This is a constructor function which is used to build up a fragment with info given;
      *
-     * @param gameQRCode
+     * @param player
      *      This is the context record of the upper level activity, is used to access the view;
      */
     public ProfileDisplayFragment(Player player, boolean isProtected) {
