@@ -15,6 +15,7 @@ public class Fishing {
     public boolean isFDBForLocalExisted = false;
     public boolean isFDBForInputExisted = false;
 
+
     /*
     testPlayer1 = new Player("000000");
     testPlayer2 = new Player("111111");
