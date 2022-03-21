@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">QRHunt</string>
+    <string name="detail">Detail</string>
+    <string name="delete">Delete</string>
+    <string name="profile">Profile</string>
+    <string name="sum_of_scores">[Sum of Scores]</string>
+    <string name="gameqrcodeid">Game QR Code ID</string>
+    <string name="score">Score</string>
+    <string name="add_comments">Add Comments</string>
+    <string name="total_qr_code">Total QR Code</string>
+    <string name="my_status_qr_code">My status QR code</string>
+    <string name="my_logging_in_qr_code">My logging in QR code</string>
+    <string name="average">Average</string>
+    <string name="sum">Sum</string>
+    <string name="max">Max</string>
+    <string name="min">Min</string>
+    <string name="user_name">User Name</string>
+    <string name="contact_information">Contact Information</string>
+    <string name="player_scanned_the_same_qr_code">Players Who Scanned The Same QR Code: </string>
+    <string name="comments">Comments: </string>
+    <string name="put_in_comment">Put in Comment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="type_comment">Type Comment</string>
+</resources>
