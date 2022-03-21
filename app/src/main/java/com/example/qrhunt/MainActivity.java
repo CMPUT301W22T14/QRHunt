@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainListView.setAdapter(mainDataAdapter);
+        //mainListView.setAdapter(mainDataAdapter);
 
 
         // Locations Marked：
