@@ -116,6 +116,7 @@ public class Player {
     /**
      * This add a new QR code to the list
      * @param newQRCode
+     *      This is the new GameQRCode that need to be added into the list.
      */
     public void addQRCode(GameQRCode newQRCode) {
         QRCodeList.add(newQRCode);
@@ -166,6 +167,7 @@ public class Player {
     /**
      * Change the username of the player
      * @param userName
+     *      This is the String of the player's userName
      */
     public void setUserName(String userName) {
         this.userName = userName;
@@ -174,6 +176,7 @@ public class Player {
     /**
      * Set the UUID of the player
      * @param uuid
+     *      This is the String of the player's uuid
      */
     public void setUUID(String uuid) {
         this.uuid = uuid;
@@ -182,6 +185,7 @@ public class Player {
     /**
      * Change the contact informtion of the player
      * @param contactInfo
+     *      This is the String of player's contact info.
      */
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;

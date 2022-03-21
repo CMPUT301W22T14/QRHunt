@@ -152,11 +152,9 @@ public class FireDatabase {
     /**
      * This method will read the data about a player from the database. and recreate the player object
      * @param obj
-     *      *     This is a object typed parameter that will be turn into our types of variable in this
-     *      function
+     *      This is a object typed parameter that will be turn into our types of variable in this function
      * @param type
-     *      *     This is an integer indicating few situations that will be handled differently in the
-     *      function
+     *      This is an integer indicating few situations that will be handled differently in the function
      * */
     public void getSinglePlayerReload(Object obj, int type, Callback callback) {
         Map<String, Object> player = new HashMap<>();
