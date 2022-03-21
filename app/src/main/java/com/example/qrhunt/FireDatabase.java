@@ -43,7 +43,7 @@ public class FireDatabase {
      * This constructor method will assign the parameter that is passed into this function
      * to private variables for usage.
      * @param uuidInput
-     *      *     This is a string representing the identity of the player.
+     *      This is a string representing the identity of the player.
      * */
     public FireDatabase(String uuidInput) {
         db = FirebaseFirestore.getInstance();
@@ -55,7 +55,7 @@ public class FireDatabase {
      * This method will update our database when we need to add players to the databse or
      * updated a specific information in the database.
      * @param player
-     *      *     This is a Player object that needs to be stored or updated from cloud
+     *      This is a Player object that needs to be stored or updated from cloud
      * */
     public void addOrUpdatePlayer(Player player) {
         HashMap<String, Object> data = new HashMap<>();
@@ -155,6 +155,8 @@ public class FireDatabase {
      *      This is a object typed parameter that will be turn into our types of variable in this function
      * @param type
      *      This is an integer indicating few situations that will be handled differently in the function
+     * @param callback
+     *      This is the callback for getting the reload player
      * */
     public void getSinglePlayerReload(Object obj, int type, Callback callback) {
         Map<String, Object> player = new HashMap<>();
