@@ -19,6 +19,11 @@ public class Player {
     private String contactInfo = null;
 
 
+    /**
+     * This constructs the Player with uuid as its uuid and userName.
+     * @param uuid
+     *      This is the only primary key and unique String for each player.
+     */
     // Constructor
     Player (String uuid) {
         this.uuid = uuid;

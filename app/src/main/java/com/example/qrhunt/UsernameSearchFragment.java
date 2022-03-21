@@ -12,16 +12,22 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+/**
+ * This class is the fragment for searching other players by their username.
+ */
 public class UsernameSearchFragment extends DialogFragment {
     private EditText username;
     private OnFragmentInteractionListener listener;
 
+    /**
+     * This is the interface for checking if the search button is pressed.
+     */
     public interface OnFragmentInteractionListener{
         void onSearchPressed(String uuid);
     }
 
     /**
-     * dealing with actions
+     * This method is dealing with actions
      *
      * @param context
      *      get the context

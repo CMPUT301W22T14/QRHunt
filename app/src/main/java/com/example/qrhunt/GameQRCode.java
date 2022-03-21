@@ -19,13 +19,19 @@ public class GameQRCode {
     private Bitmap captureImage;
 
 
+    /**
+     * Constructor method.
+     * It creates a new game QR code and calculate it's score.
+     * @param content
+     *      This is the String content of the QR code.
+     */
     public GameQRCode(String content) {
        this.content = content;
         calculateScore();
     }
 
     /**
-     * This is to calculate the score of the QR code
+     * This method is to calculate the score of the QR code
      */
     private void calculateScore() {
         try {
@@ -53,7 +59,7 @@ public class GameQRCode {
     /**
      * This is to calculate score according to the hash code
      * @param content
-     *      ...
+     *      this parameter is used to calculate the score given the content that is being scanned.
      * @return
      *      Return the score according to the hash code
      */
@@ -115,7 +121,7 @@ public class GameQRCode {
     /**
      * This adds a new comment to the list of comments
      * @param inputComment
-     *      ...
+     *      The comment String added.
      */
     public void addComment(String inputComment) {
         comments.add(inputComment);
@@ -124,7 +130,7 @@ public class GameQRCode {
     /**
      * This removes a comment from the list of comments
      * @param index
-     *      ...
+     *      The Integer index of the comment that need to be removed.
      */
     public void removeComment(int index) {
         comments.remove(index);
@@ -139,14 +145,29 @@ public class GameQRCode {
         return comments;
     }
 
+    /**
+     * This method add a scanner
+     * @param uuidOfScanner
+     *      The String of the Scanner that need to be added to list.
+     */
     public void addScanner(String uuidOfScanner) {
         uuidOfScanners.add(uuidOfScanner);
     }
 
+    /**
+     * This method remove the chosen scanner.
+     * @param index
+     *      The Integer index of the scanner that need to be remove.
+     */
     public void removeScanner(int index) {
         uuidOfScanners.remove(index);
     }
 
+    /**
+     * This method shows all scanners.
+     * @return
+     *      return the String[] of all scanners' uuid.
+     */
     public ArrayList<String> showAllScanners() {
         return uuidOfScanners;
     }
@@ -154,7 +175,7 @@ public class GameQRCode {
     /**
      * This set the object/location's image;
      * @param captureImage
-     *      ...
+     *      The captured image.
      */
     public void setCaptureImage(Bitmap captureImage) {
         this.captureImage = captureImage;

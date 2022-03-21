@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 /**
  * This is a class use to form the CustomList2 object for corresponding listView presentations.
+ * We use different customlist to display different contents so it is clearer
  */
 public class CustomList2 extends ArrayAdapter<String> {
     private ArrayList<String> data;

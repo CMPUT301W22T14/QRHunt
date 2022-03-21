@@ -24,7 +24,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
+/**
+ * This class is the fragment of leader board.
+ * Which shows several different ranking that helps player to know about their
+ * status in all the players.
+ */
 public class LeaderBoardFragment extends DialogFragment {
     private Player player = null;
     private List<Player> players = null;
@@ -35,6 +39,11 @@ public class LeaderBoardFragment extends DialogFragment {
 
     // Constructor
 
+    /**
+     * This methods sets the player to the fragment.
+     * @param player
+     *      This is the player that sets to the leader board.
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -42,8 +51,6 @@ public class LeaderBoardFragment extends DialogFragment {
     /**
      * This is a constructor function which is used to build up a fragment with info given;
      *
-     * @param player
-     *      input player
      * @param isProtected
      *      input state of the case;
      */
@@ -107,10 +114,16 @@ public class LeaderBoardFragment extends DialogFragment {
 
     }
 
+    /**
+     * TODO: ...
+     */
     public void getAllPlayers() {
         //Yujie's task !!!!!!!!!
     }
 
+    /**
+     * This method sets the rank based on player's highest score.
+     */
     public void setHighestRank() {
         //Initialize the highest rank
         rankNameView.setText("Highest Score Rank");
@@ -136,6 +149,9 @@ public class LeaderBoardFragment extends DialogFragment {
     }
 
 
+    /**
+     * This method sets the rank based on the number of GameQRCodes the players have.
+     */
     public void setTotalNumberRank() {
         rankNameView.setText("Total Number Rank");
         Collections.sort(players, new Comparator<Player>() {
@@ -159,6 +175,9 @@ public class LeaderBoardFragment extends DialogFragment {
         myRankView.setText(s);
     }
 
+    /**
+     * This method sets the rank based on the player's sum score.
+     */
     public void setSumRank() {
         rankNameView.setText("Total Sum Rank");
         Collections.sort(players, new Comparator<Player>() {
@@ -182,6 +201,17 @@ public class LeaderBoardFragment extends DialogFragment {
         myRankView.setText(s);
     }
 
+    /**
+     * This method shows the view of the fragment.
+     * @param inflater
+     *      This is the layout inflater.
+     * @param container
+     *      This is the viewGroup container
+     * @param savedInstanceState
+     *      This is the bundle.
+     * @return
+     *      The view of the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 /**
  * This is a class use to form the CustomList object for corresponding listView presentations;
+ * This is basically the same thing as the demo in our labs, except that we are displaying differnt
+ * objects
  */
 public class CustomList extends ArrayAdapter<GameQRCode> {
     private ArrayList<GameQRCode> codes;

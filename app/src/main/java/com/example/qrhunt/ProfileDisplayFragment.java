@@ -22,7 +22,10 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-
+/**
+ * This class is the fragment that shows the player's profile.
+ * In this fragment, it shows the player's information, QR code for profile and QR code for logging in.
+ */
 public class ProfileDisplayFragment extends DialogFragment {
     /* Global Variables */
     private Player player = null;
@@ -30,6 +33,11 @@ public class ProfileDisplayFragment extends DialogFragment {
     private Boolean isVisibleStatus = false;
     private Boolean isVisibleLogin = false;
 
+    /**
+     * This method sets the player to the fragment.
+     * @param player
+     *      The player that need to show the profile.
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -38,8 +46,8 @@ public class ProfileDisplayFragment extends DialogFragment {
     /**
      * This is a constructor function which is used to build up a fragment with info given;
      *
-     * @param player
-     *      This is the context record of the upper level activity, is used to access the view;
+     * @param isProtected
+     *      input state of the case;
      */
     public ProfileDisplayFragment(boolean isProtected) {
         this.isPrivacyProtected = isProtected;
@@ -207,7 +215,7 @@ public class ProfileDisplayFragment extends DialogFragment {
     /**
      * Get the code status;
      *
-     * @param statusQRCodeImage
+     * @param loggingInQRCodeImage
      *      QR code image
      */
     public void generateLoggingInQRCode(ImageView loggingInQRCodeImage) {

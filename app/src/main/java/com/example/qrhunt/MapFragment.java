@@ -16,7 +16,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
+/**
+ * This is the fragment for map fragment.
+ */
 public class MapFragment extends Fragment {
+
+    /**
+     * This method shows the view of the map fragment.
+     * @param inflater
+     *      This is the fragment's layout inflater
+     * @param container
+     *      This is the container of viewGroup.
+     * @param savedInstanceState
+     *      This is the bundle.
+     * @return
+     *      Returns the View of map fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -114,6 +114,14 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Please select your role: ");
             builder.setItems(roleOptions, new DialogInterface.OnClickListener() {
+                /**
+                 * This is a click method which let user choose what's their identity and status in the game.
+                 * The options includes Local Player, Foreign Player and Owner of the game.
+                 * @param arg0
+                 *      The dialog Interface
+                 * @param optionIdx
+                 *      The Integer index of the choice
+                 */
                 @Override
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
@@ -159,6 +167,14 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
             builder2.setTitle("How can I help you? my friend?");
             builder2.setItems(functionOptions, new DialogInterface.OnClickListener() {
+                /**
+                 * This is the click method where user could choose what feature they would like to use.
+                 * Each option is corresponding to different features, and jump to different fragments.
+                 * @param arg0
+                 *      The dialog Interface
+                 * @param optionIdx
+                 *      The integer index of choice
+                 */
                 @Override
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
@@ -318,6 +334,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     }
 
 
+    /**
+     * This is the method for after scanning the code through camera.
+     * Analysis the information in the QR code and decide what's the QR code for.
+     * @param requestCode
+     *      Integer of request code
+     * @param resultCode
+     *      Integer of result code
+     * @param data
+     *      The intent which include the QR code data.
+     *
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //from: youtube.com
@@ -514,6 +541,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         }
     }
 */
+
+    /**
+     * This method gets the reload player from database and load the listview on the mainActivity.
+     */
     private void dataHooking() {
         if (fdb != null) {
             try {
@@ -555,6 +586,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
 
 
+    /**
+     * The method for fixing the asynchronous problem.
+     * @param secondNum
+     *      The second need to wait until the asynchronous fix。
+     */
     private void asynchronousFixed(int secondNum) {
         try {
             TimeUnit.SECONDS.sleep(secondNum);

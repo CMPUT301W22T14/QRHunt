@@ -23,6 +23,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 
+/**
+ * The class is for control the map.
+ */
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;

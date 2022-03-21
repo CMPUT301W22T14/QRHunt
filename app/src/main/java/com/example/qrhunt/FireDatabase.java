@@ -29,19 +29,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class is in charge of connecting/writing and reading from database
+ * */
 public class FireDatabase {
     private String uuid;
     private FirebaseFirestore db;
     private CollectionReference collectionReference;
     private final String TAG = "Firestore";
 
-
+    /**
+     *Constructor method.
+     * This constructor method will assign the parameter that is passed into this function
+     * to private variables for usage.
+     * @param uuidInput
+     *      *     This is a string representing the identity of the player.
+     * */
     public FireDatabase(String uuidInput) {
         db = FirebaseFirestore.getInstance();
         uuid = uuidInput;
         collectionReference = db.collection("Players");
     }
 
+    /**
+     * This method will update our database when we need to add players to the databse or
+     * updated a specific information in the database.
+     * @param player
+     *      *     This is a Player object that needs to be stored or updated from cloud
+     * */
     public void addOrUpdatePlayer(Player player) {
         HashMap<String, Object> data = new HashMap<>();
         data.put("uuid", player.getUUID());
@@ -134,6 +149,15 @@ public class FireDatabase {
         });
     }*/
 
+    /**
+     * This method will read the data about a player from the database. and recreate the player object
+     * @param obj
+     *      *     This is a object typed parameter that will be turn into our types of variable in this
+     *      function
+     * @param type
+     *      *     This is an integer indicating few situations that will be handled differently in the
+     *      function
+     * */
     public void getSinglePlayerReload(Object obj, int type, Callback callback) {
         Map<String, Object> player = new HashMap<>();
         collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -182,6 +206,11 @@ public class FireDatabase {
     }
 
 
+    /**
+     * This method will read the data about all player from the database. and recreate the Player object.
+     * This is pretty much an extension from the getSinglePlayerReload() function. We use two functions here
+     * mainly for clearity and easier debugging access.
+     * */
     public void getAllPlayersReload() {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -217,6 +246,11 @@ public class FireDatabase {
         });
     }
 
+    /**
+     * This method will add the new QRCode the player get to the database.
+     * @param newCode
+     *      This is a the new QR Code that need to be added in GameQRCode type.
+     */
     public void addNewQRCode(GameQRCode newCode) {
         DocumentReference docRef = collectionReference.document(uuid);
 
@@ -250,6 +284,12 @@ public class FireDatabase {
     }
 
 
+    /**
+     * This method will remove the Qrcode from the database or do nothing if the QrCode does not exist
+     * in the database
+     * @param oldCode
+     *      * This parameter is the qrCode object that we want to remove from the cloud
+     * */
     public void removeCode(GameQRCode oldCode) {
         DocumentReference docRef = collectionReference.document(uuid);
         List<GameQRCode> newCodes = new ArrayList<>();

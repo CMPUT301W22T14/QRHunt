@@ -27,7 +27,10 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * This class is the fragment that shows the detail of a chosen GameQRCode.
+ * Which includes the comments, player who scan the same QR Code and so on.
+ */
 public class DetailDisplayFragment extends DialogFragment {
     /* Global Variables */
     private GameQRCode gameQRCode = null;
@@ -36,7 +39,8 @@ public class DetailDisplayFragment extends DialogFragment {
     // Constructor
     /**
      * This is a constructor function which is used to build up a fragment with info given;
-     *
+     *This function does not return anything, it simply displays the necessary compoenents of the detail
+     * page using the parameter that is being passed into this function
      * @param gameQRCode
      *      This is the context record of the upper level activity, is used to access the view;
      */
@@ -86,6 +90,12 @@ public class DetailDisplayFragment extends DialogFragment {
         // Adding Comment (when button clicked):
         // --> Fixing Text Size (limit < 80);
         addCommentButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This click-checking function is for the user to confirm modification of the contact info.
+             * It could save the content of editText as the new contact info for player.
+             * @param v
+             *      The View v.
+             */
             public void onClick(View v) {
                 String inputComment = inputCommentEditText.getText().toString();
                 if (inputComment.equals(""))
