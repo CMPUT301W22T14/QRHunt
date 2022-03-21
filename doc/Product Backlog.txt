@@ -1,0 +1,57 @@
+Size and Risk level(Text Version)
+
+US 01.01.01: size-high risk-high !!!half-way checkpoint
+
+US 01.02.01: size-low risk-high !!!half-way checkpoint
+
+US 01.03.01: size-low risk-high !!!half-way checkpoint
+
+US 01.04.01: size-low risk-medium !!!half-way checkpoint
+
+US 01.05.01: size-low risk-medium !!!half-way checkpoint
+
+US 01.06.01: size-low risk-medium !!!half-way checkpoint
+
+US 01.07.01: size-high risk-medium
+
+US 02.01.01: size-high risk-high !!!half-way checkpoint
+
+US 02.02.01: size-medium risk-low !!!half-way checkpoint
+
+US 02.03.01: size-medium risk-high !!!half-way checkpoint
+
+US 02.04.01: size-high risk-medium
+
+US 02.05.01: size-medium risk-medium
+
+US 03.01.01: size-high risk-medium !!!half-way checkpoint
+
+US 03.02.01: size-high risk-low
+
+US 04.01.01: size-medium risk-medium !!!half-way checkpoint
+
+US 04.02.01: size-high risk-low
+
+US 05.01.01: size-high risk-low
+
+US 05.02.01: size-high risk-medium
+
+US 06.01.01: size-high risk-medium
+
+US 07.01.01: size-high risk-low !!!half-way checkpoint
+
+US 07.02.01: size-high risk-low !!!half-way checkpoint
+
+US 07.03.01: size-high risk-low !!!half-way checkpoint
+
+US 07.04.01: size-high risk-low !!!half-way checkpoint
+
+US 08.01.01: size-medium risk-medium !!!half-way checkpoint
+
+US 08.02.01: size-medium risk-low !!!half-way checkpoint
+
+US 09.01.01: size-medium risk-low
+
+US 09.02.01: size-medium risk-low
+
+US 09.03.01: size-medium risk-low
