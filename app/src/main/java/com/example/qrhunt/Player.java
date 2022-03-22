@@ -3,6 +3,7 @@ package com.example.qrhunt;
 import com.google.zxing.qrcode.encoder.QRCode;
 
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 /**
  * This is a class that represents a player
  */
-public class Player {
+public class Player implements Serializable {
     /* Global Variables */
     private String uuid;
     private boolean isStoredRemotely = false;

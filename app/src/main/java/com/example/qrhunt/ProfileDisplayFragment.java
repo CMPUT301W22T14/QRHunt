@@ -49,10 +49,20 @@ public class ProfileDisplayFragment extends DialogFragment {
      * @param isProtected
      *      input state of the case;
      */
-    public ProfileDisplayFragment(boolean isProtected) {
-        this.isPrivacyProtected = isProtected;
-    }
+//    public ProfileDisplayFragment(boolean isProtected) {
+//        this.isPrivacyProtected = isProtected;
+//    }
 
+    public static ProfileDisplayFragment newInstance(boolean isProtected,Player player){
+
+        ProfileDisplayFragment profileDisplayFragment = new ProfileDisplayFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isProtected",isProtected);
+        bundle.putSerializable("player",player);
+        profileDisplayFragment.setArguments(bundle);
+        return  profileDisplayFragment;
+    }
 
     /**
      * Called by the android system to build up the fragment;
@@ -64,6 +74,9 @@ public class ProfileDisplayFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        isPrivacyProtected = args.getBoolean("isProtected");
+        player = (Player) args.getSerializable("player");
         // Locations Marked：
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.profile_display_fragment_layout, null);

@@ -5,12 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,11 +21,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+// Todo - 01 - Removing Code:
+//          --> (*Sometimes) App Closing, Removing Successfully;
+//          --> (Sometimes) Displaying Problem, Removing Successfully;
+// Todo - 02 - Double Codes Adding:
+//          --> (*Always) App Closing, Adding Successfully;
+// Todo - 03 - Code Picture Added Cannot Display;
+// Todo - 04 - General Code Adding:
+//          --> (*Sometimes) One More Blank Item Appeared in The listView Above The New Adding One (Sometimes), Adding Successfully;
+//          --> (Always) Comments Cannot Be Added Successfully;
+
+
 
 /**
  * This class is in charge of connecting/writing and reading from database
@@ -204,7 +214,31 @@ public class FireDatabase {
             }
         });
     }
-
+    public void getSinglePlayerReload(PlayerCallback callback) {
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
+                Player playerTarget = new Player("NOT EXIST");
+                for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
+                    //Log.d(TAG, String.valueOf(doc.getId()));
+                    String uuidGet = doc.getId();
+                    Log.d(TAG, "+++++++++++++++++++++++++++++++++++++++++" + uuidGet + "\n");
+                    if (uuid.equals(uuidGet)){
+                        String contactInfo = (String) doc.getData().get("contactInfo");
+                        playerTarget = new Player(uuidGet);
+                        playerTarget.setContactInfo(contactInfo);
+                        ArrayList<Map<String, Object>> codesOutput = (ArrayList<Map<String, Object>>) (doc.get("codes"));
+                        for (Map<String, Object> code : codesOutput) {
+                            GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                            playerTarget.addQRCode(newCode);
+                            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                        }
+                    }
+                }
+                callback.callBack(playerTarget);
+            }
+        });
+    }
 
     /**
      * This method will read the data about all player from the database. and recreate the Player object.
@@ -253,7 +287,6 @@ public class FireDatabase {
      */
     public void addNewQRCode(GameQRCode newCode) {
         DocumentReference docRef = collectionReference.document(uuid);
-
         List<GameQRCode> newCodes = new ArrayList<>();
 
         DocumentReference documentReference = collectionReference.document(uuid);
@@ -271,7 +304,7 @@ public class FireDatabase {
                             Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
                         }
                         newCodes.add(newCode);
-                        docRef.update("codes", newCodes);
+                        documentReference.update("codes", newCodes);
                         //Call fragment
                     } else {
                         Log.d(TAG, "No such document");
@@ -309,7 +342,7 @@ public class FireDatabase {
                                 newCodes.add(newCode);
                             Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
                         }
-                        docRef.update("codes", newCodes);
+                        documentReference.update("codes", newCodes);
                         // Callback:
 
                     } else {

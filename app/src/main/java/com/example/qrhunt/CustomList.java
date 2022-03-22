@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +16,10 @@ import java.util.ArrayList;
  * This is basically the same thing as the demo in our labs, except that we are displaying differnt
  * objects
  */
-public class CustomList extends ArrayAdapter<GameQRCode> {
+public class CustomList extends BaseAdapter {
     private ArrayList<GameQRCode> codes;
     private Context context;
+
 
 
     /**
@@ -31,11 +32,25 @@ public class CustomList extends ArrayAdapter<GameQRCode> {
      *     CustomList and be displayed later in the Listview;
      */
     public CustomList(Context context, ArrayList<GameQRCode> codes) {
-        super(context,0);
         this.context = context;
         this.codes = codes;
     }
 
+
+    @Override
+    public int getCount() {
+        return codes.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return codes.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
 
     /**
      * This is a view design function of the CustomList which is called by the Android Project;
@@ -52,9 +67,16 @@ public class CustomList extends ArrayAdapter<GameQRCode> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
+        View view ;
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(R.layout.content, parent, false);
+            viewHolder. gameQRCodeText = view.findViewById(R.id.game_code_text);
+            view.setTag(viewHolder);
+        }else{
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag();
         }
         GameQRCode code = null;
         if (codes.size() != 0){
@@ -63,12 +85,15 @@ public class CustomList extends ArrayAdapter<GameQRCode> {
         if (code == null) {
             return view;
         }
-        TextView gameQRCodeText = view.findViewById(R.id.game_code_text);
+
         //TextView gameQRCodeScoreText = view.findViewById(R.id.game_code_other_text);
 
-        gameQRCodeText.setText(code.getContent());
+        viewHolder.gameQRCodeText.setText(code.getContent());
         //gameQRCodeScoreText.setText(code.getScore());   //** FOR TEST
         return view;
 
+    }
+    class ViewHolder{
+        TextView gameQRCodeText;
     }
 }

@@ -34,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.util.Assert;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -44,6 +45,8 @@ import java.util.concurrent.TimeUnit;
 import android.provider.Settings.Secure;
 
 
+
+
 /**
  * This is a main class that controls the main activity and connect to all the sub-functions and sub-activities/fragments;
  */
@@ -52,13 +55,12 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     /* Global Variables */
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = new ArrayList<>();
-    ArrayAdapter<GameQRCode> mainDataAdapter;
-
+    CustomList mainDataAdapter;
     // Acquiring Identification:
-    String uuid = null;
+    String uuid;
     FireDatabase fdb = null;
     int choice = -1;
-    Boolean existed = true;
+    Boolean existed = false;
 
     Bitmap captureImage = null;
 
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         setContentView(R.layout.activity_main);
         //mainListView.setAdapter(mainDataAdapter);
 
-
         // Locations Marked：
         mainListView = findViewById(R.id.session_list);
         final FloatingActionButton button_more = findViewById(R.id.button_more);
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         button_delete.setVisibility(View.INVISIBLE);
 
 
-        String uuidLocal = "Player 2"; //getLocalUUID();
+        String uuidLocal = getLocalUUID(); //getLocalUUID();
 
         /*
         if (player == null || player.getUUID().equals("NOT EXIST")) {
@@ -144,13 +145,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         case 2:
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel!", Toast.LENGTH_LONG).show();
                             break;
-                        // TEST Channel
-                        /*
-                        case 3:
-                            isTesting = true;
-                            uuid = "TEST";
-                            fdb = new FireDatabase(uuid);
-                            break;*/
                     }
                     fdb = new FireDatabase(uuid);
                     dataHooking();
@@ -232,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Catching the item clicked:
-                GameQRCode codeAtPos = mainDataAdapter.getItem(position);
+                GameQRCode codeAtPos = mainDataList.get(position);
 
                 // Visible Operation:
                 button_detail.setVisibility(View.VISIBLE);
@@ -276,7 +270,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                      * */
                     public void onClick(View view) {
                         // Removing from ListView:
-                        mainDataAdapter.remove(codeAtPos);
+                        mainDataList.remove(codeAtPos);
+                        mainDataAdapter.notifyDataSetChanged();
                         // Removing from DataBase:
                         fdb.removeCode(codeAtPos);
                         // Todo: result handle:
@@ -309,14 +304,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
              * */
             public void onClick(View view) {
                 // --> unfolding ProfileDisplayFragment;
-                ProfileDisplayFragment profile = new ProfileDisplayFragment(false);
-                fdb.getSinglePlayerReload(profile, 2, null);
-                asynchronousFixed(1);
-                profile.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+                fdb.getSinglePlayerReload(new PlayerCallback() {
+                    @Override
+                    public void callBack(Player player) {
+                        ProfileDisplayFragment profile =  ProfileDisplayFragment.newInstance(false, player);
+                        profile.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+                        // Invisible Operation:
+                        button_detail.setVisibility(View.INVISIBLE);
+                        button_delete.setVisibility(View.INVISIBLE);
+                    }
+                });
 
-                // Invisible Operation:
-                button_detail.setVisibility(View.INVISIBLE);
-                button_delete.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -390,8 +388,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 gameQRCode.setCaptureImage(this.captureImage);
                 fdb.addNewQRCode(gameQRCode);
                 GameQRCode redundant = new GameQRCode(" ");
-                mainDataAdapter.add(redundant);
-                mainDataAdapter.remove(redundant);
+                mainDataList.add(redundant);
+                mainDataAdapter.notifyDataSetChanged();
                 this.captureImage = null;
             }
         } else {
@@ -413,13 +411,13 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     @Override
     public void onSearchPressed(String uuidTarget) {
         FireDatabase fdbSpec = new FireDatabase(uuidTarget);
-        ProfileDisplayFragment profileSpec = new ProfileDisplayFragment(true);
-        fdbSpec.getSinglePlayerReload(profileSpec, 2, null);
-        asynchronousFixed(1);
-        profileSpec.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
-
-        // Todo: fail case handle:
-        //Toast.makeText(getApplicationContext(), "User not exist", Toast.LENGTH_LONG).show();
+        fdbSpec.getSinglePlayerReload(new PlayerCallback() {
+            @Override
+            public void callBack(Player player) {
+                ProfileDisplayFragment profile =  ProfileDisplayFragment.newInstance(true,player);
+                profile.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+            }
+        });
     }
 
 
@@ -483,68 +481,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     /**
      * This function is used to deal with the player data system, if remote user data record existed,
      * the function will acquire them and rebuild the player info locally; if not existed, a new
-     * player object will be created and add to the remote database. Besides, we also prepare a
-     * test channel based on testPlayer1 for more local function tests;
+     * player object will be created and add to the remote database.
      */
     /*
-    private void dataLoading() {
-
-        if (fisher.fdb != null) {
-            fisher.fdbForInput.isDatabaseExisted(fisher);
-            asynchronousFixed(1);
-            if (fisher.isFDBForLocalExisted || fisher.isFDBForInputExisted) {
-                if (fisher.choice.equals("LOCAL")) {
-                    fisher.decisionMaking(0);
-                    Toast.makeText(getApplicationContext(), "Local Player: Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    fisher.fdbForLocal.getSinglePlayerReload(fisher, -1);
-                    asynchronousFixed(1);
-                    fisher.player = fisher.playerForInput;
-                    Toast.makeText(getApplicationContext(), "Input Player: Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
-                }
-            }
-            else {
-                fisher.player = new Player(fisher.uuidForLocal);
-                assert (fisher.choice.equals("LOCAL"));
-                fisher.playerForLocal = fisher.player;
-                fisher.fdbForLocal.addOrUpdatePlayer(fisher.player);
-                Toast.makeText(getApplicationContext(), "Welcome to join us, new player!", Toast.LENGTH_LONG).show();
-                }
-            mainDataList = fisher.player.getQRCodeList();
-            mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
-            mainListView.setAdapter(mainDataAdapter);
-            }
-    }*/
-
-/*
-    private void dataHooking() {
-        if (fdb != null) {
-            try {
-                Context context = this;
-                fdb.getSinglePlayerReload(null, 0, new Callback() {
-                    @Override
-                    public void feedback(Map<String, Object> response) {
-                        Player player = (Player) response.get("playerReloaded");
-                        fdb.addOrUpdatePlayer(player);
-                        //assert player != null;
-                        mainDataAdapter = new CustomList(context, player);
-                        mainListView.setAdapter(mainDataAdapter);
-                        Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
-                    }
-                });
-            } catch (Exception e) {
-                fdb.addOrUpdatePlayer(new Player(uuid));
-                Toast.makeText(getApplicationContext(), "Welcome to join us, new player!", Toast.LENGTH_LONG).show();
-                dataHooking();
-            }
-        }
-    }
-*/
-
-    /**
-     * This method gets the reload player from database and load the listview on the mainActivity.
-     */
     private void dataHooking() {
         if (fdb != null) {
             try {
@@ -564,15 +503,15 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                                 }
                             }
                         }
-                        assert (existed);
+                        assert existed;
                         // Callback:
-                        mainDataAdapter = new CustomList(getBaseContext(), mainDataList);
+                        mainDataAdapter = new CustomList(MainActivity.this, mainDataList);
                         mainListView.setAdapter(mainDataAdapter);
                         Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
                     }
                 });
             }
-            catch (AssertionError e) {
+            catch (Throwable t) {
                 fdb.addOrUpdatePlayer(new Player(uuid));
                 Toast.makeText(getApplicationContext(), "Welcome to join us, new player!", Toast.LENGTH_LONG).show();
                 dataHooking();
@@ -581,7 +520,46 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         else {
             // owner case;
         }
+    }*/
 
+
+    private void dataHooking() {
+        if (fdb != null) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            CollectionReference collectionReference = db.collection("Players");
+            collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
+                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
+                        String uuidGet = doc.getId();
+                        if (uuid.equals(uuidGet)) {
+                            existed = true;
+                            ArrayList<Map<String, Object>> codesOutput = (ArrayList<Map<String, Object>>) (doc.get("codes"));
+                            for (Map<String, Object> code : codesOutput) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                mainDataList.add(newCode);
+                            }
+                        }
+                    }
+                    try {
+                        assert existed;
+                        // Callback:
+                        mainDataAdapter = new CustomList(MainActivity.this, mainDataList);
+                        mainListView.setAdapter(mainDataAdapter);
+                        Toast.makeText(getApplicationContext(), "Data Loading...", Toast.LENGTH_LONG).show();
+                    }
+                    catch (AssertionError ae) {
+                        fdb.addOrUpdatePlayer(new Player(uuid));
+                        Toast.makeText(getApplicationContext(), "Welcome to join us, new player!", Toast.LENGTH_LONG).show();
+                        dataHooking();
+                    }
+                }
+            });
+
+        }
+        else {
+            // owner case;
+        }
     }
 
 
