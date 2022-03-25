@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/dennnnnnnn/Desktop/2.0.2/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ja/values-ja.xml",
+            "outputFile": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ja/values-ja.xml",
             "map": [
                 {
                     "source": "/Users/dennnnnnnn/.gradle/caches/transforms-3/f87af43b9bcd089c9903f82d1aa5a427/transformed/jetified-zxing-android-embedded-3.4.0/res/values-ja/values-ja.xml",

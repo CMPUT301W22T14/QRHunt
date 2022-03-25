@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/dennnnnnnn/Desktop/2.0.2/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ka/values-ka.xml",
+            "outputFile": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ka/values-ka.xml",
             "map": [
                 {
                     "source": "/Users/dennnnnnnn/.gradle/caches/transforms-3/47f84bc0f14ff0f8b692f7af2e9e9e3d/transformed/material-1.5.0/res/values-ka/values-ka.xml",
