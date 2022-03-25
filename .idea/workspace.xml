@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83725e6d-6034-4a7e-b110-aad4ba2352c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock" afterDir="false" />
-    </list>
+    <list default="true" id="83725e6d-6034-4a7e-b110-aad4ba2352c0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -177,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648171665352</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="checkpoint aaa">
+      <created>1648172130278</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1648172130279</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -194,6 +204,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="checkpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkpoint" />
+    <MESSAGE value="checkpoint aaa" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkpoint aaa" />
   </component>
 </project>

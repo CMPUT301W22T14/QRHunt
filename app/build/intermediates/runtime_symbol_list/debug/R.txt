@@ -3081,7 +3081,6 @@ int id textinput_helper_text 0x7f0801e6
 int id textinput_placeholder 0x7f0801e7
 int id textinput_prefix_text 0x7f0801e8
 int id textinput_suffix_text 0x7f0801e9
-int id textview_total_score 0x7f0801ea
 int id time 0x7f0801eb
 int id title 0x7f0801ec
 int id titleDividerNoCustom 0x7f0801ed
