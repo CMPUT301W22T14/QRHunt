@@ -533,6 +533,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
                         String uuidGet = doc.getId();
                         if (uuid.equals(uuidGet)) {
+                            mainDataList.clear();
                             existed = true;
                             ArrayList<Map<String, Object>> codesOutput = (ArrayList<Map<String, Object>>) (doc.get("codes"));
                             for (Map<String, Object> code : codesOutput) {

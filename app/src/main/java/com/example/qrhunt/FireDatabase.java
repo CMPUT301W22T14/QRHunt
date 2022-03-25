@@ -324,7 +324,6 @@ public class FireDatabase {
      *      * This parameter is the qrCode object that we want to remove from the cloud
      * */
     public void removeCode(GameQRCode oldCode) {
-        DocumentReference docRef = collectionReference.document(uuid);
         List<GameQRCode> newCodes = new ArrayList<>();
 
         DocumentReference documentReference = collectionReference.document(uuid);

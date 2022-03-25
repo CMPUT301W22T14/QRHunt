@@ -8,5 +8,4 @@ import java.util.Map;
  */
 public interface Callback {
     void feedback(Map<String, Object> response);
-
 }
