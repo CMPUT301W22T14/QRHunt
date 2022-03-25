@@ -382,8 +382,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             Manifest.permission.CAMERA
                     }, 100);
                 }
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 100);
+                //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //startActivityForResult(intent, 100);
                 GameQRCode gameQRCode = new GameQRCode(content);
                 gameQRCode.setCaptureImage(this.captureImage);
                 fdb.addNewQRCode(gameQRCode);
