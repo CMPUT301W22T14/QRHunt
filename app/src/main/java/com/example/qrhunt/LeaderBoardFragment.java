@@ -94,6 +94,7 @@ public class LeaderBoardFragment extends DialogFragment {
 
 
 
+        /*
 
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -126,30 +127,32 @@ public class LeaderBoardFragment extends DialogFragment {
             }
         });
 
+         */
 
-        /*
+        getAndSetHighestRank();
+
         highestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setHighestRank(players);
+                getAndSetHighestRank();
             }
         });
 
         totalNumberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setTotalNumberRank(players);
+                getAndSetTotalNumberRank();
             }
         });
 
         totalSumButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setSumRank(players);
+                getAndSetSumRank();
             }
         });
 
-         */
+
 
 
         // Page Structure:
@@ -214,12 +217,12 @@ public class LeaderBoardFragment extends DialogFragment {
             ranks.add(s);
             number++;
         }
-        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, ranks);
+        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, ranks);
         rankList.setAdapter(rankAdapter);
 
-        int myRank = players.indexOf(player) + 1;
-        String s = "Me:No." + myRank + "   Score:" + player.getTotalCodeNum();
-        myRankView.setText(s);
+        //int myRank = players.indexOf(player) + 1;
+        //String s = "Me:No." + myRank + "   Score:" + player.getTotalCodeNum();
+        //myRankView.setText(s);
     }
 
     /**
@@ -240,12 +243,12 @@ public class LeaderBoardFragment extends DialogFragment {
             ranks.add(s);
             number++;
         }
-        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, ranks);
+        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, ranks);
         rankList.setAdapter(rankAdapter);
 
-        int myRank = players.indexOf(player) + 1;
-        String s = "Me:No." + myRank + "   Score:" + player.getSumCodeScore();
-        myRankView.setText(s);
+        //int myRank = players.indexOf(player) + 1;
+        //String s = "Me:No." + myRank + "   Score:" + player.getSumCodeScore();
+        //myRankView.setText(s);
     }
 
     /**
@@ -264,5 +267,105 @@ public class LeaderBoardFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.leader_board_fragment_layout, container, false);
+    }
+
+
+    public void getAndSetHighestRank() {
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Player> players = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            String uuid = document.getId();
+                            String contactInfo = (String) document.get("contactInfo");
+                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
+                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
+                            player.setContactInfo(contactInfo);
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                player.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
+                            players.add(player);
+                        }
+                        else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                    setHighestRank(players);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void getAndSetTotalNumberRank() {
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Player> players = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            String uuid = document.getId();
+                            String contactInfo = (String) document.get("contactInfo");
+                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
+                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
+                            player.setContactInfo(contactInfo);
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                player.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
+                            players.add(player);
+                        }
+                        else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                    setTotalNumberRank(players);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void getAndSetSumRank() {
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Player> players = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            String uuid = document.getId();
+                            String contactInfo = (String) document.get("contactInfo");
+                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
+                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
+                            player.setContactInfo(contactInfo);
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                player.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
+                            players.add(player);
+                        }
+                        else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                    setSumRank(players);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
     }
 }

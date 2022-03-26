@@ -63,3 +63,8 @@ com/example/qrhunt/LeaderBoardFragment.java
  com.example.qrhunt.LeaderBoardFragment$2
  com.example.qrhunt.LeaderBoardFragment$3
  com.example.qrhunt.LeaderBoardFragment$4
+ com.example.qrhunt.LeaderBoardFragment$5
+ com.example.qrhunt.LeaderBoardFragment$6
+ com.example.qrhunt.LeaderBoardFragment$7
+ com.example.qrhunt.LeaderBoardFragment$8
+ com.example.qrhunt.LeaderBoardFragment$9
