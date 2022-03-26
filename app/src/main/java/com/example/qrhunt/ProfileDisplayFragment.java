@@ -236,6 +236,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         //URL: https://www.youtube.com/watch?v=yJh22Wk74V8
         //Author: https://www.youtube.com/channel/UCklYpZX_-QqHOeSUH4GVQpA
 
+        //String content = "LOGIN\n" + player.getUUID();
         String content = "LOGIN\n" + player.getUUID();
         // Initialize multi format writer
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();

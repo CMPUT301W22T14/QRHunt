@@ -146,8 +146,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel!", Toast.LENGTH_LONG).show();
                             break;
                     }
-                    fdb = new FireDatabase(uuid);
-                    dataHooking();
+                    if (fdb == null) {
+                        fdb = new FireDatabase(uuid);
+                        dataHooking();
+                    }
+
                 }
             }).create().show();
         }
@@ -361,25 +364,33 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //Initialize intent result
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         //check condition
+
         if (intentResult.getContents() != null) {
+
             //when result content is not null
             String content = intentResult.getContents();
             //from: stackoverflow.com
             //URL: https://stackoverflow.com/questions/454908/split-java-string-by-new-line
             //Author: https://stackoverflow.com/users/18393/cletus
             String lines[] = content.split("\\r?\\n");
-            if (lines[0].equals("STATUS")) {
+
+            if (lines.length == 2 && lines[0].equals("STATUS")) {
                 // check other player's status
-            } else if (lines[0].equals("LOGIN") && lines.length == 2) {
+            }
+            else if (lines.length == 2 && lines[0].equals("LOGIN")) {
                 // login my account in another device
                 uuid = lines[1];
-            } else {
+                fdb = new FireDatabase(uuid);
+                dataHooking();
+            }
+            else {
                 // !!! get geolocation
                 // Get image
                 // Request for camera Permission
                 //from: youtube.com
                 //URL: https://www.youtube.com/watch?v=RaOyw84625w&t=250s
                 //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
+                /*
                 if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{
                             Manifest.permission.CAMERA
@@ -387,15 +398,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 }
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 100);
+
+                 */
                 GameQRCode gameQRCode = new GameQRCode(content);
-                gameQRCode.setCaptureImage(this.captureImage);
+                //gameQRCode.setCaptureImage(this.captureImage);
                 fdb.addNewQRCode(gameQRCode);
-                GameQRCode redundant = new GameQRCode(" ");
-                mainDataList.add(redundant);
                 mainDataAdapter.notifyDataSetChanged();
                 this.captureImage = null;
             }
-        } else {
+
+        }
+        else {
             //When result content is null
             //Display toast
             Toast.makeText(getApplicationContext(), "OOPS.. You did not scan anything", Toast.LENGTH_SHORT).show();
