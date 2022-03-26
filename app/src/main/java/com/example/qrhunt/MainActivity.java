@@ -151,7 +151,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 }
             }).create().show();
         }
-        dataHooking();
+        if (uuid != null) {
+            dataHooking();
+        }
 
 
         // MORE:
@@ -173,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
                         case 0:
+                            //Scan
                             IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
                             intentIntegrator.setPrompt("For flash use volume up key");
                             intentIntegrator.setBeepEnabled(true);
@@ -382,8 +385,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             Manifest.permission.CAMERA
                     }, 100);
                 }
-                //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                //startActivityForResult(intent, 100);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 100);
                 GameQRCode gameQRCode = new GameQRCode(content);
                 gameQRCode.setCaptureImage(this.captureImage);
                 fdb.addNewQRCode(gameQRCode);
@@ -456,7 +459,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         countryName = addresses.get(0).getCountryName();
                         locality = addresses.get(0).getLocality();
                         address = addresses.get(0).getAddressLine(0);
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -532,13 +534,18 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
                     for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
                         String uuidGet = doc.getId();
+                        if (uuid == null) {
+                            return;
+                        }
                         if (uuid.equals(uuidGet)) {
                             mainDataList.clear();
                             existed = true;
                             ArrayList<Map<String, Object>> codesOutput = (ArrayList<Map<String, Object>>) (doc.get("codes"));
-                            for (Map<String, Object> code : codesOutput) {
-                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                mainDataList.add(newCode);
+                            if (codesOutput != null) {
+                                for (Map<String, Object> code : codesOutput) {
+                                    GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                    mainDataList.add(newCode);
+                                }
                             }
                         }
                     }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-id/values-id.xml",
+            "outputFile": "/Users/chen/301/QRHunt/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-id/values-id.xml",
             "map": [
                 {
-                    "source": "/Users/dennnnnnnn/.gradle/caches/transforms-3/f87af43b9bcd089c9903f82d1aa5a427/transformed/jetified-zxing-android-embedded-3.4.0/res/values-id/values-id.xml",
+                    "source": "/Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/res/values-id/values-id.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
