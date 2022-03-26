@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     Boolean existed = false;
 
     Bitmap captureImage = null;
+    GameQRCode codeAtPos = null;
 
     // Initialize attributes needed for geolocation
     /*
@@ -233,55 +234,64 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Catching the item clicked:
-                GameQRCode codeAtPos = mainDataList.get(position);
+                codeAtPos = mainDataList.get(position);
 
                 // Visible Operation:
                 button_detail.setVisibility(View.VISIBLE);
                 button_delete.setVisibility(View.VISIBLE);
 
 
-                // --> DETAIL:
-                button_detail.setOnClickListener(new View.OnClickListener() {
-                    /**
-                     * This is a click-checking function for the Detail button. If the user taps the
-                     *  button, the monitor will catch that and activate corresponding actions to
-                     *  show all the details (unfolding the DetailDisplayFragment) based on the
-                     *  listview item selected before. Feedback about the result is displayed with
-                     *  buttons to become invisible again;
-                     *
-                     * @param view
-                     *      The view clicked within the Adapter;
-                     * */
-                    public void onClick(View view) {
-                        // button_detail functions:
-                        // --> detail_display_fragment;
-                        new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
 
-                        // Invisible Operation:
-                        button_detail.setVisibility(View.INVISIBLE);
-                        button_delete.setVisibility(View.INVISIBLE);
-                    }
-                });
+            }
+        });
 
-                // --> DELETE:
-                button_delete.setOnClickListener(new View.OnClickListener() {
-                    /**
-                     * This is a click-checking function for the Delete button. If the user taps the
-                     *  button, the monitor will catch that and activate corresponding actions to
-                     *  remove the listview item selected before from both the listview presentation
-                     *  and the database remotely. Feedback about the result is displayed with
-                     *  buttons to become invisible again;
-                     *
-                     * @param view
-                     *      The view clicked within the Adapter;
-                     * */
-                    public void onClick(View view) {
-                        // Removing from ListView:
-                        mainDataList.remove(codeAtPos);
-                        mainDataAdapter.notifyDataSetChanged();
-                        // Removing from DataBase:
-                        fdb.removeCode(codeAtPos);
-                        // Todo: result handle:
+        // --> DETAIL:
+        button_detail.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This is a click-checking function for the Detail button. If the user taps the
+             *  button, the monitor will catch that and activate corresponding actions to
+             *  show all the details (unfolding the DetailDisplayFragment) based on the
+             *  listview item selected before. Feedback about the result is displayed with
+             *  buttons to become invisible again;
+             *
+             * @param view
+             *      The view clicked within the Adapter;
+             * */
+            public void onClick(View view) {
+                // button_detail functions:
+                // --> detail_display_fragment;
+                if (codeAtPos != null) {
+                    new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
+
+                    // Invisible Operation:
+                    button_detail.setVisibility(View.INVISIBLE);
+                    button_delete.setVisibility(View.INVISIBLE);
+                    codeAtPos = null;
+                }
+
+            }
+        });
+
+        // --> DELETE:
+        button_delete.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This is a click-checking function for the Delete button. If the user taps the
+             *  button, the monitor will catch that and activate corresponding actions to
+             *  remove the listview item selected before from both the listview presentation
+             *  and the database remotely. Feedback about the result is displayed with
+             *  buttons to become invisible again;
+             *
+             * @param view
+             *      The view clicked within the Adapter;
+             * */
+            public void onClick(View view) {
+                // Removing from ListView:
+                if (codeAtPos != null) {
+                    mainDataList.remove(codeAtPos);
+                    mainDataAdapter.notifyDataSetChanged();
+                    // Removing from DataBase:
+                    fdb.removeCode(codeAtPos);
+                    // Todo: result handle:
                         /*
                         if (result) {
                             Toast.makeText(getApplicationContext(), "Removed Successfully", Toast.LENGTH_LONG).show();
@@ -290,11 +300,12 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             Toast.makeText(getApplicationContext(), "Cannot Remove Invalid Code", Toast.LENGTH_LONG).show();
                         }*/
 
-                        // Invisible Operation:
-                        button_detail.setVisibility(View.INVISIBLE);
-                        button_delete.setVisibility(View.INVISIBLE);
-                    }
-                });
+                    // Invisible Operation:
+                    button_detail.setVisibility(View.INVISIBLE);
+                    button_delete.setVisibility(View.INVISIBLE);
+                    codeAtPos = null;
+                }
+
             }
         });
 
