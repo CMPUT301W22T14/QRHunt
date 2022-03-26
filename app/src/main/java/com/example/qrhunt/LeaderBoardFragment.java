@@ -39,7 +39,7 @@ import java.util.Map;
  * status in all the players.
  */
 public class LeaderBoardFragment extends DialogFragment {
-    private Player player = null;
+    private String uuid;
     //private List<Player> players = null;
     private Boolean isPrivacyProtected = false;
     private ListView rankList;
@@ -53,11 +53,11 @@ public class LeaderBoardFragment extends DialogFragment {
 
     /**
      * This methods sets the player to the fragment.
-     * @param player
+     * @param uuid
      *      This is the player that sets to the leader board.
      */
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayer(String uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -193,9 +193,20 @@ public class LeaderBoardFragment extends DialogFragment {
         ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, ranks);
         rankList.setAdapter(rankAdapter);
 
+        Player me = null;
+        int myRank = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUUID().equals(uuid)) {
+                me = players.get(i);
+                myRank = i + 1;
+            }
+        }
         //int myRank = players.indexOf(player) + 1;
-        //String s = "Me:No." + myRank + "   Score:" + player.getMaxCodeScore();
-        //myRankView.setText(s);
+        if (me != null) {
+            String s = "Me:No." + myRank + "   Score:" + me.getMaxCodeScore();
+            myRankView.setText(s);
+        }
+
     }
 
 
@@ -220,9 +231,19 @@ public class LeaderBoardFragment extends DialogFragment {
         ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, ranks);
         rankList.setAdapter(rankAdapter);
 
+        Player me = null;
+        int myRank = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUUID().equals(uuid)) {
+                me = players.get(i);
+                myRank = i + 1;
+            }
+        }
         //int myRank = players.indexOf(player) + 1;
-        //String s = "Me:No." + myRank + "   Score:" + player.getTotalCodeNum();
-        //myRankView.setText(s);
+        if (me != null) {
+            String s = "Me:No." + myRank + "   Score:" + me.getTotalCodeNum();
+            myRankView.setText(s);
+        }
     }
 
     /**
@@ -246,9 +267,19 @@ public class LeaderBoardFragment extends DialogFragment {
         ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, ranks);
         rankList.setAdapter(rankAdapter);
 
+        Player me = null;
+        int myRank = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUUID().equals(uuid)) {
+                me = players.get(i);
+                myRank = i + 1;
+            }
+        }
         //int myRank = players.indexOf(player) + 1;
-        //String s = "Me:No." + myRank + "   Score:" + player.getSumCodeScore();
-        //myRankView.setText(s);
+        if (me != null) {
+            String s = "Me:No." + myRank + "   Score:" + me.getSumCodeScore();
+            myRankView.setText(s);
+        }
     }
 
     /**

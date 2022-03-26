@@ -208,7 +208,7 @@ public class FireDatabase {
                     // 3 --> LeaderBoardFragment
                     case 3:
                         LeaderBoardFragment leaderboard = (LeaderBoardFragment) obj;
-                        leaderboard.setPlayer(playerTarget);
+                        leaderboard.setPlayer(uuid);
                         break;
                 }
             }

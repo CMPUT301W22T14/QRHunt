@@ -44,12 +44,12 @@
         "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/activity_map.xml"
     },
     {
-        "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_username_search_fragment_layout.xml.flat",
-        "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/username_search_fragment_layout.xml"
-    },
-    {
         "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "/Users/chen/301/QRHunt/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_username_search_fragment_layout.xml.flat",
+        "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/username_search_fragment_layout.xml"
     },
     {
         "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_fragment_map.xml.flat",

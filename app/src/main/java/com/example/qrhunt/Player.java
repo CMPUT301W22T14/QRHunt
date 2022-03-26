@@ -6,6 +6,7 @@ import com.google.zxing.qrcode.encoder.QRCode;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -190,5 +191,18 @@ public class Player implements Serializable {
      */
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return uuid.equals(player.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid);
     }
 }
