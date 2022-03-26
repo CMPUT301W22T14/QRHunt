@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -356,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
         if (requestCode == 100) {
             // Get capture image
-            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            Bitmap captureImage = (Bitmap)(data.getExtras().get("data"));
             this.captureImage = captureImage;
             return;
         }
@@ -396,10 +397,12 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             Manifest.permission.CAMERA
                     }, 100);
                 }
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 100);
 
                  */
+                //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //startActivityForResult(intent, 100);
+
+
                 GameQRCode gameQRCode = new GameQRCode(content);
                 //gameQRCode.setCaptureImage(this.captureImage);
                 fdb.addNewQRCode(gameQRCode);

@@ -88,7 +88,7 @@ public class CustomList extends BaseAdapter {
 
         //TextView gameQRCodeScoreText = view.findViewById(R.id.game_code_other_text);
 
-        viewHolder.gameQRCodeText.setText(code.getContent());
+        viewHolder.gameQRCodeText.setText(code.getHash());
         //gameQRCodeScoreText.setText(code.getScore());   //** FOR TEST
         return view;
 

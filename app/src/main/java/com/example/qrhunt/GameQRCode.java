@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -17,7 +18,7 @@ public class GameQRCode {
     private final ArrayList<String> comments = new ArrayList<String>();
     private final ArrayList<String> uuidOfScanners = new ArrayList<String>();
     private Bitmap captureImage;
-
+    private String hash;
 
     /**
      * Constructor method.
@@ -49,11 +50,16 @@ public class GameQRCode {
                 hexString.append(hex);
             }
             String SHA256Hash = hexString.toString();
+            setHash(SHA256Hash);
             score = hashToScore(SHA256Hash);
             // Then calculate the score
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setHash(String SHA256Hash) {
+        this.hash = SHA256Hash;
     }
 
     /**
@@ -199,4 +205,7 @@ public class GameQRCode {
         return content;
     }
 
+    public String getHash() {
+        return hash;
+    }
 }

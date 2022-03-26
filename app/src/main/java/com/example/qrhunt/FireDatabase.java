@@ -342,7 +342,7 @@ public class FireDatabase {
                         Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + uuid);
                         for (Map<String, Object> code : codes) {
                             GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                            if (!newCode.getContent().equals(oldCode.getContent()))
+                            if (!newCode.getHash().equals(oldCode.getHash()))
                                 newCodes.add(newCode);
                             Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
                         }
