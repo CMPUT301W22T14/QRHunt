@@ -1,98 +1,98 @@
 [
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/generated/res/pngs/debug/drawable-anydpi-v24/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_username_search_fragment_layout.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/username_search_fragment_layout.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_username_search_fragment_layout.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\username_search_fragment_layout.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_comment_content.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/comment_content.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_leader_board_fragment_layout.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/leader_board_fragment_layout.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_content.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\content.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/drawable_ic_launcher_background.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_activity_main.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/activity_main.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_detail_display_fragment_layout.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/detail_display_fragment_layout.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_map.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\fragment_map.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_map.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\activity_map.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_profile_display_fragment_layout.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/profile_display_fragment_layout.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_detail_display_fragment_layout.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\detail_display_fragment_layout.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_leader_board_fragment_layout.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\leader_board_fragment_layout.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_activity_map.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/activity_map.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_content.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/content.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_profile_display_fragment_layout.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\profile_display_fragment_layout.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_fragment_map.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/fragment_map.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_comment_content.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\comment_content.xml"
     },
     {
-        "merged": "/Users/dennnnnnnn/Desktop/QRHunt/app/build/intermediates/merged_res/debug/layout_content2.xml.flat",
-        "source": "/Users/dennnnnnnn/Desktop/QRHunt/app/src/main/res/layout/content2.xml"
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_content2.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\content2.xml"
     }
 ]

@@ -2,6 +2,7 @@ package com.example.qrhunt;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -27,6 +29,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
@@ -56,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = new ArrayList<>();
     CustomList mainDataAdapter;
+
     // Acquiring Identification:
     String uuid;
     FireDatabase fdb = null;
@@ -63,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     Boolean existed = false;
 
     Bitmap captureImage = null;
+
+    Location currentLocation;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int REQUEST_CODE = 101;
 
     // Initialize attributes needed for geolocation
     /*
@@ -102,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
 
         String uuidLocal = getLocalUUID(); //getLocalUUID();
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         /*
         if (player == null || player.getUUID().equals("NOT EXIST")) {
@@ -196,8 +210,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
                             break;
                         case 4:
-                            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                            startActivity(intent);
+                            // Map
+                            // LocationEvent makes a map if the parameter QR code has content:"NON",
+                            // The QR code is not added to the database
+                            GameQRCode gameQRCode = new GameQRCode("NON");
+                            LocationEvent(gameQRCode);
                             break;
                     }
                 }
@@ -382,11 +399,14 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             Manifest.permission.CAMERA
                     }, 100);
                 }
-                //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                //startActivityForResult(intent, 100);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 100);
+
                 GameQRCode gameQRCode = new GameQRCode(content);
                 gameQRCode.setCaptureImage(this.captureImage);
-                fdb.addNewQRCode(gameQRCode);
+
+                LocationEvent(gameQRCode);
+
                 GameQRCode redundant = new GameQRCode(" ");
                 mainDataList.add(redundant);
                 mainDataAdapter.notifyDataSetChanged();
@@ -562,9 +582,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             // owner case;
         }
     }
-
-
-
     /**
      * The method for fixing the asynchronous problem.
      * @param secondNum
@@ -575,6 +592,63 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             TimeUnit.SECONDS.sleep(secondNum);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+    /**
+     * Not ideal implementation; Create map at current location or create QR code with current location after picture is taken
+     */
+    private void LocationEvent(GameQRCode gameQRCode) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        }
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            //@Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    currentLocation = location;
+
+                    // Check if we want to make a map or if we are adding a new QR code to the database
+                    if (gameQRCode.getContent().equals("NON")) {
+                        Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        intent.putExtra("Latitude", currentLocation.getLatitude());
+                        intent.putExtra("Longitude", currentLocation.getLongitude());
+                        startActivity(intent);
+                    } else
+                    {
+                        gameQRCode.setLongitude(currentLocation.getLongitude());
+                        gameQRCode.setLatitude(currentLocation.getLatitude());
+                        fdb.addNewQRCode(gameQRCode);
+                    }
+                    //Toast.makeText(getApplicationContext(), gps.getLatitude() + " " + gps.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                    //SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+                    //supportMapFragment.getMapAsync(MapActivity.this);
+                }
+            }
+        });
+    }
+    /**
+     * Ask system for permission
+     *
+     * @param requestCode
+     *      code for working
+     * @param permissions
+     *      feedback from sys
+     */
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    GameQRCode gameQRCode = new GameQRCode("NON");
+                    LocationEvent(gameQRCode);
+                }
+                break;
         }
     }
 }

@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -22,15 +23,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+
 
 /**
  * The class is for control the map.
  */
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
-    Location currentLocation;
-    FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int REQUEST_CODE = 101;
 
+    ArrayList<Double> gpsLatLng;
+    ArrayList<GameQRCode> QRCodes;
     /**
      * Called by the android system to build up the fragment;
      *
@@ -40,71 +42,64 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_map);
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        fetchLastLocation();
+        SupportMapFragment supportMapFragment = (SupportMapFragment)
+                getSupportFragmentManager().findFragmentById(R.id.google_map);
+        supportMapFragment.getMapAsync(this);
 
+        //fetchLastLocation();
+        Intent intent = getIntent();
+
+        gpsLatLng = new ArrayList<>();
+        gpsLatLng.add(intent.getDoubleExtra("Latitude", 1.0));
+        gpsLatLng.add(intent.getDoubleExtra("Longitude", 1.0));
+
+        QRCodes = new ArrayList<>();
+        getQRCodes();
+
+        Toast.makeText(getApplicationContext(), gpsLatLng.get(0) + " " + gpsLatLng.get(1), Toast.LENGTH_SHORT).show();
+        //double longitude = bundle.getDouble("Longitude");
+        //double latitude = bundle.getDouble("Latitude");
     }
 
     /**
-     * Recall the last locastion
-     */
-    private void fetchLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {
-                    Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-
-                    SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
-                    supportMapFragment.getMapAsync(MapActivity.this);
-                }
-            }
-        });
-    }
-
-    /**
-     * Prepar\ing the map for the testing;
+     * Preparing the map for the testing;
      *
      * @param googleMap
      *      Call the googleMap tool;
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("I'm here");
+
+        LatLng latLng = new LatLng(gpsLatLng.get(0), gpsLatLng.get(1));
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(latLng)
+                .title("I'm here");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
         googleMap.addMarker(markerOptions);
-    }
 
-
-    /**
-     * Ask system for permission
-     *
-     * @param requestCode
-     *      code for working
-     * @param permissions
-     *      feedback from sys
-     */
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    fetchLastLocation();
-                }
-                break;
+        for (int i = 0; i < QRCodes.size(); i++) {
+            latLng = new LatLng(QRCodes.get(i).getLatitude(), QRCodes.get(i).getLongitude());
+            markerOptions = new MarkerOptions()
+                    .position(latLng)
+                    .title("Nearby QR Code");
+            googleMap.addMarker(markerOptions);
         }
+        // Just for verifying if multiple markers can be displayed this way
+        for (int i = 0; i < 10; i++) {
+            latLng = new LatLng(gpsLatLng.get(0) + i, gpsLatLng.get(1) + i);
+            markerOptions = new MarkerOptions()
+                    .position(latLng)
+                    .title("Nearby QR Code");
+            googleMap.addMarker(markerOptions);
+        }
+
     }
 
-
+    public void getQRCodes() {
+        //
+    }
 }

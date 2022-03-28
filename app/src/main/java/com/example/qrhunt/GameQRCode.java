@@ -1,6 +1,7 @@
 package com.example.qrhunt;
 
 import android.graphics.Bitmap;
+import android.location.Location;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -18,6 +19,9 @@ public class GameQRCode {
     private final ArrayList<String> uuidOfScanners = new ArrayList<String>();
     private Bitmap captureImage;
 
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+
 
     /**
      * Constructor method.
@@ -27,7 +31,9 @@ public class GameQRCode {
      */
     public GameQRCode(String content) {
        this.content = content;
-        calculateScore();
+       if (!content.equals("NON")) {
+           calculateScore();
+       }
     }
 
     /**
@@ -199,4 +205,19 @@ public class GameQRCode {
         return content;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 }
