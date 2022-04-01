@@ -208,7 +208,7 @@ public class FireDatabase {
                     // 3 --> LeaderBoardFragment
                     case 3:
                         LeaderBoardFragment leaderboard = (LeaderBoardFragment) obj;
-                        leaderboard.setPlayer(playerTarget);
+                        leaderboard.setPlayer(uuid);
                         break;
                 }
             }
@@ -228,10 +228,12 @@ public class FireDatabase {
                         playerTarget = new Player(uuidGet);
                         playerTarget.setContactInfo(contactInfo);
                         ArrayList<Map<String, Object>> codesOutput = (ArrayList<Map<String, Object>>) (doc.get("codes"));
-                        for (Map<String, Object> code : codesOutput) {
-                            GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                            playerTarget.addQRCode(newCode);
-                            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                        if (codesOutput != null) {
+                            for (Map<String, Object> code : codesOutput) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                playerTarget.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
                         }
                     }
                 }
@@ -298,11 +300,14 @@ public class FireDatabase {
                     if (document.exists()) {
                         ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
                         Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + uuid);
-                        for (Map<String, Object> code : codes) {
-                            GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                            newCodes.add(newCode);
-                            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                        if (codes != null) {
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                newCodes.add(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
                         }
+
                         newCodes.add(newCode);
                         documentReference.update("codes", newCodes);
                         //Call fragment
@@ -337,7 +342,7 @@ public class FireDatabase {
                         Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + uuid);
                         for (Map<String, Object> code : codes) {
                             GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                            if (!newCode.getContent().equals(oldCode.getContent()))
+                            if (!newCode.getHash().equals(oldCode.getHash()))
                                 newCodes.add(newCode);
                             Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
                         }
@@ -353,6 +358,4 @@ public class FireDatabase {
             }
         });
     }
-
-
 }
