@@ -58,7 +58,7 @@ public class GameQRCode {
         }
     }
 
-    private void setHash(String SHA256Hash) {
+    public void setHash(String SHA256Hash) {
         this.hash = SHA256Hash;
     }
 
@@ -114,6 +114,9 @@ public class GameQRCode {
         }
         return sum;
     }
+
+
+
 
     /**
      * This gets the score of the QR code

@@ -67,10 +67,12 @@ public class DetailDisplayFragment extends DialogFragment {
         TextView commentsTextView = view.findViewById(R.id.comments_textView);
         ListView playerSameQRCodeList = view.findViewById(R.id.players_sameQRCode_list);
         ListView commentSameQRCodeList = view.findViewById(R.id.comment_sameQRCode_list);
+        TextView codeHashTextView = view.findViewById(R.id.code_hash_textview);
 
         EditText inputCommentEditText = view.findViewById(R.id.input_comment_editText);
         Button addCommentButton = view.findViewById(R.id.add_comment_button);
         ImageView QRCodeImageView = view.findViewById(R.id.QRCode_view);
+        codeHashTextView.setText(gameQRCode.getHash());
 
         // Set QRCodeImageView
         if (gameQRCode.getCaptureImage() != null)

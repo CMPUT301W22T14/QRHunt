@@ -22,4 +22,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="type_comment">Type Comment</string>
+    <string name="delete_player" />
+    <string name="delete_code" />
+    <string name="x" />
 </resources>

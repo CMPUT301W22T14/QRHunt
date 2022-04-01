@@ -46,6 +46,7 @@ public class FireDatabase {
     private String uuid;
     private FirebaseFirestore db;
     private CollectionReference collectionReference;
+    private CollectionReference collectionReferenceForCodes;
     private final String TAG = "Firestore";
 
     /**
@@ -59,6 +60,7 @@ public class FireDatabase {
         db = FirebaseFirestore.getInstance();
         uuid = uuidInput;
         collectionReference = db.collection("Players");
+        collectionReferenceForCodes = db.collection("Codes");
     }
 
     /**
@@ -87,6 +89,11 @@ public class FireDatabase {
                     Log.d(TAG, "Data could not be added!" + e.toString());
                 }
             });
+    }
+
+    public void addComment(GameQRCode code) {
+        HashMap<String, Object> data = new HashMap<>();
+
     }
 
     /*

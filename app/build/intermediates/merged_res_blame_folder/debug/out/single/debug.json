@@ -32,6 +32,10 @@
         "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/content.xml"
     },
     {
+        "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_activity_owner.xml.flat",
+        "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/activity_owner.xml"
+    },
+    {
         "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_detail_display_fragment_layout.xml.flat",
         "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/detail_display_fragment_layout.xml"
     },

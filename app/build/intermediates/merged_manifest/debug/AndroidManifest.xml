@@ -53,6 +53,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.QRHunt" >
         <activity
+            android:name="com.example.qrhunt.OwnerActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.qrhunt.MapActivity"
             android:exported="false" />
 

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
-INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
-INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
-INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
+INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
+INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
+INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
 MERGED from [com.google.android.material:material:1.5.0] /Users/chen/.gradle/caches/transforms-3/47f84bc0f14ff0f8b692f7af2e9e9e3d/transformed/material-1.5.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.3] /Users/chen/.gradle/caches/transforms-3/15de8030b03dca390ad149b4b2bf215c/transformed/constraintlayout-2.1.3/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.4.1] /Users/chen/.gradle/caches/transforms-3/daec56630d897aa40e0fc6356687505b/transformed/appcompat-1.4.1/AndroidManifest.xml:17:1-24:12
@@ -66,20 +66,20 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/chen/.gradle/cache
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/chen/.gradle/caches/transforms-3/d66993e727816c8ff7896b7937150dab/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] /Users/chen/.gradle/caches/transforms-3/ed70ecc853b016ed772444ba11cfd1a3/transformed/jetified-protolite-well-known-types-18.0.0/AndroidManifest.xml:2:1-11:12
 MERGED from [io.grpc:grpc-android:1.41.0] /Users/chen/.gradle/caches/transforms-3/4a8b23debbedf13af7eb948d1cea6399/transformed/jetified-grpc-android-1.41.0/AndroidManifest.xml:2:1-13:12
-INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
-INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
-INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
+INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
+INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
+INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
 	package
 		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:3:5-33
 		INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
 		INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-44:12
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:1-46:12
 		INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:2:11-69
@@ -112,11 +112,11 @@ ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:9:5-75
 	android:name
 		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:9:22-72
 uses-permission#android.permission.READ_PRIVILEGED_PHONE_STATE
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:11:5-86
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:10:5-86
 	android:name
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:11:22-83
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:10:22-83
 application
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:13:5-42:19
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:12:5-44:19
 MERGED from [com.google.android.material:material:1.5.0] /Users/chen/.gradle/caches/transforms-3/47f84bc0f14ff0f8b692f7af2e9e9e3d/transformed/material-1.5.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.5.0] /Users/chen/.gradle/caches/transforms-3/47f84bc0f14ff0f8b692f7af2e9e9e3d/transformed/material-1.5.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.3] /Users/chen/.gradle/caches/transforms-3/15de8030b03dca390ad149b4b2bf215c/transformed/constraintlayout-2.1.3/AndroidManifest.xml:9:5-20
@@ -158,55 +158,61 @@ MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/chen/.gradle/caches/
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.7.0] /Users/chen/.gradle/caches/transforms-3/8fff248dbe0397cca10a959cecdafd82/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:18:9-35
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:16:9-41
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:15:9-41
 	android:roundIcon
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:17:9-54
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:16:9-54
 	android:icon
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:15:9-43
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:14:9-43
 	android:allowBackup
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:14:9-35
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:13:9-35
 	android:theme
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:19:9-44
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:18:9-44
+activity#com.example.qrhunt.OwnerActivity
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:19:9-21:40
+	android:exported
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:21:13-37
+	android:name
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:20:13-42
 activity#com.example.qrhunt.MapActivity
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:20:9-22:40
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:22:9-24:40
 	android:exported
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:22:13-37
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:24:13-37
 	android:name
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:21:13-40
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:23:13-40
 meta-data#com.google.android.geo.API_KEY
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:24:9-26:71
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:26:9-28:71
 	android:value
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:26:13-68
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:28:13-68
 	android:name
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:25:13-58
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:27:13-58
 activity#com.example.qrhunt.MainActivity
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:28:9-36:20
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:30:9-38:20
 	android:exported
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:30:13-36
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:32:13-36
 	android:name
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:29:13-41
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:31:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:31:13-35:29
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:33:13-37:29
 action#android.intent.action.MAIN
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:32:17-69
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:34:17-69
 	android:name
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:32:25-66
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:34:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:34:17-77
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:36:17-77
 	android:name
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:34:27-74
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:36:27-74
 activity#com.example.qrhunt.Capture
-ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:37:9-41:57
+ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:39:9-43:57
 	android:screenOrientation
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:39:13-49
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:41:13-49
 	android:stateNotNeeded
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:40:13-42
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:42:13-42
 	android:theme
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:41:13-54
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:43:13-54
 	android:name
-		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:38:13-36
+		ADDED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml:40:13-36
 uses-sdk
 INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/chen/301/QRHunt/app/src/main/AndroidManifest.xml

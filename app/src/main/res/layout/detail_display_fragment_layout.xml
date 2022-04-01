@@ -12,17 +12,18 @@
         android:id="@+id/players_sameQRCode_list"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player_scanned_the_same_QRCode_textView" />
 
     <ListView
         android:id="@+id/comment_sameQRCode_list"
-        android:layout_width="386dp"
-        android:layout_height="152dp"
+        android:layout_width="359dp"
+        android:layout_height="147dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/player_scanned_the_same_qr_code"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,5 +86,14 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment_sameQRCode_list" />
+
+    <TextView
+        android:id="@+id/code_hash_textview"
+        android:layout_width="379dp"
+        android:layout_height="30dp"
+        android:text="TextView"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

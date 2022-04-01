@@ -16,6 +16,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -46,8 +48,6 @@ import java.util.concurrent.TimeUnit;
 import android.provider.Settings.Secure;
 
 
-
-
 /**
  * This is a main class that controls the main activity and connect to all the sub-functions and sub-activities/fragments;
  */
@@ -57,23 +57,13 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     ListView mainListView = null;
     ArrayList<GameQRCode> mainDataList = new ArrayList<>();
     CustomList mainDataAdapter;
-    // Acquiring Identification:
+
     String uuid;
     FireDatabase fdb = null;
     int choice = -1;
-    Boolean existed = false;
-
+    Boolean isInitAsking = true;
     Bitmap captureImage = null;
-    GameQRCode codeAtPos = null;
 
-    // Initialize attributes needed for geolocation
-    /*
-    FusedLocationProviderClient fusedLocationProviderClient;
-    double latitude;
-    double longitude;
-    String countryName;
-    String locality;
-    String address;*/
 
 
     /* Creating Function */
@@ -89,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //mainListView.setAdapter(mainDataAdapter);
 
         // Locations Marked：
         mainListView = findViewById(R.id.session_list);
@@ -102,114 +91,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         button_detail.setVisibility(View.INVISIBLE);
         button_delete.setVisibility(View.INVISIBLE);
 
-
-        String uuidLocal = getLocalUUID(); //getLocalUUID();
-
-        /*
-        if (player == null || player.getUUID().equals("NOT EXIST")) {
-            fdb = null;
-        }*/
-
         // Identity Asking:
-        if (fdb == null) {
-            //String[] roleOptions = {"Local Player", "Foreign Player", "Owner Channel", "TEST Channel"};
-            String[] roleOptions = {"Local Player", "Foreign Player", "Owner Channel"};
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Please select your role: ");
-            builder.setItems(roleOptions, new DialogInterface.OnClickListener() {
-                /**
-                 * This is a click method which let user choose what's their identity and status in the game.
-                 * The options includes Local Player, Foreign Player and Owner of the game.
-                 * @param arg0
-                 *      The dialog Interface
-                 * @param optionIdx
-                 *      The Integer index of the choice
-                 */
-                @Override
-                public void onClick(DialogInterface arg0, int optionIdx) {
-                    switch (optionIdx) {
-                        // Local Player:
-                        case 0:
-                            choice = 0;
-                            uuid = uuidLocal;
-                            break;
-                        // Foreign Player:
-                        case 1:
-                            IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
-                            intentIntegrator.setPrompt("For flash use volume up key");
-                            intentIntegrator.setBeepEnabled(true);
-                            intentIntegrator.setOrientationLocked(true);
-                            intentIntegrator.setCaptureActivity(Capture.class);
-                            intentIntegrator.initiateScan();
-                            choice = 1;
-                            break;
-                        // Owner Channel
-                        case 2:
-                            Toast.makeText(getApplicationContext(), "Welcome to the owner channel!", Toast.LENGTH_LONG).show();
-                            break;
-                    }
-                    if (fdb == null) {
-                        fdb = new FireDatabase(uuid);
-                        dataHooking();
-                    }
-
-                }
-            }).create().show();
-        }
-        if (uuid != null) {
-            dataHooking();
-        }
-
+        identityAsking();
 
         // MORE:
         button_more.setOnClickListener((view) -> {
-            // Asking for function needed:
-            String[] functionOptions = {"Scan New Code", "Searching by Location", "Leader Board", "Searching by Username", "Map"};
-            AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
-            builder2.setTitle("How can I help you? my friend?");
-            builder2.setItems(functionOptions, new DialogInterface.OnClickListener() {
-                /**
-                 * This is the click method where user could choose what feature they would like to use.
-                 * Each option is corresponding to different features, and jump to different fragments.
-                 * @param arg0
-                 *      The dialog Interface
-                 * @param optionIdx
-                 *      The integer index of choice
-                 */
-                @Override
-                public void onClick(DialogInterface arg0, int optionIdx) {
-                    switch (optionIdx) {
-                        case 0:
-                            //Scan
-                            IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
-                            intentIntegrator.setPrompt("For flash use volume up key");
-                            intentIntegrator.setBeepEnabled(true);
-                            intentIntegrator.setOrientationLocked(true);
-                            intentIntegrator.setCaptureActivity(Capture.class);
-                            intentIntegrator.initiateScan();
-                            break;
-                        case 1:
-                            // Searching by Location
-                            break;
-                        case 2:
-                            // Leader Board
-                            LeaderBoardFragment leaderboard = new LeaderBoardFragment(false);
-                            fdb.getSinglePlayerReload(leaderboard, 3, null);
-                            asynchronousFixed(1);
-                            leaderboard.show(getSupportFragmentManager(), "LeaderBoardFragment Activated");
-                            break;
-                        case 3:
-                            // Searching by Username
-                            // --> Unfolding ProfileDisplayFragment;
-                            new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
-                            break;
-                        case 4:
-                            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                            startActivity(intent);
-                            break;
-                    }
-                }
-            }).create().show();
+            if (fdb == null) {
+                identityAsking();
+                Toast.makeText(getApplicationContext(), "Sorry, we haven't know who you are...", Toast.LENGTH_LONG).show();
+            } else {
+                moreFuncAsking();
+            }
         });
 
 
@@ -234,80 +126,63 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Catching the item clicked:
-                codeAtPos = mainDataList.get(position);
+                GameQRCode codeAtPos = (GameQRCode) mainListView.getItemAtPosition(position);
 
                 // Visible Operation:
                 button_detail.setVisibility(View.VISIBLE);
                 button_delete.setVisibility(View.VISIBLE);
 
 
+                // --> DETAIL:
+                button_detail.setOnClickListener(new View.OnClickListener() {
+                    /**
+                     * This is a click-checking function for the Detail button. If the user taps the
+                     *  button, the monitor will catch that and activate corresponding actions to
+                     *  show all the details (unfolding the DetailDisplayFragment) based on the
+                     *  listview item selected before. Feedback about the result is displayed with
+                     *  buttons to become invisible again;
+                     *
+                     * @param view
+                     *      The view clicked within the Adapter;
+                     * */
+                    public void onClick(View view) {
+                        // button_detail functions:
+                        // --> detail_display_fragment;
+                        new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
 
+                        // Invisible Operation:
+                        button_detail.setVisibility(View.INVISIBLE);
+                        button_delete.setVisibility(View.INVISIBLE);
+                    }
+                });
+
+                // --> DELETE:
+                button_delete.setOnClickListener(new View.OnClickListener() {
+                    /**
+                     * This is a click-checking function for the Delete button. If the user taps the
+                     *  button, the monitor will catch that and activate corresponding actions to
+                     *  remove the listview item selected before from both the listview presentation
+                     *  and the database remotely. Feedback about the result is displayed with
+                     *  buttons to become invisible again;
+                     *
+                     * @param view
+                     *      The view clicked within the Adapter;
+                     * */
+                    public void onClick(View view) {
+                        // Removing from ListView:
+                        mainDataList.remove(codeAtPos);
+                        mainDataAdapter.notifyDataSetChanged();
+                        // Removing from DataBase:
+                        fdb.removeCode(codeAtPos);
+
+                        // Invisible Operation:
+                        button_detail.setVisibility(View.INVISIBLE);
+                        button_delete.setVisibility(View.INVISIBLE);
+                    }
+                });
             }
         });
 
-        // --> DETAIL:
-        button_detail.setOnClickListener(new View.OnClickListener() {
-            /**
-             * This is a click-checking function for the Detail button. If the user taps the
-             *  button, the monitor will catch that and activate corresponding actions to
-             *  show all the details (unfolding the DetailDisplayFragment) based on the
-             *  listview item selected before. Feedback about the result is displayed with
-             *  buttons to become invisible again;
-             *
-             * @param view
-             *      The view clicked within the Adapter;
-             * */
-            public void onClick(View view) {
-                // button_detail functions:
-                // --> detail_display_fragment;
-                if (codeAtPos != null) {
-                    new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
-
-                    // Invisible Operation:
-                    button_detail.setVisibility(View.INVISIBLE);
-                    button_delete.setVisibility(View.INVISIBLE);
-                    codeAtPos = null;
-                }
-
-            }
-        });
-
-        // --> DELETE:
-        button_delete.setOnClickListener(new View.OnClickListener() {
-            /**
-             * This is a click-checking function for the Delete button. If the user taps the
-             *  button, the monitor will catch that and activate corresponding actions to
-             *  remove the listview item selected before from both the listview presentation
-             *  and the database remotely. Feedback about the result is displayed with
-             *  buttons to become invisible again;
-             *
-             * @param view
-             *      The view clicked within the Adapter;
-             * */
-            public void onClick(View view) {
-                // Removing from ListView:
-                if (codeAtPos != null) {
-                    mainDataList.remove(codeAtPos);
-                    mainDataAdapter.notifyDataSetChanged();
-                    // Removing from DataBase:
-                    fdb.removeCode(codeAtPos);
-                    // Todo: result handle:
-                        /*
-                        if (result) {
-                            Toast.makeText(getApplicationContext(), "Removed Successfully", Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Cannot Remove Invalid Code", Toast.LENGTH_LONG).show();
-                        }*/
-
-                    // Invisible Operation:
-                    button_detail.setVisibility(View.INVISIBLE);
-                    button_delete.setVisibility(View.INVISIBLE);
-                    codeAtPos = null;
-                }
-
-            }
-        });
 
         // PROFILE:
         button_profile.setOnClickListener(new View.OnClickListener() {
@@ -321,32 +196,26 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
              *      The view clicked within the Adapter;
              * */
             public void onClick(View view) {
-                // --> unfolding ProfileDisplayFragment;
-                fdb.getSinglePlayerReload(new PlayerCallback() {
-                    @Override
-                    public void callBack(Player player) {
-                        ProfileDisplayFragment profile =  ProfileDisplayFragment.newInstance(false, player);
-                        profile.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
-                        // Invisible Operation:
-                        button_detail.setVisibility(View.INVISIBLE);
-                        button_delete.setVisibility(View.INVISIBLE);
-                    }
-                });
+                if (fdb == null) {
+                    identityAsking();
+                    Toast.makeText(getApplicationContext(), "Sorry, we haven't know who you are...", Toast.LENGTH_LONG).show();
+                } else {
+                    // --> unfolding ProfileDisplayFragment;
+                    fdb.getSinglePlayerReload(new PlayerCallback() {
+                        @Override
+                        public void callBack(Player player) {
+                            asynchronousFixed(1);
+                            ProfileDisplayFragment profile = ProfileDisplayFragment.newInstance(false, player);
+                            profile.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated: A");
+                            // Invisible Operation:
+                            button_detail.setVisibility(View.INVISIBLE);
+                            button_delete.setVisibility(View.INVISIBLE);
 
+                        }
+                    });
+                }
             }
         });
-
-        // Check permission
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            //when permission granted
-            //getLocation();
-        } else {
-            // when permission denied
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }
-
     }
 
 
@@ -368,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
         if (requestCode == 100) {
             // Get capture image
-            Bitmap captureImage = (Bitmap)(data.getExtras().get("data"));
+            Bitmap captureImage = (Bitmap) (data.getExtras().get("data"));
             this.captureImage = captureImage;
             return;
         }
@@ -376,9 +245,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //Initialize intent result
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         //check condition
-
         if (intentResult.getContents() != null) {
-
             //when result content is not null
             String content = intentResult.getContents();
             //from: stackoverflow.com
@@ -388,14 +255,12 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
             if (lines.length == 2 && lines[0].equals("STATUS")) {
                 // check other player's status
-            }
-            else if (lines.length == 2 && lines[0].equals("LOGIN")) {
+            } else if (lines.length == 2 && lines[0].equals("LOGIN")) {
                 // login my account in another device
                 uuid = lines[1];
                 fdb = new FireDatabase(uuid);
                 dataHooking();
-            }
-            else {
+            } else {
                 // !!! get geolocation
                 // Get image
                 // Request for camera Permission
@@ -412,8 +277,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                  */
                 //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //startActivityForResult(intent, 100);
-
-
                 GameQRCode gameQRCode = new GameQRCode(content);
                 //gameQRCode.setCaptureImage(this.captureImage);
                 fdb.addNewQRCode(gameQRCode);
@@ -421,8 +284,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 this.captureImage = null;
             }
 
-        }
-        else {
+        } else {
             //When result content is null
             //Display toast
             Toast.makeText(getApplicationContext(), "OOPS.. You did not scan anything", Toast.LENGTH_SHORT).show();
@@ -444,8 +306,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         fdbSpec.getSinglePlayerReload(new PlayerCallback() {
             @Override
             public void callBack(Player player) {
-                ProfileDisplayFragment profile =  ProfileDisplayFragment.newInstance(true,player);
-                profile.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated");
+                ProfileDisplayFragment profile = ProfileDisplayFragment.newInstance(true, player);
+                profile.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated: C");
+                Toast.makeText(getApplicationContext(), "- C -", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -454,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     // Todo: Geolocation Searching Part Is Still Processing...
     /*
     private void getLocation() {
-        //From: youtube.com
+        // From: youtube.com
         // URL:https://www.youtube.com/watch?v=Ak1O9Gip-pg
         // Author: android coding
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -512,46 +375,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
      * the function will acquire them and rebuild the player info locally; if not existed, a new
      * player object will be created and add to the remote database.
      */
-    /*
-    private void dataHooking() {
-        if (fdb != null) {
-            try {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                CollectionReference collectionReference = db.collection("Players");
-                collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
-                        for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
-                            String uuidGet = doc.getId();
-                            if (uuid.equals(uuidGet)) {
-                                existed = true;
-                                ArrayList<Map<String, Object>> codesOutput = (ArrayList<Map<String, Object>>) (doc.get("codes"));
-                                for (Map<String, Object> code : codesOutput) {
-                                    GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                    mainDataList.add(newCode);
-                                }
-                            }
-                        }
-                        assert existed;
-                        // Callback:
-                        mainDataAdapter = new CustomList(MainActivity.this, mainDataList);
-                        mainListView.setAdapter(mainDataAdapter);
-                        Toast.makeText(getApplicationContext(), "Data reloaded successfully. Welcome back!", Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-            catch (Throwable t) {
-                fdb.addOrUpdatePlayer(new Player(uuid));
-                Toast.makeText(getApplicationContext(), "Welcome to join us, new player!", Toast.LENGTH_LONG).show();
-                dataHooking();
-            }
-        }
-        else {
-            // owner case;
-        }
-    }*/
-
-
     private void dataHooking() {
         if (fdb != null) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -559,7 +382,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
-                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
+                    boolean existed = false;
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         String uuidGet = doc.getId();
                         if (uuid == null) {
                             return;
@@ -582,8 +406,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         mainDataAdapter = new CustomList(MainActivity.this, mainDataList);
                         mainListView.setAdapter(mainDataAdapter);
                         Toast.makeText(getApplicationContext(), "Data Loading...", Toast.LENGTH_LONG).show();
-                    }
-                    catch (AssertionError ae) {
+                    } catch (AssertionError ae) {
                         fdb.addOrUpdatePlayer(new Player(uuid));
                         Toast.makeText(getApplicationContext(), "Welcome to join us, new player!", Toast.LENGTH_LONG).show();
                         dataHooking();
@@ -591,12 +414,12 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 }
             });
 
-        }
-        else {
+        } else {
             // owner case;
+            Intent intent = new Intent(MainActivity.this, OwnerActivity.class);
+            startActivity(intent);
         }
     }
-
 
 
     /**
@@ -611,5 +434,123 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             e.printStackTrace();
         }
     }
-}
 
+    private void moreFuncAsking() {
+        // Asking for function needed:
+        String[] functionOptions = {"Scan New Code", "Searching by Location", "Leader Board", "Searching by Username", "Map"};
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
+        builder2.setTitle("How can I help you? my friend?");
+        builder2.setItems(functionOptions, new DialogInterface.OnClickListener() {
+            /**
+             * This is the click method where user could choose what feature they would like to use.
+             * Each option is corresponding to different features, and jump to different fragments.
+             * @param arg0
+             *      The dialog Interface
+             * @param optionIdx
+             *      The integer index of choice
+             */
+            @Override
+            public void onClick(DialogInterface arg0, int optionIdx) {
+                switch (optionIdx) {
+                    case 0:
+                        // Scan New Cod
+                        IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+                        intentIntegrator.setPrompt("For flash use volume up key");
+                        intentIntegrator.setBeepEnabled(true);
+                        intentIntegrator.setOrientationLocked(true);
+                        intentIntegrator.setCaptureActivity(Capture.class);
+                        intentIntegrator.initiateScan();
+                        break;
+                    case 1:
+                        // Searching by Location
+
+                        break;
+                    case 2:
+                        // Leader Board
+                        LeaderBoardFragment leaderboard = new LeaderBoardFragment(false);
+                        fdb.getSinglePlayerReload(leaderboard, 3, null);
+                        asynchronousFixed(1);
+                        leaderboard.show(getSupportFragmentManager(), "LeaderBoardFragment Activated");
+                        break;
+                    case 3:
+                        // Searching by Username
+                        // --> Unfolding ProfileDisplayFragment;
+                        new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
+                        Toast.makeText(getApplicationContext(), "- B -", Toast.LENGTH_LONG).show();
+                        break;
+                    case 4:
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        }).create().show();
+    }
+
+    private void identityAsking() {
+        if (fdb == null) {
+            String[] roleOptions = {"Local Player", "Foreign Player", "Owner Channel"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Please select your role: ");
+            builder.setItems(roleOptions, new DialogInterface.OnClickListener() {
+                /**
+                 * This is a click method which let user choose what's their identity and status in the game.
+                 * The options includes Local Player, Foreign Player and Owner of the game.
+                 * @param arg0
+                 *      The dialog Interface
+                 * @param optionIdx
+                 *      The Integer index of the choice
+                 */
+                @Override
+                public void onClick(DialogInterface arg0, int optionIdx) {
+                    switch (optionIdx) {
+                        // Local Player:
+                        case 0:
+                            choice = 0;
+                            uuid = getLocalUUID();
+                            break;
+                        // Foreign Player:
+                        case 1:
+                            IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+                            intentIntegrator.setPrompt("For flash use volume up key");
+                            intentIntegrator.setBeepEnabled(true);
+                            intentIntegrator.setOrientationLocked(true);
+                            intentIntegrator.setCaptureActivity(Capture.class);
+                            intentIntegrator.initiateScan();
+                            choice = 1;
+                            break;
+                        // Owner Channel
+                        case 2:
+                            Intent intent = new Intent(MainActivity.this, OwnerActivity.class);
+                            startActivity(intent);
+                            break;
+                    }
+                    if (fdb == null) {
+                        fdb = new FireDatabase(uuid);
+                        dataHooking();
+                    }
+                }
+            }).create().show();
+        }
+        if (uuid != null) {
+            dataHooking();
+        }
+    }
+
+    private void getCurrentLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) this);
+    }
+
+
+}

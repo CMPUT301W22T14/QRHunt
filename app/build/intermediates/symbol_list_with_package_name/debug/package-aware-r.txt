@@ -2607,6 +2607,7 @@ id SHOW_PROGRESS
 id SYM
 id TOP_END
 id TOP_START
+id X
 id accelerate
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
@@ -2698,6 +2699,8 @@ id bounceEnd
 id bounceStart
 id buttonPanel
 id button_delete
+id button_delete_code
+id button_delete_player
 id button_detail
 id button_more
 id button_profile
@@ -2731,6 +2734,8 @@ id clip_horizontal
 id clip_vertical
 id clockwise
 id closest
+id code_hash_textview
+id codes_list
 id collapseActionView
 id comment
 id comment_sameQRCode_list
@@ -2961,6 +2966,7 @@ id peekHeight
 id percent
 id pin
 id player_scanned_the_same_QRCode_textView
+id players_list
 id players_sameQRCode_list
 id position
 id postLayout
@@ -3226,6 +3232,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
 layout activity_map
+layout activity_owner
 layout comment_content
 layout content
 layout content2
@@ -3400,6 +3407,8 @@ string common_signin_button_text_long
 string contact_information
 string default_web_client_id
 string delete
+string delete_code
+string delete_player
 string detail
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
@@ -3518,6 +3527,7 @@ string sum_of_scores
 string total_qr_code
 string type_comment
 string user_name
+string x
 string zxing_app_name
 string zxing_button_ok
 string zxing_msg_camera_framework_bug
