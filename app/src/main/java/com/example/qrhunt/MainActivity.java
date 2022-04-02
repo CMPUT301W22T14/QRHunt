@@ -2,6 +2,11 @@ package com.example.qrhunt;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,17 +15,22 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.provider.Telephony;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +40,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
@@ -41,7 +56,10 @@ import com.google.firebase.firestore.util.Assert;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -61,9 +79,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     String uuid;
     FireDatabase fdb = null;
     int choice = -1;
-    Boolean isInitAsking = true;
-    Bitmap captureImage = null;
-
+    FusedLocationProviderClient fusedLocationProviderClient;
 
 
     /* Creating Function */
@@ -79,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Locations Marked：
         mainListView = findViewById(R.id.session_list);
@@ -204,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     fdb.getSinglePlayerReload(new PlayerCallback() {
                         @Override
                         public void callBack(Player player) {
-                            asynchronousFixed(1);
+                            asynchronousFixed(300);
                             ProfileDisplayFragment profile = ProfileDisplayFragment.newInstance(false, player);
                             profile.show(getSupportFragmentManager(), "ProfileDisplayFragment Activated: A");
                             // Invisible Operation:
@@ -235,12 +253,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //from: youtube.com
         //URL: https://www.youtube.com/watch?v=kwOZEU0UBVg
         //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
-        if (requestCode == 100) {
-            // Get capture image
-            Bitmap captureImage = (Bitmap) (data.getExtras().get("data"));
-            this.captureImage = captureImage;
-            return;
-        }
         super.onActivityResult(requestCode, resultCode, data);
         //Initialize intent result
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -275,13 +287,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 }
 
                  */
-                //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                //startActivityForResult(intent, 100);
                 GameQRCode gameQRCode = new GameQRCode(content);
-                //gameQRCode.setCaptureImage(this.captureImage);
+                getCurrentLocation(gameQRCode);
                 fdb.addNewQRCode(gameQRCode);
                 mainDataAdapter.notifyDataSetChanged();
-                this.captureImage = null;
+                //this.captureImage = null;
             }
 
         } else {
@@ -429,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
      */
     private void asynchronousFixed(int secondNum) {
         try {
-            TimeUnit.SECONDS.sleep(secondNum);
+            TimeUnit.MICROSECONDS.sleep(secondNum);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -437,7 +447,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
     private void moreFuncAsking() {
         // Asking for function needed:
-        String[] functionOptions = {"Scan New Code", "Searching by Location", "Leader Board", "Searching by Username", "Map"};
+        String[] functionOptions = {"Scan New Code", "Searching Nearby", "Leader Board", "Searching by Username", "Others' Codes"};
         AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
         builder2.setTitle("How can I help you? my friend?");
         builder2.setItems(functionOptions, new DialogInterface.OnClickListener() {
@@ -462,8 +472,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         intentIntegrator.initiateScan();
                         break;
                     case 1:
-                        // Searching by Location
+                        // Map + Searching by Location
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
 
+                        startActivity(intent);
                         break;
                     case 2:
                         // Leader Board
@@ -479,8 +491,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         Toast.makeText(getApplicationContext(), "- B -", Toast.LENGTH_LONG).show();
                         break;
                     case 4:
-                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                        startActivity(intent);
+                        new BrowseOthersCodesFragment().show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
                         break;
                 }
             }
@@ -537,20 +548,26 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         }
     }
 
-    private void getCurrentLocation() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+    public void getCurrentLocation(GameQRCode code) {
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    Location location = task.getResult();
+                    if (location != null) {
+                        Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+                        try {
+                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                            code.loadCoordinate(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) this);
+        else {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
     }
-
-
 }

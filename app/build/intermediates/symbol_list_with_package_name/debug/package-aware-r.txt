@@ -2742,6 +2742,7 @@ id comment_sameQRCode_list
 id comments_textView
 id compress
 id confirm_button
+id confirm_search_button
 id constraint
 id contact_information_textView
 id container
@@ -2950,6 +2951,8 @@ id notification_main_column_container
 id off
 id on
 id onInterceptTouchReturnSwipe
+id other_player_name_textview
+id other_players_codes
 id outline
 id outward
 id overshoot
@@ -3253,6 +3256,7 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout detail_display_fragment_layout
+layout fragment_browse_others_codes
 layout fragment_map
 layout leader_board_fragment_layout
 layout m3_alert_dialog

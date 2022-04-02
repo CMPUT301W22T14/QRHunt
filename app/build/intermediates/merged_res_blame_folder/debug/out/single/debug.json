@@ -100,6 +100,10 @@
         "source": "/Users/chen/301/QRHunt/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
+        "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_fragment_browse_others_codes.xml.flat",
+        "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/fragment_browse_others_codes.xml"
+    },
+    {
         "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_profile_display_fragment_layout.xml.flat",
         "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/profile_display_fragment_layout.xml"
     }

@@ -1,6 +1,7 @@
 package com.example.qrhunt;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -309,14 +310,20 @@ public class FireDatabase {
                         Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + uuid);
                         if (codes != null) {
                             for (Map<String, Object> code : codes) {
-                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                newCodes.add(newCode);
-                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                                GameQRCode oldCode = new GameQRCode((String) code.get("content"));
+                                Map<String, Double> map = (Map<String, Double>) (code.get("latestLatLng"));
+                                if (map != null) {
+                                    oldCode.loadCoordinate(map.get("latitude"), map.get("longitude"));
+                                }
+                                newCodes.add(oldCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + oldCode.getContent());
                             }
                         }
-
+                        //Bitmap image =  newCode.getCaptureImage();
+                        //newCode.setCaptureImage(null);
                         newCodes.add(newCode);
                         documentReference.update("codes", newCodes);
+                        //newCode.setCaptureImage(image);
                         //Call fragment
                     } else {
                         Log.d(TAG, "No such document");

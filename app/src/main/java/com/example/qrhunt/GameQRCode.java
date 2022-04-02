@@ -1,6 +1,9 @@
 package com.example.qrhunt;
 
 import android.graphics.Bitmap;
+import android.location.Location;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -19,6 +22,9 @@ public class GameQRCode {
     private final ArrayList<String> uuidOfScanners = new ArrayList<String>();
     private Bitmap captureImage;
     private String hash;
+    private LatLng latestLatLng = null;
+
+
 
     /**
      * Constructor method.
@@ -27,8 +33,16 @@ public class GameQRCode {
      *      This is the String content of the QR code.
      */
     public GameQRCode(String content) {
-       this.content = content;
+        this.content = content;
         calculateScore();
+    }
+
+
+    public void loadCoordinate(double latitude, double longitude) {
+
+        // Todo - 飞鱼：在code 创建时时获取并记录位置坐标；
+        //latestLatLng = new LatLng(..., ...);
+        latestLatLng = new LatLng(latitude, longitude);
     }
 
     /**
@@ -58,9 +72,11 @@ public class GameQRCode {
         }
     }
 
+
     public void setHash(String SHA256Hash) {
         this.hash = SHA256Hash;
     }
+
 
     /**
      * This is to calculate score according to the hash code
@@ -116,6 +132,9 @@ public class GameQRCode {
     }
 
 
+    public LatLng getLatestLatLng() {
+        return latestLatLng;
+    }
 
 
     /**
@@ -127,6 +146,7 @@ public class GameQRCode {
         return score;
     }
 
+
     /**
      * This adds a new comment to the list of comments
      * @param inputComment
@@ -135,6 +155,7 @@ public class GameQRCode {
     public void addComment(String inputComment) {
         comments.add(inputComment);
     }
+
 
     /**
      * This removes a comment from the list of comments
@@ -145,6 +166,7 @@ public class GameQRCode {
         comments.remove(index);
     }
 
+
     /**
      * This gets the list of all comments
      * @return
@@ -153,6 +175,7 @@ public class GameQRCode {
     public ArrayList<String> showAllComments() {
         return comments;
     }
+
 
     /**
      * This method add a scanner
@@ -163,6 +186,7 @@ public class GameQRCode {
         uuidOfScanners.add(uuidOfScanner);
     }
 
+
     /**
      * This method remove the chosen scanner.
      * @param index
@@ -171,6 +195,7 @@ public class GameQRCode {
     public void removeScanner(int index) {
         uuidOfScanners.remove(index);
     }
+
 
     /**
      * This method shows all scanners.
@@ -181,6 +206,7 @@ public class GameQRCode {
         return uuidOfScanners;
     }
 
+
     /**
      * This set the object/location's image;
      * @param captureImage
@@ -189,6 +215,12 @@ public class GameQRCode {
     public void setCaptureImage(Bitmap captureImage) {
         this.captureImage = captureImage;
     }
+
+
+    public void setLatestLatLng(LatLng latestLatLng) {
+        this.latestLatLng = latestLatLng;
+    }
+
 
     /**
      * This gets the image of the object/location;
@@ -199,6 +231,7 @@ public class GameQRCode {
         return captureImage;
     }
 
+
     /**
      * This gets the content of the QR code;
      * @return
@@ -208,7 +241,20 @@ public class GameQRCode {
         return content;
     }
 
+
     public String getHash() {
         return hash;
+    }
+
+    public double getLatitude() {
+        if (latestLatLng == null)
+            return 0;
+        return latestLatLng.latitude;
+    }
+
+    public double getLongitude() {
+        if (latestLatLng == null)
+            return 0;
+        return latestLatLng.longitude;
     }
 }
