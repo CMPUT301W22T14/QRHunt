@@ -177,21 +177,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     // 用户坐标展示函数：
     private Marker addPlayerMarker(GoogleMap googleMap) {
-        Marker playerMarker = googleMap.addMarker(new MarkerOptions().position(playerCoordinate).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+        Marker playerMarker = googleMap.addMarker(new MarkerOptions().position(playerCoordinate).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         return playerMarker;
-    }
-
-
-    // 近码坐标展示函数：
-    private ArrayList<Marker> addCodeMarkers(GoogleMap googleMap) {
-        ArrayList<Marker> codeMarkers = new ArrayList<>();
-        int index = 1;
-        for (LatLng coordinate : codesCoordinatesNearby) {
-            Marker codeMarker = googleMap.addMarker(new MarkerOptions().position(coordinate).title( "Code" + index).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-            codeMarkers.add(codeMarker);
-            index += 1;
-        }
-        return codeMarkers;
     }
 
 
@@ -202,7 +189,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         //ArrayList<Marker> codeMarkers = addCodeMarkers(googleMap);
         //codeMarkers.add(playerMarker);
 
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(playerMarker.getPosition(), 5));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(playerMarker.getPosition(), 15));
         timeSleep(1);
 
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -245,13 +232,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     ArrayList<Marker> codeMarkers = new ArrayList<>();
                     int index = 1;
                     for (LatLng coordinate : codesCoordinatesNearby) {
-                        Marker codeMarker = googleMap.addMarker(new MarkerOptions().position(coordinate).title( "Code" + index).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                        Marker codeMarker = googleMap.addMarker(new MarkerOptions().position(coordinate).title( "Code" + index).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                         codeMarkers.add(codeMarker);
                         index += 1;
                     }
-                    for (Marker marker : codeMarkers) {
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(codeMarkers.get(0).getPosition(), 8));
-                    }
+
+                    //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(codeMarkers.get(0).getPosition(), 15));
+
                 }
                 else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
