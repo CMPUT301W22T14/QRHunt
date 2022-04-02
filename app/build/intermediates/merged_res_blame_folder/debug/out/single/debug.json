@@ -4,6 +4,10 @@
         "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_search_by_location_fragment_layout.xml.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\search_by_location_fragment_layout.xml"
+    },
+    {
         "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_username_search_fragment_layout.xml.flat",
         "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\username_search_fragment_layout.xml"
     },
@@ -24,12 +28,12 @@
         "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
-    },
-    {
         "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_map.xml.flat",
         "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\layout\\fragment_map.xml"
+    },
+    {
+        "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
         "merged": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_map.xml.flat",

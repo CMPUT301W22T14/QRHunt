@@ -32,7 +32,7 @@ public class GameQRCode {
      */
     public GameQRCode(String content) {
        this.content = content;
-       if (!content.equals("NON")) {
+       if ((!content.equals("MAPAUTO"))&&!content.equals("MAPMANUAL")) {
            calculateScore();
        }
     }

@@ -57,7 +57,9 @@ import android.provider.Settings.Secure;
 /**
  * This is a main class that controls the main activity and connect to all the sub-functions and sub-activities/fragments;
  */
-public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements
+        UsernameSearchFragment.OnFragmentInteractionListener,
+        SearchByLocationFragment.OnFragmentInteractionListener {
 
     /* Global Variables */
     ListView mainListView = null;
@@ -201,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             break;
                         case 1:
                             // Searching by Location
+                            new SearchByLocationFragment().show(getSupportFragmentManager(), "Search for QR codes by location");
                             break;
                         case 2:
                             // Leader Board
@@ -218,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             // Map of nearby QR Codes
                             // LocationEvent makes a map if the parameter QR code has content:"NON",
                             // The QR code is not added to the database
-                            GameQRCode gameQRCode = new GameQRCode("NON");
+                            GameQRCode gameQRCode = new GameQRCode("MAPAUTO");
                             LocationEvent(gameQRCode);
                             break;
                     }
@@ -630,9 +633,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         }
     }
     /**
-     * Not ideal implementation; Create map at current location or create QR code with current location after picture is taken
+     * Not ideal implementation; Create map at location or create QR code with current location after picture is taken
+     * Bad coupling/cohesion
      */
-    private void LocationEvent(GameQRCode gameQRCode) {
+    public void LocationEvent(GameQRCode gameQRCode) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {
                     Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
@@ -646,12 +650,19 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     currentLocation = location;
 
                     // Check if we want to make a map or if we are adding a new QR code to the database
-                    if (gameQRCode.getContent().equals("NON")) {
-                        Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                    if (gameQRCode.getContent().equals("MAPAUTO")) {
+                        //Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         intent.putExtra("Latitude", currentLocation.getLatitude());
                         intent.putExtra("Longitude", currentLocation.getLongitude());
+                        startActivity(intent);
+                    } else if (gameQRCode.getContent().equals("MAPMANUAL")) {
+                        //Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        intent.putExtra("Latitude", gameQRCode.getLatitude());
+                        intent.putExtra("Longitude", gameQRCode.getLongitude());
                         startActivity(intent);
                     } else
                     {
@@ -680,7 +691,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         switch (requestCode) {
             case REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    GameQRCode gameQRCode = new GameQRCode("NON");
+                    GameQRCode gameQRCode = new GameQRCode("MAPAUTO");
                     LocationEvent(gameQRCode);
                 }
                 break;
