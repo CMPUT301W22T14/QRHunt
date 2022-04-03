@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -85,9 +84,6 @@ public class OwnerActivity extends Activity {
                 }
             }
         });
-
-
-
 
 
         playersListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -171,7 +167,6 @@ public class OwnerActivity extends Activity {
                             deleteCodeButton.setVisibility(View.INVISIBLE);
                             deletePlayerButton.setVisibility(View.INVISIBLE);
                             //codesListview.setVisibility(View.INVISIBLE);
-
 
                         }
                     });

@@ -4,29 +4,23 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -91,44 +85,6 @@ public class LeaderBoardFragment extends DialogFragment {
         rankNameView = view.findViewById(R.id.rank_name_textView);
         myRankView = view.findViewById(R.id.estimate_ranking_textView);
 
-
-
-
-        /*
-
-        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<Player> players = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
-                            String uuid = document.getId();
-                            String contactInfo = (String) document.get("contactInfo");
-                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
-                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
-                            player.setContactInfo(contactInfo);
-                            for (Map<String, Object> code : codes) {
-                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                player.addQRCode(newCode);
-                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
-                            }
-                            players.add(player);
-                        }
-                        else {
-                            Log.d(TAG, "No such document");
-                        }
-                    }
-                    setHighestRank(players);
-                }
-                else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                }
-            }
-        });
-
-         */
-
         getAndSetHighestRank();
 
         highestButton.setOnClickListener(new View.OnClickListener() {
@@ -153,8 +109,6 @@ public class LeaderBoardFragment extends DialogFragment {
         });
 
 
-
-
         // Page Structure:
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
@@ -164,12 +118,6 @@ public class LeaderBoardFragment extends DialogFragment {
 
     }
 
-    /**
-     * TODO: ...
-     */
-    public void getAllPlayers() {
-        //Yujie's task !!!!!!!!!
-    }
 
     /**
      * This method sets the rank based on player's highest score.
@@ -275,7 +223,7 @@ public class LeaderBoardFragment extends DialogFragment {
                 myRank = i + 1;
             }
         }
-        //int myRank = players.indexOf(player) + 1;
+
         if (me != null) {
             String s = "Me:No." + myRank + "   Score:" + me.getSumCodeScore();
             myRankView.setText(s);

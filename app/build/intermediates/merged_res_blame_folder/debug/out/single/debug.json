@@ -44,6 +44,10 @@
         "source": "/Users/chen/301/QRHunt/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
+        "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_fragment_search_by_geolocation.xml.flat",
+        "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/fragment_search_by_geolocation.xml"
+    },
+    {
         "merged": "/Users/chen/301/QRHunt/app/build/intermediates/merged_res/debug/layout_activity_map.xml.flat",
         "source": "/Users/chen/301/QRHunt/app/src/main/res/layout/activity_map.xml"
     },

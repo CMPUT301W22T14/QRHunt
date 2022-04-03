@@ -1,10 +1,8 @@
 package com.example.qrhunt;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -25,12 +23,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -80,8 +75,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
                     supportMapFragment.getMapAsync(MapActivity.this);
-
-                    //loadCodesCoordinates();
                 }
             }
         });
@@ -98,63 +91,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
                 break;
         }
-    }
-
-
-
-    // Codes坐标加载函数：下载/去重/转换
-    private void loadCodesCoordinates() {
-
-        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<Player> players = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
-                            String uuid = document.getId();
-                            String contactInfo = (String) document.get("contactInfo");
-                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
-                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
-                            player.setContactInfo(contactInfo);
-                            for (Map<String, Object> code : codes) {
-                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                Map<String, Double> map = (Map<String, Double>) (code.get("latestLatLng"));
-                                if (map != null) {
-                                    newCode.loadCoordinate(map.get("latitude"), map.get("longitude"));
-                                    player.addQRCode(newCode);
-                                }
-                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
-                            }
-                            players.add(player);
-                        }
-                        else {
-                            Log.d(TAG, "No such document");
-                        }
-                    }
-                    for (Player player : players) {
-                        ArrayList<GameQRCode> codesOfPlayer = player.getQRCodeList();
-                        for (GameQRCode code : codesOfPlayer) {
-                            LatLng codeCoordinate = new LatLng(code.getLatitude(), code.getLongitude());
-
-                            if (isCoordinateNearby(codeCoordinate)) {
-                                codesCoordinatesNearby.add(codeCoordinate);
-                            }
-                        }
-                    }
-                }
-                else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                }
-            }
-        });
-
-        // Todo - 飞鱼：接入fdb，下载 全线player信息，接入集合转换；
-        //FireDatabase fdb = new FireDatabase("Admin");
-        //ArrayList<Player> players = fdb.getAllPlayersReload();
-
-
-
     }
 
 
@@ -245,7 +181,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         });
-        //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(codeMarkers.get(0).getPosition(), 8));
     }
 
 

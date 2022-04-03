@@ -1,15 +1,8 @@
 package com.example.qrhunt;
 
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -97,75 +90,6 @@ public class FireDatabase {
 
     }
 
-    /*
-    public void getSinglePlayerReload(Object obj, int type) {
-        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
-                for(QueryDocumentSnapshot document: queryDocumentSnapshots) {
-                    if (document.getId().equals("Player 1")) {
-                        String uuidOutput = document.getId();
-                        String contactInfoOutput = (String) document.get("contactInfo");
-                        ArrayList<Map<String, Object>> codesOutput = (ArrayList<Map<String, Object>>) document.get("codes");
-                        Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + uuidOutput);
-                        Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + contactInfoOutput);
-                        Player player = new Player(uuidOutput); // The player !!!!!!!!!!!!!!
-                        player.setContactInfo(contactInfoOutput);
-                        for (Map<String, Object> code : codesOutput) {
-                            GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                            player.addQRCode(newCode);
-                            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
-                        }
-                        // Callback:
-                        switch (type) {
-                            // 0 --> CustomList
-                            case 0:
-                                CustomList cl = (CustomList) obj;
-                                cl.setPlayer(player);
-                                break;
-                            // 1 -->
-                            case 1:
-                                break;
-                            // 2 --> ProfileDisplayFragment
-                            case 2:
-                                ProfileDisplayFragment profile = (ProfileDisplayFragment) obj;
-                                profile.setPlayer(player);
-                                break;
-                            // 3 --> LeaderBoardFragment
-                            case 3:
-                                LeaderBoardFragment leaderboard = (LeaderBoardFragment) obj;
-                                leaderboard.setPlayer(player);
-                                break;
-                        }
-
-                    }
-                }
-            }
-        });
-    }
-
-
-    public void getSinglePlayerReload(Object obj, int type) {
-        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
-                players.clear();
-                for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                    //Log.d(TAG, String.valueOf(doc.getId()));
-                    String uuid = doc.getId();
-                    String contactInfo = (String) doc.getData().get("contactInfo");
-                    //List<GameQRCode> codes = (List<GameQRCode>) doc.getData().get("codes");
-                    Player player = new Player(uuid);
-                    player.setContactInfo(contactInfo);
-                    //if (codes != null) {
-                    //    for (GameQRCode code : codes)
-                    //        player.addQRCode(code);
-                    //}
-                    players.add(player);
-                }
-            }
-        });
-    }*/
 
     /**
      * This method will read the data about a player from the database. and recreate the player object

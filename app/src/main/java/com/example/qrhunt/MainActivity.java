@@ -1,23 +1,12 @@
 package com.example.qrhunt;
 
-import static android.content.ContentValues.TAG;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,24 +14,14 @@ import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.provider.MediaStore;
-import android.provider.Telephony;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,17 +31,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.util.Assert;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import android.provider.Settings.Secure;
 
 
@@ -86,18 +62,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     Bitmap captureImage = null;
     GameQRCode codeAtPos = null;
     FusedLocationProviderClient fusedLocationProviderClient;
-
-    // Initialize attributes needed for geolocation
-    /*
-    FusedLocationProviderClient fusedLocationProviderClient;
-    double latitude;
-    double longitude;
-    String countryName;
-    String locality;
-    String address;*/
-
-
-    /* Creating Function */
 
     /**
      * This is the main function of the project, all major tasks, functions and player data are
@@ -127,10 +91,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
         String uuidLocal = getLocalUUID(); //getLocalUUID();
 
-        /*
-        if (player == null || player.getUUID().equals("NOT EXIST")) {
-            fdb = null;
-        }*/
 
         // Identity Asking:
         if (fdb == null) {
@@ -186,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         // MORE:
         button_more.setOnClickListener((view) -> {
             // Asking for function needed:
-            String[] functionOptions = {"Scan Code", "Searching Nearby", "Leader Board", "Searching by Username", "Others' Codes"};
+            String[] functionOptions = {"Scan Code", "Map", "Leader Board", "Searching by Username", "Others' Codes", "Search Codes by Geolocation"};
             AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this);
             builder2.setTitle("How can I help you? my friend?");
             builder2.setItems(functionOptions, new DialogInterface.OnClickListener() {
@@ -231,6 +191,9 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             break;
                         case 4:
                             new BrowseOthersCodesFragment().show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
+                            break;
+                        case 5:
+                            new SearchByGeolocationFragment().show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
                             break;
                     }
                 }
@@ -417,14 +380,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 //from: youtube.com
                 //URL: https://www.youtube.com/watch?v=RaOyw84625w&t=250s
                 //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
-                /*
-                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{
-                            Manifest.permission.CAMERA
-                    }, 100);
-                }
-
-                 */
                 GameQRCode gameQRCode = new GameQRCode(content);
                 getCurrentLocation(gameQRCode);
                 fdb.addNewQRCode(gameQRCode);

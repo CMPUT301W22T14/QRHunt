@@ -1,15 +1,12 @@
 package com.example.qrhunt;
 
 import android.graphics.Bitmap;
-import android.location.Location;
-
 import com.google.android.gms.maps.model.LatLng;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 
 /**

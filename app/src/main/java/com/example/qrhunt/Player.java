@@ -1,8 +1,5 @@
 package com.example.qrhunt;
 
-import com.google.zxing.qrcode.encoder.QRCode;
-
-
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;

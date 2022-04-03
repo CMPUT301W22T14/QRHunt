@@ -11,26 +11,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the  factory method to
+ * create an instance of this fragment.
+ */
 public class BrowseOthersCodesFragment extends DialogFragment {
 
     private EditText textView;
@@ -43,7 +42,6 @@ public class BrowseOthersCodesFragment extends DialogFragment {
     public BrowseOthersCodesFragment() {
         // Required empty public constructor
     }
-
 
 
     /**
@@ -76,21 +74,14 @@ public class BrowseOthersCodesFragment extends DialogFragment {
             }
         });
 
-
-
-
         // Page Structure:
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
                 .setView(view)
                 .setTitle("Browse Others' Codes").create();
 
-
-
-
-
-
     }
+
     public void populateList(String currUuid) {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

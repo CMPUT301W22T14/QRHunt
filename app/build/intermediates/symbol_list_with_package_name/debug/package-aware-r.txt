@@ -2743,6 +2743,7 @@ id comments_textView
 id compress
 id confirm_button
 id confirm_search_button
+id confirm_search_nearby_button
 id constraint
 id contact_information_textView
 id container
@@ -2856,6 +2857,7 @@ id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
 id labeled
+id latitude_textview
 id layout
 id left
 id leftToRight
@@ -2866,6 +2868,7 @@ id line3
 id linear
 id listMode
 id list_item
+id longitude_textView
 id masked
 id match_constraint
 id match_parent
@@ -2936,6 +2939,7 @@ id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
 id navigation_header_container
+id nearby_location_codes_listview
 id never
 id neverCompleteToEnd
 id neverCompleteToStart
@@ -3256,6 +3260,7 @@ layout design_text_input_start_icon
 layout detail_display_fragment_layout
 layout fragment_browse_others_codes
 layout fragment_map
+layout fragment_search_by_geolocation
 layout leader_board_fragment_layout
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
