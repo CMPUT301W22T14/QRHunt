@@ -2850,6 +2850,7 @@ int id item_touch_helper_previous_elevation 0x7f0800ff
 int id jumpToEnd 0x7f080100
 int id jumpToStart 0x7f080101
 int id labeled 0x7f080102
+int id latitude_edit_text 0x7f080221
 int id layout 0x7f080103
 int id left 0x7f080104
 int id leftToRight 0x7f080105
@@ -2860,6 +2861,7 @@ int id line3 0x7f080109
 int id linear 0x7f08010a
 int id listMode 0x7f08010b
 int id list_item 0x7f08010c
+int id longitude_edit_text 0x7f080222
 int id masked 0x7f08010d
 int id match_constraint 0x7f08010e
 int id match_parent 0x7f08010f
@@ -3308,6 +3310,7 @@ int layout notification_template_media_custom 0x7f0b006e
 int layout notification_template_part_chronometer 0x7f0b006f
 int layout notification_template_part_time 0x7f0b0070
 int layout profile_display_fragment_layout 0x7f0b0071
+int layout search_by_location_fragment_layout 0x7f0b0088
 int layout select_dialog_item_material 0x7f0b0072
 int layout select_dialog_multichoice_material 0x7f0b0073
 int layout select_dialog_singlechoice_material 0x7f0b0074

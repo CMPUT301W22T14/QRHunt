@@ -2851,6 +2851,7 @@ id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
 id labeled
+id latitude_edit_text
 id layout
 id left
 id leftToRight
@@ -2861,6 +2862,7 @@ id line3
 id linear
 id listMode
 id list_item
+id longitude_edit_text
 id masked
 id match_constraint
 id match_parent
@@ -3309,6 +3311,7 @@ layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout profile_display_fragment_layout
+layout search_by_location_fragment_layout
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material

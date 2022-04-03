@@ -2,6 +2,7 @@ package com.example.qrhunt;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -27,6 +29,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
@@ -50,7 +57,9 @@ import android.provider.Settings.Secure;
 /**
  * This is a main class that controls the main activity and connect to all the sub-functions and sub-activities/fragments;
  */
-public class MainActivity extends AppCompatActivity implements UsernameSearchFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements
+        UsernameSearchFragment.OnFragmentInteractionListener,
+        SearchByLocationFragment.OnFragmentInteractionListener {
 
     /* Global Variables */
     ListView mainListView = null;
@@ -63,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     Boolean existed = false;
 
     Bitmap captureImage = null;
+    GameQRCode codeAtPos = null;
+    Location currentLocation;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int REQUEST_CODE = 101;
 
     // Initialize attributes needed for geolocation
     /*
@@ -102,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
 
 
         String uuidLocal = getLocalUUID(); //getLocalUUID();
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         /*
         if (player == null || player.getUUID().equals("NOT EXIST")) {
@@ -146,12 +161,17 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel!", Toast.LENGTH_LONG).show();
                             break;
                     }
-                    fdb = new FireDatabase(uuid);
-                    dataHooking();
+                    if (fdb == null) {
+                        fdb = new FireDatabase(uuid);
+                        dataHooking();
+                    }
+
                 }
             }).create().show();
         }
-        dataHooking();
+        if (uuid != null) {
+            dataHooking();
+        }
 
 
         // MORE:
@@ -173,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 public void onClick(DialogInterface arg0, int optionIdx) {
                     switch (optionIdx) {
                         case 0:
+                            //Scan
                             IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
                             intentIntegrator.setPrompt("For flash use volume up key");
                             intentIntegrator.setBeepEnabled(true);
@@ -182,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             break;
                         case 1:
                             // Searching by Location
+                            new SearchByLocationFragment().show(getSupportFragmentManager(), "Search for QR codes by location");
                             break;
                         case 2:
                             // Leader Board
@@ -196,8 +218,11 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             new UsernameSearchFragment().show(getSupportFragmentManager(), "Search player by username");
                             break;
                         case 4:
-                            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                            startActivity(intent);
+                            // Map of nearby QR Codes
+                            // LocationEvent makes a map if the parameter QR code has content:"NON",
+                            // The QR code is not added to the database
+                            GameQRCode gameQRCode = new GameQRCode("MAPAUTO");
+                            LocationEvent(gameQRCode);
                             break;
                     }
                 }
@@ -226,55 +251,64 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Catching the item clicked:
-                GameQRCode codeAtPos = mainDataList.get(position);
+                codeAtPos = mainDataList.get(position);
 
                 // Visible Operation:
                 button_detail.setVisibility(View.VISIBLE);
                 button_delete.setVisibility(View.VISIBLE);
 
 
-                // --> DETAIL:
-                button_detail.setOnClickListener(new View.OnClickListener() {
-                    /**
-                     * This is a click-checking function for the Detail button. If the user taps the
-                     *  button, the monitor will catch that and activate corresponding actions to
-                     *  show all the details (unfolding the DetailDisplayFragment) based on the
-                     *  listview item selected before. Feedback about the result is displayed with
-                     *  buttons to become invisible again;
-                     *
-                     * @param view
-                     *      The view clicked within the Adapter;
-                     * */
-                    public void onClick(View view) {
-                        // button_detail functions:
-                        // --> detail_display_fragment;
-                        new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
 
-                        // Invisible Operation:
-                        button_detail.setVisibility(View.INVISIBLE);
-                        button_delete.setVisibility(View.INVISIBLE);
-                    }
-                });
+            }
+        });
 
-                // --> DELETE:
-                button_delete.setOnClickListener(new View.OnClickListener() {
-                    /**
-                     * This is a click-checking function for the Delete button. If the user taps the
-                     *  button, the monitor will catch that and activate corresponding actions to
-                     *  remove the listview item selected before from both the listview presentation
-                     *  and the database remotely. Feedback about the result is displayed with
-                     *  buttons to become invisible again;
-                     *
-                     * @param view
-                     *      The view clicked within the Adapter;
-                     * */
-                    public void onClick(View view) {
-                        // Removing from ListView:
-                        mainDataList.remove(codeAtPos);
-                        mainDataAdapter.notifyDataSetChanged();
-                        // Removing from DataBase:
-                        fdb.removeCode(codeAtPos);
-                        // Todo: result handle:
+        // --> DETAIL:
+        button_detail.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This is a click-checking function for the Detail button. If the user taps the
+             *  button, the monitor will catch that and activate corresponding actions to
+             *  show all the details (unfolding the DetailDisplayFragment) based on the
+             *  listview item selected before. Feedback about the result is displayed with
+             *  buttons to become invisible again;
+             *
+             * @param view
+             *      The view clicked within the Adapter;
+             * */
+            public void onClick(View view) {
+                // button_detail functions:
+                // --> detail_display_fragment;
+                if (codeAtPos != null) {
+                    new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
+
+                    // Invisible Operation:
+                    button_detail.setVisibility(View.INVISIBLE);
+                    button_delete.setVisibility(View.INVISIBLE);
+                    codeAtPos = null;
+                }
+
+            }
+        });
+
+        // --> DELETE:
+        button_delete.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This is a click-checking function for the Delete button. If the user taps the
+             *  button, the monitor will catch that and activate corresponding actions to
+             *  remove the listview item selected before from both the listview presentation
+             *  and the database remotely. Feedback about the result is displayed with
+             *  buttons to become invisible again;
+             *
+             * @param view
+             *      The view clicked within the Adapter;
+             * */
+            public void onClick(View view) {
+                // Removing from ListView:
+                if (codeAtPos != null) {
+                    mainDataList.remove(codeAtPos);
+                    mainDataAdapter.notifyDataSetChanged();
+                    // Removing from DataBase:
+                    fdb.removeCode(codeAtPos);
+                    // Todo: result handle:
                         /*
                         if (result) {
                             Toast.makeText(getApplicationContext(), "Removed Successfully", Toast.LENGTH_LONG).show();
@@ -283,11 +317,12 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                             Toast.makeText(getApplicationContext(), "Cannot Remove Invalid Code", Toast.LENGTH_LONG).show();
                         }*/
 
-                        // Invisible Operation:
-                        button_detail.setVisibility(View.INVISIBLE);
-                        button_delete.setVisibility(View.INVISIBLE);
-                    }
-                });
+                    // Invisible Operation:
+                    button_detail.setVisibility(View.INVISIBLE);
+                    button_delete.setVisibility(View.INVISIBLE);
+                    codeAtPos = null;
+                }
+
             }
         });
 
@@ -350,7 +385,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
         if (requestCode == 100) {
             // Get capture image
-            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            Bitmap captureImage = (Bitmap)(data.getExtras().get("data"));
             this.captureImage = captureImage;
             return;
         }
@@ -358,41 +393,57 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         //Initialize intent result
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         //check condition
+
         if (intentResult.getContents() != null) {
+
             //when result content is not null
             String content = intentResult.getContents();
             //from: stackoverflow.com
             //URL: https://stackoverflow.com/questions/454908/split-java-string-by-new-line
             //Author: https://stackoverflow.com/users/18393/cletus
             String lines[] = content.split("\\r?\\n");
-            if (lines[0].equals("STATUS")) {
+
+            if (lines.length == 2 && lines[0].equals("STATUS")) {
                 // check other player's status
-            } else if (lines[0].equals("LOGIN") && lines.length == 2) {
+            }
+            else if (lines.length == 2 && lines[0].equals("LOGIN")) {
                 // login my account in another device
                 uuid = lines[1];
-            } else {
+                fdb = new FireDatabase(uuid);
+                dataHooking();
+            }
+            else {
                 // !!! get geolocation
                 // Get image
                 // Request for camera Permission
                 //from: youtube.com
                 //URL: https://www.youtube.com/watch?v=RaOyw84625w&t=250s
                 //Author: https://www.youtube.com/channel/UCUIF5MImktJLDWDKe5oTdJQ
+                /*
                 if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{
                             Manifest.permission.CAMERA
                     }, 100);
                 }
+
+                 */
                 //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //startActivityForResult(intent, 100);
+
+
                 GameQRCode gameQRCode = new GameQRCode(content);
-                gameQRCode.setCaptureImage(this.captureImage);
-                fdb.addNewQRCode(gameQRCode);
-                GameQRCode redundant = new GameQRCode(" ");
-                mainDataList.add(redundant);
+                //gameQRCode.setCaptureImage(this.captureImage);
+
+                LocationEvent(gameQRCode);
+
+                //GameQRCode redundant = new GameQRCode(" ");
+                //mainDataList.add(redundant);
                 mainDataAdapter.notifyDataSetChanged();
                 this.captureImage = null;
             }
-        } else {
+
+        }
+        else {
             //When result content is null
             //Display toast
             Toast.makeText(getApplicationContext(), "OOPS.. You did not scan anything", Toast.LENGTH_SHORT).show();
@@ -456,7 +507,6 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         countryName = addresses.get(0).getCountryName();
                         locality = addresses.get(0).getLocality();
                         address = addresses.get(0).getAddressLine(0);
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -532,13 +582,18 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
                     for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
                         String uuidGet = doc.getId();
+                        if (uuid == null) {
+                            return;
+                        }
                         if (uuid.equals(uuidGet)) {
                             mainDataList.clear();
                             existed = true;
                             ArrayList<Map<String, Object>> codesOutput = (ArrayList<Map<String, Object>>) (doc.get("codes"));
-                            for (Map<String, Object> code : codesOutput) {
-                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                mainDataList.add(newCode);
+                            if (codesOutput != null) {
+                                for (Map<String, Object> code : codesOutput) {
+                                    GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                    mainDataList.add(newCode);
+                                }
                             }
                         }
                     }
@@ -575,6 +630,71 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
             TimeUnit.SECONDS.sleep(secondNum);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+    /**
+     * Not ideal implementation; Create map at location or create QR code with current location after picture is taken
+     * Bad coupling/cohesion
+     */
+    public void LocationEvent(GameQRCode gameQRCode) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        }
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            //@Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    currentLocation = location;
+
+                    // Check if we want to make a map or if we are adding a new QR code to the database
+                    if (gameQRCode.getContent().equals("MAPAUTO")) {
+                        //Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        intent.putExtra("Latitude", currentLocation.getLatitude());
+                        intent.putExtra("Longitude", currentLocation.getLongitude());
+                        startActivity(intent);
+                    } else if (gameQRCode.getContent().equals("MAPMANUAL")) {
+                        //Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        intent.putExtra("Latitude", gameQRCode.getLatitude());
+                        intent.putExtra("Longitude", gameQRCode.getLongitude());
+                        startActivity(intent);
+                    } else
+                    {
+                        gameQRCode.setLongitude(currentLocation.getLongitude());
+                        gameQRCode.setLatitude(currentLocation.getLatitude());
+                        fdb.addNewQRCode(gameQRCode);
+                    }
+                    //Toast.makeText(getApplicationContext(), gps.getLatitude() + " " + gps.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                    //SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+                    //supportMapFragment.getMapAsync(MapActivity.this);
+                }
+            }
+        });
+    }
+    /**
+     * Ask system for permission
+     *
+     * @param requestCode
+     *      code for working
+     * @param permissions
+     *      feedback from sys
+     */
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    GameQRCode gameQRCode = new GameQRCode("MAPAUTO");
+                    LocationEvent(gameQRCode);
+                }
+                break;
         }
     }
 }

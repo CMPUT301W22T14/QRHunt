@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is the fragment of leader board.
@@ -30,22 +39,25 @@ import java.util.List;
  * status in all the players.
  */
 public class LeaderBoardFragment extends DialogFragment {
-    private Player player = null;
-    private List<Player> players = null;
+    private String uuid;
+    //private List<Player> players = null;
     private Boolean isPrivacyProtected = false;
     private ListView rankList;
     private TextView rankNameView;
     private TextView myRankView;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = db.collection("Players");
+    private String TAG = "players";
 
     // Constructor
 
     /**
      * This methods sets the player to the fragment.
-     * @param player
+     * @param uuid
      *      This is the player that sets to the leader board.
      */
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayer(String uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -80,29 +92,67 @@ public class LeaderBoardFragment extends DialogFragment {
         myRankView = view.findViewById(R.id.estimate_ranking_textView);
 
 
-        getAllPlayers();
-        setHighestRank();
+
+
+        /*
+
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Player> players = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            String uuid = document.getId();
+                            String contactInfo = (String) document.get("contactInfo");
+                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
+                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
+                            player.setContactInfo(contactInfo);
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                player.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
+                            players.add(player);
+                        }
+                        else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                    setHighestRank(players);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+         */
+
+        getAndSetHighestRank();
 
         highestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setHighestRank();
+                getAndSetHighestRank();
             }
         });
 
         totalNumberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setTotalNumberRank();
+                getAndSetTotalNumberRank();
             }
         });
 
         totalSumButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setSumRank();
+                getAndSetSumRank();
             }
         });
+
+
 
 
         // Page Structure:
@@ -124,7 +174,7 @@ public class LeaderBoardFragment extends DialogFragment {
     /**
      * This method sets the rank based on player's highest score.
      */
-    public void setHighestRank() {
+    public void setHighestRank(List<Player> players) {
         //Initialize the highest rank
         rankNameView.setText("Highest Score Rank");
         Collections.sort(players, new Comparator<Player>() {
@@ -140,19 +190,30 @@ public class LeaderBoardFragment extends DialogFragment {
             ranks.add(s);
             number++;
         }
-        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, ranks);
+        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, ranks);
         rankList.setAdapter(rankAdapter);
 
-        int myRank = players.indexOf(player) + 1;
-        String s = "Me:No." + myRank + "   Score:" + player.getMaxCodeScore();
-        myRankView.setText(s);
+        Player me = null;
+        int myRank = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUUID().equals(uuid)) {
+                me = players.get(i);
+                myRank = i + 1;
+            }
+        }
+        //int myRank = players.indexOf(player) + 1;
+        if (me != null) {
+            String s = "Me:No." + myRank + "   Score:" + me.getMaxCodeScore();
+            myRankView.setText(s);
+        }
+
     }
 
 
     /**
      * This method sets the rank based on the number of GameQRCodes the players have.
      */
-    public void setTotalNumberRank() {
+    public void setTotalNumberRank(List<Player> players) {
         rankNameView.setText("Total Number Rank");
         Collections.sort(players, new Comparator<Player>() {
             @Override
@@ -167,18 +228,28 @@ public class LeaderBoardFragment extends DialogFragment {
             ranks.add(s);
             number++;
         }
-        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, ranks);
+        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, ranks);
         rankList.setAdapter(rankAdapter);
 
-        int myRank = players.indexOf(player) + 1;
-        String s = "Me:No." + myRank + "   Score:" + player.getTotalCodeNum();
-        myRankView.setText(s);
+        Player me = null;
+        int myRank = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUUID().equals(uuid)) {
+                me = players.get(i);
+                myRank = i + 1;
+            }
+        }
+        //int myRank = players.indexOf(player) + 1;
+        if (me != null) {
+            String s = "Me:No." + myRank + "   Score:" + me.getTotalCodeNum();
+            myRankView.setText(s);
+        }
     }
 
     /**
      * This method sets the rank based on the player's sum score.
      */
-    public void setSumRank() {
+    public void setSumRank(List<Player> players) {
         rankNameView.setText("Total Sum Rank");
         Collections.sort(players, new Comparator<Player>() {
             @Override
@@ -193,12 +264,22 @@ public class LeaderBoardFragment extends DialogFragment {
             ranks.add(s);
             number++;
         }
-        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, ranks);
+        ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, ranks);
         rankList.setAdapter(rankAdapter);
 
-        int myRank = players.indexOf(player) + 1;
-        String s = "Me:No." + myRank + "   Score:" + player.getSumCodeScore();
-        myRankView.setText(s);
+        Player me = null;
+        int myRank = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUUID().equals(uuid)) {
+                me = players.get(i);
+                myRank = i + 1;
+            }
+        }
+        //int myRank = players.indexOf(player) + 1;
+        if (me != null) {
+            String s = "Me:No." + myRank + "   Score:" + me.getSumCodeScore();
+            myRankView.setText(s);
+        }
     }
 
     /**
@@ -217,5 +298,105 @@ public class LeaderBoardFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.leader_board_fragment_layout, container, false);
+    }
+
+
+    public void getAndSetHighestRank() {
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Player> players = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            String uuid = document.getId();
+                            String contactInfo = (String) document.get("contactInfo");
+                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
+                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
+                            player.setContactInfo(contactInfo);
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                player.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
+                            players.add(player);
+                        }
+                        else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                    setHighestRank(players);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void getAndSetTotalNumberRank() {
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Player> players = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            String uuid = document.getId();
+                            String contactInfo = (String) document.get("contactInfo");
+                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
+                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
+                            player.setContactInfo(contactInfo);
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                player.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
+                            players.add(player);
+                        }
+                        else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                    setTotalNumberRank(players);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void getAndSetSumRank() {
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Player> players = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            String uuid = document.getId();
+                            String contactInfo = (String) document.get("contactInfo");
+                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
+                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
+                            player.setContactInfo(contactInfo);
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                player.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
+                            players.add(player);
+                        }
+                        else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                    setSumRank(players);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
     }
 }
