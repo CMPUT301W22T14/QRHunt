@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * This is the activity for the owner
+ */
 public class OwnerActivity extends Activity {
     public boolean isValidClick = false;
     public ArrayList<Player> players = new ArrayList<>();
@@ -39,7 +42,11 @@ public class OwnerActivity extends Activity {
     private String chosenCode = null;
 
 
-
+    /**
+     * The creation method
+     * @param savedInstanceState
+     *      This is an object type of Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,6 +192,11 @@ public class OwnerActivity extends Activity {
 
     }
 
+    /**
+     * get all the codes of the player
+     * @param currUuid
+     *      The uuid of the player
+     */
     public void getPlayerCodes(String currUuid) {
         collectionReference2.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -217,6 +229,11 @@ public class OwnerActivity extends Activity {
         });
     }
 
+    /**
+     * Remove a player
+     * @param currUuid
+     *      The uuid of the player
+     */
     public void removePlayer(String currUuid) {
         collectionReference.document(currUuid).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -231,6 +248,11 @@ public class OwnerActivity extends Activity {
         });
     }
 
+    /**
+     * Remove a code
+     * @param currCode
+     *      The hash of the code
+     */
     public void removeCode(String currCode) {
         List<GameQRCode> newCodes = new ArrayList<>();
         GameQRCode oldCode = new GameQRCode("");

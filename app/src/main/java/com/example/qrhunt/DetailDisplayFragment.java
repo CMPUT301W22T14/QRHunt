@@ -139,6 +139,11 @@ public class DetailDisplayFragment extends DialogFragment {
     }
 
 
+    /**
+     * This method upload the comment to the firestore database
+     * @param comment
+     *      This is the new comment
+     */
     public void uploadComment(String comment) {
         DocumentReference documentReference = collectionReferenceForCodes.document(gameQRCode.getHash()+"\n"+uuid);
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -169,6 +174,9 @@ public class DetailDisplayFragment extends DialogFragment {
         });
     }
 
+    /**
+     * This method populate all the comments to the list view
+     */
     public void getAllComments() {
         collectionReferenceForCodes.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -195,7 +203,9 @@ public class DetailDisplayFragment extends DialogFragment {
     }
 
 
-
+    /**
+     * This method populates all the players to the list view
+     */
     public void getAllPlayers() {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

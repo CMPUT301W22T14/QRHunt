@@ -35,6 +35,13 @@ public class GameQRCode {
     }
 
 
+    /**
+     * This method get the location
+     * @param latitude
+     *      the latitude of the code
+     * @param longitude
+     *      the longitude of the code
+     */
     public void loadCoordinate(double latitude, double longitude) {
 
         // Todo - 飞鱼：在code 创建时时获取并记录位置坐标；
@@ -70,6 +77,11 @@ public class GameQRCode {
     }
 
 
+    /**
+     * This method sets the hash code of the code
+     * @param SHA256Hash
+     *      The hash code of the code
+     */
     public void setHash(String SHA256Hash) {
         this.hash = SHA256Hash;
     }
@@ -129,10 +141,6 @@ public class GameQRCode {
     }
 
 
-    public LatLng getLatestLatLng() {
-        return latestLatLng;
-    }
-
 
     /**
      * This gets the score of the QR code
@@ -155,16 +163,6 @@ public class GameQRCode {
 
 
     /**
-     * This removes a comment from the list of comments
-     * @param index
-     *      The Integer index of the comment that need to be removed.
-     */
-    public void removeComment(int index) {
-        comments.remove(index);
-    }
-
-
-    /**
      * This gets the list of all comments
      * @return
      *      Return the list of all comments
@@ -173,25 +171,6 @@ public class GameQRCode {
         return comments;
     }
 
-
-    /**
-     * This method add a scanner
-     * @param uuidOfScanner
-     *      The String of the Scanner that need to be added to list.
-     */
-    public void addScanner(String uuidOfScanner) {
-        uuidOfScanners.add(uuidOfScanner);
-    }
-
-
-    /**
-     * This method remove the chosen scanner.
-     * @param index
-     *      The Integer index of the scanner that need to be remove.
-     */
-    public void removeScanner(int index) {
-        uuidOfScanners.remove(index);
-    }
 
 
     /**
@@ -203,20 +182,6 @@ public class GameQRCode {
         return uuidOfScanners;
     }
 
-
-    /**
-     * This set the object/location's image;
-     * @param captureImage
-     *      The captured image.
-     */
-    public void setCaptureImage(Bitmap captureImage) {
-        this.captureImage = captureImage;
-    }
-
-
-    public void setLatestLatLng(LatLng latestLatLng) {
-        this.latestLatLng = latestLatLng;
-    }
 
 
     /**
@@ -239,16 +204,31 @@ public class GameQRCode {
     }
 
 
+    /**
+     * Get hash code
+     * @return
+     *      Return the hash code
+     */
     public String getHash() {
         return hash;
     }
 
+    /**
+     * Get latitude
+     * @return
+     *      Returns latitude
+     */
     public double getLatitude() {
         if (latestLatLng == null)
             return 0;
         return latestLatLng.latitude;
     }
 
+    /**
+     * Get longitude
+     * @return
+     *      Returns longitude
+     */
     public double getLongitude() {
         if (latestLatLng == null)
             return 0;

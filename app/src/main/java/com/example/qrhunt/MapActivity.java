@@ -45,7 +45,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     String TAG = "Players";
 
 
-    // 创造函数：
+    /**
+     * The creation method
+     * @param savedInstanceState
+     *      This is an object type of Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +63,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     }
 
-    // player最新位置匹配函数：
+
+    /**
+     * Get the location of the player
+     */
     private void fetchLatestPlayerCoordinate() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
@@ -81,7 +88,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-    // 权限获取函数：
+    /**
+     * Request permission
+     * @param requestCode
+     *      This is an object type of int
+     * @param permissions
+     *      This is an object type of String[]
+     * @param grantResults
+     *      This is an object type of int[]
+     */
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
@@ -94,9 +109,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-
-
-    // Nearby判定函数：
+    /**
+     * Check if this code is near to the player
+     * @param coordinate
+     *      The location of the code
+     * @return
+     *      If the code is near to the player
+     */
     private boolean isCoordinateNearby(LatLng coordinate) {
         double threshold = 0.5;
         double playerLatitude = playerCoordinate.latitude;
@@ -111,14 +130,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-    // 用户坐标展示函数：
+    /**
+     * add player markers
+     * @param googleMap
+     *      This is an object type of GoogleMap
+     * @return
+     *      Returns the markers
+     */
     private Marker addPlayerMarker(GoogleMap googleMap) {
         Marker playerMarker = googleMap.addMarker(new MarkerOptions().position(playerCoordinate).title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         return playerMarker;
     }
 
 
-    // 地图响应函数：
+    /**
+     * This is a method that deals with map
+     * @param googleMap
+     *      This is an object type of GoogleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Marker playerMarker = addPlayerMarker(googleMap);
@@ -184,7 +213,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-    // 休眠函数：（提升用户体验）
+    /**
+     * Sleep method
+     * @param secondNum
+     *      The time of sleep
+     */
     private void timeSleep(int secondNum) {
         try {
             TimeUnit.SECONDS.sleep(secondNum);

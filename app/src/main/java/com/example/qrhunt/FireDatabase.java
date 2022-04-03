@@ -146,6 +146,12 @@ public class FireDatabase {
             }
         });
     }
+
+    /**
+     * This method gets the information of a single player
+     * @param callback
+     *      This is an object type of PlayerCallback
+     */
     public void getSinglePlayerReload(PlayerCallback callback) {
         collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -174,45 +180,6 @@ public class FireDatabase {
         });
     }
 
-    /**
-     * This method will read the data about all player from the database. and recreate the Player object.
-     * This is pretty much an extension from the getSinglePlayerReload() function. We use two functions here
-     * mainly for clearity and easier debugging access.
-     * */
-    public void getAllPlayersReload() {
-        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<Player> players = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
-                            String uuid = document.getId();
-                            String contactInfo = (String) document.get("contactInfo");
-                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
-                            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + uuid);
-                            Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + contactInfo);
-                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
-                            player.setContactInfo(contactInfo);
-                            for (Map<String, Object> code : codes) {
-                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                player.addQRCode(newCode);
-                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
-                            }
-                            players.add(player);
-                        }
-                        else {
-                            Log.d(TAG, "No such document");
-                        }
-                    }
-                    // Callback:
-                }
-                else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-                }
-            }
-        });
-    }
 
     /**
      * This method will add the new QRCode the player get to the database.

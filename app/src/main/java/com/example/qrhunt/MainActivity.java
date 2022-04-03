@@ -497,8 +497,13 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
         }
     }
 
+    /**
+     * Get current location
+     * @param code
+     *
+     */
     public void getCurrentLocation(GameQRCode code) {
-        
+
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
                 @Override

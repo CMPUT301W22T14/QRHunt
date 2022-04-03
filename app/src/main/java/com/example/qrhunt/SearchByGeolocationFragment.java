@@ -25,7 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * This is the Fragment where we can search nearby codes by geolocation
+ */
 public class SearchByGeolocationFragment extends DialogFragment {
     private EditText latitudeText;
     private EditText longitudeText;
@@ -83,6 +85,11 @@ public class SearchByGeolocationFragment extends DialogFragment {
 
     }
 
+    /**
+     * Fill the list view
+     * @param enteredLocation
+     *      The location
+     */
     public void fillTheListView(LatLng enteredLocation) {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -132,6 +139,14 @@ public class SearchByGeolocationFragment extends DialogFragment {
         });
     }
 
+    /**
+     * Check if the code is nearby
+     * @param enteredLocation
+     *      The entered location
+     * @param codeLocation
+     *      The location of the code
+     * @return
+     */
     private boolean isCoordinateNearby(LatLng enteredLocation, LatLng codeLocation) {
         double threshold = 0.5;
         double enteredLatitude = enteredLocation.latitude;

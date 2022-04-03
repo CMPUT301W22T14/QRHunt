@@ -29,12 +29,6 @@ public class Player implements Serializable {
         this.userName = uuid;
     }
 
-    Player (String uuid, String userName, ArrayList<GameQRCode> QRCodeList, String contactInfo) {
-        this.uuid = uuid;
-        this.userName = userName;
-        this.QRCodeList = QRCodeList;
-        this.contactInfo = contactInfo;
-    }
 
 
     // Expand Methods:
@@ -172,14 +166,7 @@ public class Player implements Serializable {
         this.userName = userName;
     }
 
-    /**
-     * Set the UUID of the player
-     * @param uuid
-     *      This is the String of the player's uuid
-     */
-    public void setUUID(String uuid) {
-        this.uuid = uuid;
-    }
+
 
     /**
      * Change the contact informtion of the player
@@ -190,6 +177,13 @@ public class Player implements Serializable {
         this.contactInfo = contactInfo;
     }
 
+    /**
+     * override mehtod
+     * @param o
+     *      An object
+     * @return
+     *      A Boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -198,11 +192,23 @@ public class Player implements Serializable {
         return uuid.equals(player.uuid);
     }
 
+    /**
+     * hash code
+     * @return
+     *      Returns hash code
+     */
     @Override
     public int hashCode() {
         return Objects.hash(uuid);
     }
 
+    /**
+     * Check if the player has this code
+     * @param code
+     *      An QRcode
+     * @return
+     *      If the player has this code
+     */
     public boolean hasThisCode(GameQRCode code) {
         for (GameQRCode c : QRCodeList) {
             if (c.getHash().equals(code.getHash()))

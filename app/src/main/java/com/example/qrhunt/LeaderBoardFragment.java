@@ -249,6 +249,9 @@ public class LeaderBoardFragment extends DialogFragment {
     }
 
 
+    /**
+     * Get and set the highest rank
+     */
     public void getAndSetHighestRank() {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -282,6 +285,9 @@ public class LeaderBoardFragment extends DialogFragment {
         });
     }
 
+    /**
+     * Get and set the totalNumber rank
+     */
     public void getAndSetTotalNumberRank() {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -315,6 +321,9 @@ public class LeaderBoardFragment extends DialogFragment {
         });
     }
 
+    /**
+     * Get and set the Sum rank
+     */
     public void getAndSetSumRank() {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

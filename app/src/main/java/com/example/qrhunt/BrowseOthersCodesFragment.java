@@ -82,6 +82,11 @@ public class BrowseOthersCodesFragment extends DialogFragment {
 
     }
 
+    /**
+     * This method populate the list view
+     * @param currUuid
+     *      The uuid of the current player
+     */
     public void populateList(String currUuid) {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
