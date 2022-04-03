@@ -57,6 +57,7 @@ public class ProfileDisplayFragment extends DialogFragment {
 
         ProfileDisplayFragment profileDisplayFragment = new ProfileDisplayFragment();
 
+
         Bundle bundle = new Bundle();
         bundle.putBoolean("isProtected",isProtected);
         bundle.putSerializable("player",player);
@@ -110,6 +111,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         loggingInQRCodeButton.setVisibility(View.INVISIBLE);
         statusQRCodeImage.setVisibility(View.INVISIBLE);
         loggingInQRCodeImage.setVisibility(View.INVISIBLE);
+        
 
         // Checking Clicks:
         // --> Show Codes & Images (when clicked);
@@ -203,6 +205,7 @@ public class ProfileDisplayFragment extends DialogFragment {
         //Author: https://www.youtube.com/channel/UCklYpZX_-QqHOeSUH4GVQpA
 
         // Get the information of the player
+        /*
         String username = "User Name: " + player.getUserName();
         String contactInfo = "Contact Information: " + player.getContactInfo();
         String minScore = "Minimal Score: " + player.getMinCodeScore();
@@ -210,9 +213,14 @@ public class ProfileDisplayFragment extends DialogFragment {
         String avgScore = "Average Score: " + player.getAvgCodeScore();
         String sumScore = "Sum Score: " + player.getSumCodeScore();
         String totalSum = "Num Of QR Code: " + player.getTotalCodeNum();
+
+
         // Integrate the information
         String content = "STATUS\n" + username + "\n" + contactInfo + "\n" + minScore + "\n" + maxScore + "\n" +
                 avgScore + "\n" + sumScore + "\n" + totalSum;
+
+         */
+        String content = "STATUS\n" + player.getUUID();
         // Initialize multi format writer
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {

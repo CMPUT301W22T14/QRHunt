@@ -3,12 +3,10 @@ package com.example.qrhunt;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,13 +17,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.zxing.qrcode.encoder.QRCode;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * This class is the fragment that shows the detail of a chosen GameQRCode.
@@ -34,6 +36,10 @@ import java.util.regex.Pattern;
 public class DetailDisplayFragment extends DialogFragment {
     /* Global Variables */
     private GameQRCode gameQRCode = null;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = db.collection("Players");
+    private String TAG = "players";
+    ListView playerSameQRCodeList;
 
 
     // Constructor
@@ -65,7 +71,7 @@ public class DetailDisplayFragment extends DialogFragment {
 
         TextView playerScannedTheSameTextView = view.findViewById(R.id.player_scanned_the_same_QRCode_textView);
         TextView commentsTextView = view.findViewById(R.id.comments_textView);
-        ListView playerSameQRCodeList = view.findViewById(R.id.players_sameQRCode_list);
+        playerSameQRCodeList = view.findViewById(R.id.players_sameQRCode_list);
         ListView commentSameQRCodeList = view.findViewById(R.id.comment_sameQRCode_list);
         TextView codeHashTextView = view.findViewById(R.id.code_hash_textview);
 
@@ -114,18 +120,53 @@ public class DetailDisplayFragment extends DialogFragment {
             }
         });
 
+        getAllPlayers();
 
         // Page Structure:
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
                 .setView(view)
                 .setTitle("Detail Page").create();
-                //.setNegativeButton("Looks Good", null).create();
 
+    }
 
-
-
-
+    public void getAllPlayers() {
+        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Player> players = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            String uuid = document.getId();
+                            String contactInfo = (String) document.get("contactInfo");
+                            ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
+                            Player player = new Player(uuid); // The player !!!!!!!!!!!!!!
+                            player.setContactInfo(contactInfo);
+                            for (Map<String, Object> code : codes) {
+                                GameQRCode newCode = new GameQRCode((String) code.get("content"));
+                                player.addQRCode(newCode);
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
+                            }
+                            players.add(player);
+                        }
+                        else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                    List<String> targetPlayers = new ArrayList<>();
+                    for (Player player : players) {
+                        if (player.hasThisCode(gameQRCode))
+                            targetPlayers.add(player.getUUID());
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, targetPlayers);
+                    playerSameQRCodeList.setAdapter(adapter);
+                }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
     }
 
 

@@ -205,4 +205,12 @@ public class Player implements Serializable {
     public int hashCode() {
         return Objects.hash(uuid);
     }
+
+    public boolean hasThisCode(GameQRCode code) {
+        for (GameQRCode c : QRCodeList) {
+            if (c.getHash().equals(code.getHash()))
+                return true;
+        }
+        return false;
+    }
 }

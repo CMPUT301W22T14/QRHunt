@@ -2816,7 +2816,6 @@ id floating
 id forever
 id fragment_container_view_tag
 id frost
-id game_code_other_text
 id game_code_text
 id ghost_view
 id ghost_view_holder
@@ -3092,7 +3091,6 @@ id textinput_helper_text
 id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
-id textview_total_score
 id time
 id title
 id titleDividerNoCustom
