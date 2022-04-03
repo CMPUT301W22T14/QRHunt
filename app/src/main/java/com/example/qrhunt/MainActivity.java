@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                     public void onClick(View view) {
                         // button_detail functions:
                         // --> detail_display_fragment;
-                        new DetailDisplayFragment(codeAtPos).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
+                        new DetailDisplayFragment(codeAtPos, uuid).show(getSupportFragmentManager(), "DetailDisplayFragment Activated");
 
                         // Invisible Operation:
                         button_detail.setVisibility(View.INVISIBLE);
@@ -498,6 +498,7 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
     }
 
     public void getCurrentLocation(GameQRCode code) {
+        
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
                 @Override

@@ -22,8 +22,8 @@
 
     <ListView
         android:id="@+id/comment_sameQRCode_list"
-        android:layout_width="359dp"
-        android:layout_height="147dp"
+        android:layout_width="296dp"
+        android:layout_height="148dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"

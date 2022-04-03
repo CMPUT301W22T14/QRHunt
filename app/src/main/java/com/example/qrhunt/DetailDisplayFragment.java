@@ -19,7 +19,11 @@ import androidx.fragment.app.DialogFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
@@ -38,6 +42,9 @@ public class DetailDisplayFragment extends DialogFragment {
     private CollectionReference collectionReference = db.collection("Players");
     private String TAG = "players";
     ListView playerSameQRCodeList;
+    ListView commentSameQRCodeList;
+    String uuid;
+    private CollectionReference collectionReferenceForCodes = db.collection("Codes");
 
 
     // Constructor
@@ -48,8 +55,9 @@ public class DetailDisplayFragment extends DialogFragment {
      * @param gameQRCode
      *      This is the context record of the upper level activity, is used to access the view;
      */
-    public DetailDisplayFragment(GameQRCode gameQRCode) {
+    public DetailDisplayFragment(GameQRCode gameQRCode, String uuid) {
         this.gameQRCode = gameQRCode;
+        this.uuid = uuid;
     }
 
 
@@ -70,7 +78,7 @@ public class DetailDisplayFragment extends DialogFragment {
         TextView playerScannedTheSameTextView = view.findViewById(R.id.player_scanned_the_same_QRCode_textView);
         TextView commentsTextView = view.findViewById(R.id.comments_textView);
         playerSameQRCodeList = view.findViewById(R.id.players_sameQRCode_list);
-        ListView commentSameQRCodeList = view.findViewById(R.id.comment_sameQRCode_list);
+        commentSameQRCodeList = view.findViewById(R.id.comment_sameQRCode_list);
         TextView codeHashTextView = view.findViewById(R.id.code_hash_textview);
 
         EditText inputCommentEditText = view.findViewById(R.id.input_comment_editText);
@@ -115,10 +123,12 @@ public class DetailDisplayFragment extends DialogFragment {
                 String redundant = " ";
                 allCommentsAdapter.add(redundant);
                 allCommentsAdapter.remove(redundant);
+                uploadComment(inputComment);
             }
         });
 
         getAllPlayers();
+        getAllComments();
 
         // Page Structure:
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -127,6 +137,64 @@ public class DetailDisplayFragment extends DialogFragment {
                 .setTitle("Detail Page").create();
 
     }
+
+
+    public void uploadComment(String comment) {
+        DocumentReference documentReference = collectionReferenceForCodes.document(gameQRCode.getHash()+"\n"+uuid);
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> allComments = new ArrayList<>();
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        ArrayList<String> comments = (ArrayList<String>) document.get("comments");
+                        Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + uuid);
+                        if (comments != null) {
+                            for (String c : comments) {
+                                allComments.add(c);
+                            }
+                        }
+                        allComments.add(comment);
+                        documentReference.update("comments", allComments);
+                        //newCode.setCaptureImage(image);
+                        //Call fragment
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void getAllComments() {
+        collectionReferenceForCodes.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
+                List<String> comments = null;
+                for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
+                    String id = doc.getId();
+                    if (id.equals(gameQRCode.getHash()+"\n"+uuid)) {
+                        comments = (ArrayList<String>) doc.get("comments");
+                    }
+                }
+
+                if (comments != null) {
+                    List<String> changed = new ArrayList<>();
+                    for (String c : comments) {
+                        changed.add("     "+c);
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity().getBaseContext(), R.layout.content, R.id.game_code_text, comments);
+                    commentSameQRCodeList.setAdapter(adapter);
+                }
+            }
+        });
+
+    }
+
+
 
     public void getAllPlayers() {
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

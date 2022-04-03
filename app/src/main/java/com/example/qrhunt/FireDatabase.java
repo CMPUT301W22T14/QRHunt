@@ -257,6 +257,23 @@ public class FireDatabase {
                 }
             }
         });
+
+        HashMap<String, Object> data = new HashMap<>();
+        List<String> comments = new ArrayList<>();
+        data.put("comments", comments);
+        collectionReferenceForCodes.document(newCode.getHash()+"\n"+uuid).set(data)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Data has been added successfully!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Data could not be added!" + e.toString());
+                    }
+                });
     }
 
 

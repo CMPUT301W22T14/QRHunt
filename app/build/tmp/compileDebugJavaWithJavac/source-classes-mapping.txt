@@ -52,10 +52,11 @@ com/example/qrhunt/Capture.java
  com.example.qrhunt.Capture
 com/example/qrhunt/Player.java
  com.example.qrhunt.Player
-com/example/qrhunt/DetailDisplayFragment.java
- com.example.qrhunt.DetailDisplayFragment
- com.example.qrhunt.DetailDisplayFragment$1
- com.example.qrhunt.DetailDisplayFragment$2
+com/example/qrhunt/ProfileDisplayFragment.java
+ com.example.qrhunt.ProfileDisplayFragment
+ com.example.qrhunt.ProfileDisplayFragment$1
+ com.example.qrhunt.ProfileDisplayFragment$2
+ com.example.qrhunt.ProfileDisplayFragment$3
 com/example/qrhunt/MapActivity.java
  com.example.qrhunt.MapActivity
  com.example.qrhunt.MapActivity$1
@@ -71,6 +72,8 @@ com/example/qrhunt/FireDatabase.java
  com.example.qrhunt.FireDatabase$5
  com.example.qrhunt.FireDatabase$6
  com.example.qrhunt.FireDatabase$7
+ com.example.qrhunt.FireDatabase$8
+ com.example.qrhunt.FireDatabase$9
 com/example/qrhunt/MainActivity.java
  com.example.qrhunt.MainActivity
  com.example.qrhunt.MainActivity$1
@@ -84,8 +87,9 @@ com/example/qrhunt/MainActivity.java
  com.example.qrhunt.MainActivity$6
  com.example.qrhunt.MainActivity$7
  com.example.qrhunt.MainActivity$8
-com/example/qrhunt/ProfileDisplayFragment.java
- com.example.qrhunt.ProfileDisplayFragment
- com.example.qrhunt.ProfileDisplayFragment$1
- com.example.qrhunt.ProfileDisplayFragment$2
- com.example.qrhunt.ProfileDisplayFragment$3
+com/example/qrhunt/DetailDisplayFragment.java
+ com.example.qrhunt.DetailDisplayFragment
+ com.example.qrhunt.DetailDisplayFragment$1
+ com.example.qrhunt.DetailDisplayFragment$2
+ com.example.qrhunt.DetailDisplayFragment$3
+ com.example.qrhunt.DetailDisplayFragment$4
