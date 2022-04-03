@@ -2718,8 +2718,6 @@ id chain2
 id chains
 id change_contactInfo_button
 id change_contactInfo_textView
-id change_name_button
-id change_name_editText
 id checkbox
 id checked
 id chip

@@ -13,6 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
@@ -28,6 +32,8 @@ public class ProfileDisplayFragment extends DialogFragment {
     private Boolean isPrivacyProtected = false;
     private Boolean isVisibleStatus = false;
     private Boolean isVisibleLogin = false;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = db.collection("Players");
 
     /**
      * This method sets the player to the fragment.
@@ -88,8 +94,8 @@ public class ProfileDisplayFragment extends DialogFragment {
         ImageView statusQRCodeImage = view.findViewById(R.id.my_status_QRCode_image);
         ImageView loggingInQRCodeImage = view.findViewById(R.id.my_logging_in_QRCode_image);
 
-        TextView changeNameTextView = view.findViewById(R.id.change_name_editText);
-        Button changeNameButton = view.findViewById(R.id.change_name_button);
+        //TextView changeNameTextView = view.findViewById(R.id.change_name_editText);
+        //Button changeNameButton = view.findViewById(R.id.change_name_button);
         TextView changeContactInfoTextView = view.findViewById(R.id.change_contactInfo_textView);
         Button changeContactInfoButton = view.findViewById(R.id.change_contactInfo_button);
 
@@ -125,6 +131,7 @@ public class ProfileDisplayFragment extends DialogFragment {
                     }
                 }
             });
+
             loggingInQRCodeButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     if (isVisibleLogin == false) {
@@ -141,17 +148,6 @@ public class ProfileDisplayFragment extends DialogFragment {
             });
         }
 
-        changeNameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String newName = changeNameTextView.getText().toString();
-                if (!newName.equals("")) {
-                    player.setUserName(newName);
-                    changeNameTextView.setText("");
-                    username.setText("User Name: " + newName);
-                }
-            }
-        });
 
         changeContactInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +157,8 @@ public class ProfileDisplayFragment extends DialogFragment {
                     player.setContactInfo(newContactInfo);
                     changeContactInfoTextView.setText("");
                     contactInfo.setText("Contact Information: " + newContactInfo);
+                    DocumentReference documentReference = collectionReference.document(player.getUUID());
+                    documentReference.update("contactInfo", newContactInfo);
                 }
             }
         });
