@@ -128,6 +128,8 @@ public class MainActivity extends AppCompatActivity implements UsernameSearchFra
                         // Owner Channel
                         case 2:
                             Toast.makeText(getApplicationContext(), "Welcome to the owner channel!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getBaseContext(), OwnerActivity.class);
+                            startActivity(intent);
                             break;
                     }
                     if (fdb == null) {

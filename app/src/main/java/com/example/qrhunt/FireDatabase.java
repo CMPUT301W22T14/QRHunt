@@ -202,9 +202,9 @@ public class FireDatabase {
                         if (codes != null) {
                             for (Map<String, Object> code : codes) {
                                 GameQRCode oldCode = new GameQRCode((String) code.get("content"));
-                                Map<String, Double> map = (Map<String, Double>) (code.get("latestLatLng"));
-                                if (map != null) {
-                                    oldCode.loadCoordinate(map.get("latitude"), map.get("longitude"));
+
+                                if (code.get("latitude") != null || code.get("longitude") != null) {
+                                    oldCode.loadCoordinate((Double) code.get("latitude"), (Double) code.get("longitude"));
                                 }
                                 newCodes.add(oldCode);
                                 Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + oldCode.getContent());

@@ -117,7 +117,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
      *      If the code is near to the player
      */
     private boolean isCoordinateNearby(LatLng coordinate) {
-        double threshold = 0.5;
+        double threshold = 1;
         double playerLatitude = playerCoordinate.latitude;
         double playerLongitude = playerCoordinate.longitude;
         double codeLatitude = coordinate.latitude;
@@ -171,12 +171,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             player.setContactInfo(contactInfo);
                             for (Map<String, Object> code : codes) {
                                 GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                Map<String, Double> map = (Map<String, Double>) (code.get("latestLatLng"));
-                                if (map != null) {
-                                    newCode.loadCoordinate(map.get("latitude"), map.get("longitude"));
+                                if (code.get("latitude") != null || code.get("longitude") != null) {
+                                    newCode.loadCoordinate((Double) code.get("latitude"), (Double) code.get("longitude"));
                                     player.addQRCode(newCode);
                                 }
-                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
                             }
                             players.add(player);
                         }
@@ -194,15 +192,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             }
                         }
                     }
-                    ArrayList<Marker> codeMarkers = new ArrayList<>();
+
                     int index = 1;
+                    Log.d(TAG,  "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!"+codesCoordinatesNearby.size());
                     for (LatLng coordinate : codesCoordinatesNearby) {
                         Marker codeMarker = googleMap.addMarker(new MarkerOptions().position(coordinate).title( "Code" + index).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                        codeMarkers.add(codeMarker);
                         index += 1;
                     }
-
-                    //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(codeMarkers.get(0).getPosition(), 15));
 
                 }
                 else {

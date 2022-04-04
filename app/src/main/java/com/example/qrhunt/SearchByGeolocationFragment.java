@@ -106,11 +106,11 @@ public class SearchByGeolocationFragment extends DialogFragment {
                             player.setContactInfo(contactInfo);
                             for (Map<String, Object> code : codes) {
                                 GameQRCode newCode = new GameQRCode((String) code.get("content"));
-                                Map<String, Double> map = (Map<String, Double>) (code.get("latestLatLng"));
-                                if (map != null) {
-                                    newCode.loadCoordinate(map.get("latitude"), map.get("longitude"));
+                                if (code.get("latitude") != null || code.get("longitude") != null) {
+                                    newCode.loadCoordinate((Double) code.get("latitude"), (Double) code.get("longitude"));
                                     player.addQRCode(newCode);
                                 }
+
                                 Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + newCode.getContent());
                             }
                             players.add(player);
@@ -148,7 +148,7 @@ public class SearchByGeolocationFragment extends DialogFragment {
      * @return
      */
     private boolean isCoordinateNearby(LatLng enteredLocation, LatLng codeLocation) {
-        double threshold = 0.5;
+        double threshold = 1;
         double enteredLatitude = enteredLocation.latitude;
         double enteredLongitude = enteredLocation.longitude;
         double codeLatitude = codeLocation.latitude;
