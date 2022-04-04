@@ -220,7 +220,7 @@ public class GameQRCode {
     }
 
     public void setLatitude(double latitude) {
-        this.latitude = latitude;
+        this.latitude = latitude + 0.05;
     }
 
     public double getLongitude() {
@@ -228,6 +228,6 @@ public class GameQRCode {
     }
 
     public void setLongitude(double longitude) {
-        this.longitude = longitude;
+        this.longitude = longitude + 0.05;
     }
 }

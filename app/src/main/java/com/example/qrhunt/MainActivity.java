@@ -618,8 +618,6 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-
-
     /**
      * The method for fixing the asynchronous problem.
      * @param secondNum
@@ -633,8 +631,8 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
     /**
-     * Not ideal implementation; Create map at location or create QR code with current location after picture is taken
-     * Bad coupling/cohesion
+     * Create map at location or create QR code with current location after picture is taken
+     * @param gameQRCode
      */
     public void LocationEvent(GameQRCode gameQRCode) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -651,29 +649,27 @@ public class MainActivity extends AppCompatActivity implements
 
                     // Check if we want to make a map or if we are adding a new QR code to the database
                     if (gameQRCode.getContent().equals("MAPAUTO")) {
-                        //Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                        // Create map using current location
 
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         intent.putExtra("Latitude", currentLocation.getLatitude());
                         intent.putExtra("Longitude", currentLocation.getLongitude());
                         startActivity(intent);
-                    } else if (gameQRCode.getContent().equals("MAPMANUAL")) {
-                        //Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
+                    } else if (gameQRCode.getContent().equals("MAPMANUAL")) {
+                        // Create map based on user input from SearchByLocation fragment instead of gps
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         intent.putExtra("Latitude", gameQRCode.getLatitude());
                         intent.putExtra("Longitude", gameQRCode.getLongitude());
                         startActivity(intent);
+
                     } else
                     {
+                        // Set new QR Code's geolocation as current location
                         gameQRCode.setLongitude(currentLocation.getLongitude());
                         gameQRCode.setLatitude(currentLocation.getLatitude());
                         fdb.addNewQRCode(gameQRCode);
                     }
-                    //Toast.makeText(getApplicationContext(), gps.getLatitude() + " " + gps.getLongitude(), Toast.LENGTH_SHORT).show();
-
-                    //SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
-                    //supportMapFragment.getMapAsync(MapActivity.this);
                 }
             }
         });

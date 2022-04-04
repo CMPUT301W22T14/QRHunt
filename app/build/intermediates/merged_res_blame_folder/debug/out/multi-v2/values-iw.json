@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\wibch\\GitItems\\301projectv4\\QRHunt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-iw\\values-iw.xml",
+            "outputFile": "C:\\Users\\wibch\\GitItems\\301projectv5\\QRHunt\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-iw\\values-iw.xml",
             "map": [
                 {
                     "source": "C:\\Users\\wibch\\.gradle\\caches\\transforms-3\\0b84b9bb66a610d3e3be9c277d72faae\\transformed\\jetified-zxing-android-embedded-3.4.0\\res\\values-iw\\values-iw.xml",
