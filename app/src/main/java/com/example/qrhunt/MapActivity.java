@@ -61,14 +61,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 getSupportFragmentManager().findFragmentById(R.id.google_map);
         supportMapFragment.getMapAsync(this);
 
-        //fetchLastLocation();
+        // get the map's starting point from intent extras
         Intent intent = getIntent();
 
         gpsLatLng = new ArrayList<>();
         gpsLatLng.add(intent.getDoubleExtra("Latitude", 1.0));
         gpsLatLng.add(intent.getDoubleExtra("Longitude", 1.0));
-
-        QRCodes = new ArrayList<>();
 
         Toast.makeText(getApplicationContext(), gpsLatLng.get(0) + " " + gpsLatLng.get(1), Toast.LENGTH_SHORT).show();
         //double longitude = bundle.getDouble("Longitude");
@@ -84,17 +82,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+        // Create initial map marker and zoom in on it
+
         final LatLng[] latLng = {new LatLng(gpsLatLng.get(0), gpsLatLng.get(1))};
         final MarkerOptions[] markerOptions = {new MarkerOptions()
                 .position(latLng[0])
                 .title("I'm here")};
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng[0]));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng[0], 25));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng[0], 16));
         googleMap.addMarker(markerOptions[0]);
 
         // Access database, retrieve QR codes and display them on the map
-        // NOTE: Still need to test if I can get latitude/longitude from QR codes (I think I can, not 100% certain what "content" is)
-        // Currently uses QR code scores instead to show that they are being accessed properly
         collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -103,13 +101,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         if (document.exists()) {
                             ArrayList<Map<String, Object>> codes = (ArrayList<Map<String, Object>>) document.get("codes");
                             for (Map<String, Object> code : codes) {
-                                GameQRCode QRCode = new GameQRCode((String) code.get("content"));
-                                latLng[0] = new LatLng(gpsLatLng.get(0) + QRCode.getScore(), gpsLatLng.get(1) + codes.size());//new LatLng(QRCode.getLatitude(), QRCode.getLongitude());
+                                String codeContent = (String) code.get("content");
+                                Double codeLat = 0.0;
+                                Double codeLng = 0.0;
+                                if (code.get("latitude") != null) {
+                                    codeLat = (Double) (code.get("latitude"));
+                                    codeLng = (Double) (code.get("longitude"));
+                                }
+                                latLng[0] = new LatLng(codeLat, codeLng);
+                                // Create marker for the QR code
                                 markerOptions[0] = new MarkerOptions()
                                         .position(latLng[0])
-                                        .title("Nearby QR Code");
+                                        .title("Nearby QR Code: " + codeContent);
                                 googleMap.addMarker(markerOptions[0]);
-                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + QRCode.getContent());
+                                Log.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + codeContent);
                             }
                         }
                         else {
@@ -123,15 +128,5 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         });
-
-        // Just for verifying if multiple markers can be displayed this way
-        //for (int i = 0; i < 10; i++) {
-        //    latLng = new LatLng(gpsLatLng.get(0) + i, gpsLatLng.get(1) + i);
-        //    markerOptions = new MarkerOptions()
-        //            .position(latLng)
-        //            .title("Nearby QR Code");
-        //    googleMap.addMarker(markerOptions);
-        //}
-
     }
 }
