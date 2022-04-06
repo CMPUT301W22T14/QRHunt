@@ -4,6 +4,23 @@
             "outputFile": "/Users/chen/Desktop/QRHunt/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ro/values-ro.xml",
             "map": [
                 {
+                    "source": "/Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/res/values-ro/values-ro.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,114,166,275",
+                        "endColumns": "58,51,108,116",
+                        "endOffsets": "109,161,270,387"
+                    },
+                    "to": {
+                        "startLines": "108,109,110,111",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "9937,9996,10048,10157",
+                        "endColumns": "58,51,108,116",
+                        "endOffsets": "9991,10043,10152,10269"
+                    }
+                },
+                {
                     "source": "/Users/chen/.gradle/caches/transforms-3/d90cdb58c1d76d5627b1a46b3fa36cf9/transformed/jetified-play-services-basement-18.0.0/res/values-ro/values.xml",
                     "from": {
                         "startLines": "4",
@@ -88,23 +105,6 @@
                         "startOffsets": "326,447,551,664,748,852,973,1058,1138,1229,1322,1417,1511,1611,1704,1799,1893,1984,2076,2159,2271,2379,2479,2593,2699,2805,2969,9752",
                         "endColumns": "120,103,112,83,103,120,84,79,90,92,94,93,99,92,94,93,90,91,82,111,107,99,113,105,105,163,102,83",
                         "endOffsets": "442,546,659,743,847,968,1053,1133,1224,1317,1412,1506,1606,1699,1794,1888,1979,2071,2154,2266,2374,2474,2588,2694,2800,2964,3067,9831"
-                    }
-                },
-                {
-                    "source": "/Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/res/values-ro/values-ro.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,114,166,275",
-                        "endColumns": "58,51,108,116",
-                        "endOffsets": "109,161,270,387"
-                    },
-                    "to": {
-                        "startLines": "108,109,110,111",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "9937,9996,10048,10157",
-                        "endColumns": "58,51,108,116",
-                        "endOffsets": "9991,10043,10152,10269"
                     }
                 }
             ]

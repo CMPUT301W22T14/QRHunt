@@ -4,7 +4,7 @@
             "outputFile": "/Users/chen/Desktop/QRHunt/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-he/values-he.xml",
             "map": [
                 {
-                    "source": "/Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/res/values-he/values-he.xml",
+                    "source": "/Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/res/values-he/values-he.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

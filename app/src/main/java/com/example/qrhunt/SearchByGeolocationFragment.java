@@ -107,7 +107,9 @@ public class SearchByGeolocationFragment extends DialogFragment {
                             for (Map<String, Object> code : codes) {
                                 GameQRCode newCode = new GameQRCode((String) code.get("content"));
                                 if (code.get("latitude") != null || code.get("longitude") != null) {
-                                    newCode.loadCoordinate((Double) code.get("latitude"), (Double) code.get("longitude"));
+                                    double la = Double.valueOf(code.get("latitude").toString()).doubleValue();
+                                    double lo = Double.valueOf(code.get("longitude").toString()).doubleValue();
+                                    newCode.loadCoordinate(la, lo);
                                     player.addQRCode(newCode);
                                 }
 

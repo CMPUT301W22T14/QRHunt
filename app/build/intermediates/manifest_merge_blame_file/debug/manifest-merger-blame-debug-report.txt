@@ -36,48 +36,48 @@
 20-->[com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:13:22-76
 21
 22    <uses-feature
-22-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:26:5-28:35
+22-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:26:5-28:35
 23        android:glEsVersion="0x00020000"
-23-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:27:9-41
+23-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:27:9-41
 24        android:required="true" /> <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
-24-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:28:9-32
+24-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:28:9-32
 25    <uses-feature
-25-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:24:5-26:36
+25-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:24:5-26:36
 26        android:name="android.hardware.camera"
-26-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:25:9-47
+26-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:25:9-47
 27        android:required="false" />
-27-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:26:9-33
+27-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:26:9-33
 28    <uses-feature
-28-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:27:5-29:36
+28-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:27:5-29:36
 29        android:name="android.hardware.camera.front"
-29-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:28:9-53
+29-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:28:9-53
 30        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
-30-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:29:9-33
+30-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:29:9-33
 31    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
 32    <uses-feature
-32-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:32:5-34:36
+32-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:32:5-34:36
 33        android:name="android.hardware.camera.autofocus"
-33-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:33:9-57
+33-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:33:9-57
 34        android:required="false" />
-34-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:34:9-33
+34-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:34:9-33
 35    <uses-feature
-35-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:35:5-37:36
+35-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:35:5-37:36
 36        android:name="android.hardware.camera.flash"
-36-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:36:9-53
+36-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:36:9-53
 37        android:required="false" />
-37-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:37:9-33
+37-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:37:9-33
 38    <uses-feature
-38-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:38:5-40:36
+38-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:38:5-40:36
 39        android:name="android.hardware.screen.landscape"
-39-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:39:9-57
+39-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:39:9-57
 40        android:required="false" />
-40-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:40:9-33
+40-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:40:9-33
 41    <uses-feature
-41-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:41:5-43:36
+41-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:41:5-43:36
 42        android:name="android.hardware.wifi"
-42-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:42:9-45
+42-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:42:9-45
 43        android:required="false" />
-43-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:43:9-33
+43-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:43:9-33
 44
 45    <application
 45-->/Users/chen/Desktop/QRHunt/app/src/main/AndroidManifest.xml:12:5-44:19
@@ -167,26 +167,26 @@
 90-->[com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:34:17-82
 91        </service> <!-- Needs to be explicitly declared on P+ -->
 92        <uses-library
-92-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:33:9-35:40
+92-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:33:9-35:40
 93            android:name="org.apache.http.legacy"
-93-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:34:13-50
+93-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:34:13-50
 94            android:required="false" />
-94-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:35:13-37
+94-->[com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:35:13-37
 95
 96        <activity
-96-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:46:9-52:63
+96-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:46:9-52:63
 97            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-97-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:47:13-74
+97-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:47:13-74
 98            android:clearTaskOnLaunch="true"
-98-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:48:13-45
+98-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:48:13-45
 99            android:screenOrientation="sensorLandscape"
-99-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:49:13-56
+99-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:49:13-56
 100            android:stateNotNeeded="true"
-100-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:50:13-42
+100-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:50:13-42
 101            android:theme="@style/zxing_CaptureTheme"
-101-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:51:13-54
+101-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:51:13-54
 102            android:windowSoftInputMode="stateAlwaysHidden" />
-102-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:52:13-60
+102-->[com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:52:13-60
 103        <activity
 103-->[com.google.android.gms:play-services-base:18.0.1] /Users/chen/.gradle/caches/transforms-3/d98319f7b7726cf12a32e24850696daa/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
 104            android:name="com.google.android.gms.common.api.GoogleApiActivity"

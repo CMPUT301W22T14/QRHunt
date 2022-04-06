@@ -9,10 +9,10 @@ MERGED from [androidx.constraintlayout:constraintlayout:2.1.3] /Users/chen/.grad
 MERGED from [androidx.appcompat:appcompat:1.4.1] /Users/chen/.gradle/caches/transforms-3/daec56630d897aa40e0fc6356687505b/transformed/appcompat-1.4.1/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:2:1-26:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/chen/.gradle/caches/transforms-3/7abc93721ba4101603e7287563af27ac/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:17:1-38:12
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/chen/.gradle/caches/transforms-3/10889cba6fda732b75493d2536d1c454/transformed/jetified-play-services-location-17.0.0/AndroidManifest.xml:2:1-9:12
-MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:17:1-55:12
+MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/chen/.gradle/caches/transforms-3/fe47d14fdc683405ca2c8f3fedfabbdf/transformed/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/chen/.gradle/caches/transforms-3/d49deba57dc5acfb9d73d2e364b26d8a/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta02] /Users/chen/.gradle/caches/transforms-3/76cd86e45e92b014d3bc76b9490c8f37/transformed/jetified-firebase-appcheck-interop-16.0.0-beta02/AndroidManifest.xml:15:1-26:12
@@ -85,8 +85,8 @@ INJECTED from /Users/chen/Desktop/QRHunt/app/src/main/AndroidManifest.xml:2:1-46
 		ADDED from /Users/chen/Desktop/QRHunt/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.CAMERA
 ADDED from /Users/chen/Desktop/QRHunt/app/src/main/AndroidManifest.xml:5:5-65
-MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:21:5-65
-MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:21:5-65
+MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:21:5-65
+MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:21:5-65
 	android:name
 		ADDED from /Users/chen/Desktop/QRHunt/app/src/main/AndroidManifest.xml:5:22-62
 uses-permission#android.permission.ACCESS_FINE_LOCATION
@@ -101,8 +101,8 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/chen/Desktop/QRHunt/app/src/main/AndroidManifest.xml:8:5-67
 MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:14:5-67
 MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:14:5-67
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:24:5-67
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:26:5-67
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:26:5-67
 	android:name
@@ -123,14 +123,14 @@ MERGED from [androidx.constraintlayout:constraintlayout:2.1.3] /Users/chen/.grad
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.3] /Users/chen/.gradle/caches/transforms-3/15de8030b03dca390ad149b4b2bf215c/transformed/constraintlayout-2.1.3/AndroidManifest.xml:9:5-20
 MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:16:5-24:19
 MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:16:5-24:19
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:30:5-36:19
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:30:5-36:19
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:28:5-36:19
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:28:5-36:19
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/chen/.gradle/caches/transforms-3/10889cba6fda732b75493d2536d1c454/transformed/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/chen/.gradle/caches/transforms-3/10889cba6fda732b75493d2536d1c454/transformed/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:45:5-53:19
-MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:45:5-53:19
+MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:45:5-53:19
+MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:45:5-53:19
 MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta02] /Users/chen/.gradle/caches/transforms-3/76cd86e45e92b014d3bc76b9490c8f37/transformed/jetified-firebase-appcheck-interop-16.0.0-beta02/AndroidManifest.xml:24:5-20
 MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta02] /Users/chen/.gradle/caches/transforms-3/76cd86e45e92b014d3bc76b9490c8f37/transformed/jetified-firebase-appcheck-interop-16.0.0-beta02/AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/chen/.gradle/caches/transforms-3/d98319f7b7726cf12a32e24850696daa/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:19:5-23:19
@@ -227,14 +227,14 @@ MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/
 MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/chen/.gradle/caches/transforms-3/7abc93721ba4101603e7287563af27ac/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/chen/.gradle/caches/transforms-3/7abc93721ba4101603e7287563af27ac/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/chen/.gradle/caches/transforms-3/10889cba6fda732b75493d2536d1c454/transformed/jetified-play-services-location-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/chen/.gradle/caches/transforms-3/10889cba6fda732b75493d2536d1c454/transformed/jetified-play-services-location-17.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:19:5-43
-MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:19:5-43
+MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:19:5-43
+MERGED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:19:5-43
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/chen/.gradle/caches/transforms-3/fe47d14fdc683405ca2c8f3fedfabbdf/transformed/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/chen/.gradle/caches/transforms-3/fe47d14fdc683405ca2c8f3fedfabbdf/transformed/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/chen/.gradle/caches/transforms-3/d49deba57dc5acfb9d73d2e364b26d8a/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
@@ -353,8 +353,8 @@ INJECTED from /Users/chen/Desktop/QRHunt/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/chen/Desktop/QRHunt/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:13:5-79
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:23:5-79
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:23:5-79
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:25:5-79
 MERGED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:25:5-79
 MERGED from [io.grpc:grpc-android:1.41.0] /Users/chen/.gradle/caches/transforms-3/4a8b23debbedf13af7eb948d1cea6399/transformed/jetified-grpc-android-1.41.0/AndroidManifest.xml:11:5-79
@@ -382,17 +382,17 @@ ADDED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/c
 	android:name
 		ADDED from [com.google.firebase:firebase-firestore:24.0.1] /Users/chen/.gradle/caches/transforms-3/b7a908dbc659d2481b1b97a1636a87fc/transformed/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:21:17-111
 uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:26:5-28:35
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:27:9-41
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:27:9-41
 	android:required
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:28:9-32
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:28:9-32
 uses-library#org.apache.http.legacy
-ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:33:9-35:40
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:33:9-35:40
 	android:required
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:35:13-37
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:35:13-37
 	android:name
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/59fa614454a1331062c22d16671393d1/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:34:13-50
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /Users/chen/.gradle/caches/transforms-3/5f10b8c24dbb3b741ad86aadd0e31e1c/transformed/jetified-play-services-maps-16.1.0/AndroidManifest.xml:34:13-50
 meta-data#com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar
 ADDED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:32:13-34:85
 	android:value
@@ -400,55 +400,55 @@ ADDED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/ca
 	android:name
 		ADDED from [com.google.firebase:firebase-database:20.0.4] /Users/chen/.gradle/caches/transforms-3/bc21d98e0e81a37e3bb2df404e9e11ec/transformed/jetified-firebase-database-20.0.4/AndroidManifest.xml:33:17-109
 uses-feature#android.hardware.camera
-ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:24:5-26:36
+ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:24:5-26:36
 	android:required
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:26:9-33
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:26:9-33
 	android:name
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:25:9-47
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:25:9-47
 uses-feature#android.hardware.camera.front
-ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:27:5-29:36
+ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:27:5-29:36
 	android:required
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:29:9-33
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:29:9-33
 	android:name
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:28:9-53
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:28:9-53
 uses-feature#android.hardware.camera.autofocus
-ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:32:5-34:36
+ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:32:5-34:36
 	android:required
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:34:9-33
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:34:9-33
 	android:name
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:33:9-57
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:33:9-57
 uses-feature#android.hardware.camera.flash
-ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:35:5-37:36
+ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:35:5-37:36
 	android:required
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:37:9-33
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:37:9-33
 	android:name
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:36:9-53
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:36:9-53
 uses-feature#android.hardware.screen.landscape
-ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:38:5-40:36
+ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:38:5-40:36
 	android:required
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:40:9-33
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:40:9-33
 	android:name
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:39:9-57
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:39:9-57
 uses-feature#android.hardware.wifi
-ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:41:5-43:36
+ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:41:5-43:36
 	android:required
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:43:9-33
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:43:9-33
 	android:name
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:42:9-45
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:42:9-45
 activity#com.journeyapps.barcodescanner.CaptureActivity
-ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:46:9-52:63
+ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:46:9-52:63
 	android:screenOrientation
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:49:13-56
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:49:13-56
 	android:clearTaskOnLaunch
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:48:13-45
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:48:13-45
 	android:stateNotNeeded
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:50:13-42
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:50:13-42
 	android:windowSoftInputMode
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:52:13-60
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:52:13-60
 	android:theme
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:51:13-54
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:51:13-54
 	android:name
-		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/9554fc9de987596d9ddf0d276699bbd8/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:47:13-74
+		ADDED from [com.journeyapps:zxing-android-embedded:3.4.0] /Users/chen/.gradle/caches/transforms-3/d436846a893a250dd1c69c3b7852f7fb/transformed/jetified-zxing-android-embedded-3.4.0/AndroidManifest.xml:47:13-74
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/chen/.gradle/caches/transforms-3/d98319f7b7726cf12a32e24850696daa/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
 	android:exported

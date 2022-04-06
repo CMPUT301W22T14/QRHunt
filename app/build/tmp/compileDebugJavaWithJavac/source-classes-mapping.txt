@@ -1,15 +1,16 @@
-com/example/qrhunt/OwnerActivity.java
- com.example.qrhunt.OwnerActivity
- com.example.qrhunt.OwnerActivity$1
- com.example.qrhunt.OwnerActivity$2
- com.example.qrhunt.OwnerActivity$2$1
- com.example.qrhunt.OwnerActivity$3
- com.example.qrhunt.OwnerActivity$3$1
- com.example.qrhunt.OwnerActivity$4
- com.example.qrhunt.OwnerActivity$5
- com.example.qrhunt.OwnerActivity$6
- com.example.qrhunt.OwnerActivity$7
- com.example.qrhunt.OwnerActivity$8
+com/example/qrhunt/MainActivity.java
+ com.example.qrhunt.MainActivity
+ com.example.qrhunt.MainActivity$1
+ com.example.qrhunt.MainActivity$2
+ com.example.qrhunt.MainActivity$3
+ com.example.qrhunt.MainActivity$3$1
+ com.example.qrhunt.MainActivity$3$2
+ com.example.qrhunt.MainActivity$4
+ com.example.qrhunt.MainActivity$4$1
+ com.example.qrhunt.MainActivity$5
+ com.example.qrhunt.MainActivity$6
+ com.example.qrhunt.MainActivity$7
+ com.example.qrhunt.MainActivity$8
 com/example/qrhunt/BuildConfig.java
  com.example.qrhunt.BuildConfig
 com/example/qrhunt/CustomList.java
@@ -25,11 +26,10 @@ com/example/qrhunt/UsernameSearchFragment.java
  com.example.qrhunt.UsernameSearchFragment
  com.example.qrhunt.UsernameSearchFragment$1
  com.example.qrhunt.UsernameSearchFragment$OnFragmentInteractionListener
-com/example/qrhunt/ProfileDisplayFragment.java
- com.example.qrhunt.ProfileDisplayFragment
- com.example.qrhunt.ProfileDisplayFragment$1
- com.example.qrhunt.ProfileDisplayFragment$2
- com.example.qrhunt.ProfileDisplayFragment$3
+com/example/qrhunt/SearchByGeolocationFragment.java
+ com.example.qrhunt.SearchByGeolocationFragment
+ com.example.qrhunt.SearchByGeolocationFragment$1
+ com.example.qrhunt.SearchByGeolocationFragment$2
 com/example/qrhunt/LeaderBoardFragment.java
  com.example.qrhunt.LeaderBoardFragment
  com.example.qrhunt.LeaderBoardFragment$1
@@ -65,30 +65,30 @@ com/example/qrhunt/DetailDisplayFragment.java
  com.example.qrhunt.DetailDisplayFragment$2
  com.example.qrhunt.DetailDisplayFragment$3
  com.example.qrhunt.DetailDisplayFragment$4
-com/example/qrhunt/BrowseOthersCodesFragment.java
- com.example.qrhunt.BrowseOthersCodesFragment
- com.example.qrhunt.BrowseOthersCodesFragment$1
- com.example.qrhunt.BrowseOthersCodesFragment$2
-com/example/qrhunt/CustomList2.java
- com.example.qrhunt.CustomList2
-com/example/qrhunt/MainActivity.java
- com.example.qrhunt.MainActivity
- com.example.qrhunt.MainActivity$1
- com.example.qrhunt.MainActivity$2
- com.example.qrhunt.MainActivity$3
- com.example.qrhunt.MainActivity$3$1
- com.example.qrhunt.MainActivity$3$2
- com.example.qrhunt.MainActivity$4
- com.example.qrhunt.MainActivity$4$1
- com.example.qrhunt.MainActivity$5
- com.example.qrhunt.MainActivity$6
- com.example.qrhunt.MainActivity$7
- com.example.qrhunt.MainActivity$8
 com/example/qrhunt/MapActivity.java
  com.example.qrhunt.MapActivity
  com.example.qrhunt.MapActivity$1
  com.example.qrhunt.MapActivity$2
-com/example/qrhunt/SearchByGeolocationFragment.java
- com.example.qrhunt.SearchByGeolocationFragment
- com.example.qrhunt.SearchByGeolocationFragment$1
- com.example.qrhunt.SearchByGeolocationFragment$2
+com/example/qrhunt/CustomList2.java
+ com.example.qrhunt.CustomList2
+com/example/qrhunt/ProfileDisplayFragment.java
+ com.example.qrhunt.ProfileDisplayFragment
+ com.example.qrhunt.ProfileDisplayFragment$1
+ com.example.qrhunt.ProfileDisplayFragment$2
+ com.example.qrhunt.ProfileDisplayFragment$3
+com/example/qrhunt/BrowseOthersCodesFragment.java
+ com.example.qrhunt.BrowseOthersCodesFragment
+ com.example.qrhunt.BrowseOthersCodesFragment$1
+ com.example.qrhunt.BrowseOthersCodesFragment$2
+com/example/qrhunt/OwnerActivity.java
+ com.example.qrhunt.OwnerActivity
+ com.example.qrhunt.OwnerActivity$1
+ com.example.qrhunt.OwnerActivity$2
+ com.example.qrhunt.OwnerActivity$2$1
+ com.example.qrhunt.OwnerActivity$3
+ com.example.qrhunt.OwnerActivity$3$1
+ com.example.qrhunt.OwnerActivity$4
+ com.example.qrhunt.OwnerActivity$5
+ com.example.qrhunt.OwnerActivity$6
+ com.example.qrhunt.OwnerActivity$7
+ com.example.qrhunt.OwnerActivity$8
